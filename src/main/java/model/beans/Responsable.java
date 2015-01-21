@@ -1,0 +1,59 @@
+package model.beans;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author skuarch
+ */
+@Entity
+@Table(name = "responsable")
+public class Responsable {
+
+    @Id
+    @Column(name = "responsable_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
+    private long id;
+    
+    @OneToOne
+    @JoinColumn(name ="person_id")
+    private Person person;
+    
+    @Column(name = "responsable_is_soft_deleted")
+    private int softDeleted;
+    
+    public Responsable() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public int getSoftDeleted() {
+        return softDeleted;
+    }
+
+    public void setSoftDeleted(int softDeleted) {
+        this.softDeleted = softDeleted;
+    }
+    
+}
