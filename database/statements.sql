@@ -1,4 +1,5 @@
-#INSERT INTO `person` (`person_email`, `person_is_soft_deleted`, `person_name`,`person_password`,`person_last_session`) VALUES ('skuarch@yahoo.com.mx', '0', 'alfredo','123', now());
+ALTER TABLE `regaloenclave`.`address` 
+CHANGE COLUMN `address_all` `address_all` VARCHAR(512) NOT NULL ;
 
 #mail template
 INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_delete`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('English', 'regaloenclave@regaloenclave.com', '0', 'hola', 'affiliate', 'Welcome to regalo en clave');
