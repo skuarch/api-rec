@@ -19,6 +19,7 @@
 	   		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd"
        xmlns:jee="http://www.springframework.org/schema/jee">
     
+    <import resource="beans.xml" />
     <mvc:annotation-driven />
     <context:annotation-config />   
     
@@ -68,5 +69,5 @@
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>-->
-    
+        
 </beans>

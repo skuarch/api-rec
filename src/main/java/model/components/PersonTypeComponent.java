@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import model.beans.PersonType;
 import model.database.DAO;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author skuarch
  */
-//@Component
+@Component
 public class PersonTypeComponent {
 
     //==========================================================================

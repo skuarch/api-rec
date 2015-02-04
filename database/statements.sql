@@ -10,6 +10,7 @@ INSERT INTO `regaloenclave`.`configuration` (`configuration_smtp_host`, `configu
 #transaction type
 INSERT INTO `regaloenclave`.`transaction_type` (`transaction_type_name`) VALUES ('new affiliate');
 INSERT INTO `regaloenclave`.`transaction_type` (`transaction_type_name`) VALUES ('new freelancer');
+INSERT INTO `regaloenclave`.`transaction_type` (`transaction_type_is_soft_deleted`, `transaction_type_name`) VALUES ('0', 'person authentication');
 
 #gender
 INSERT INTO `regaloenclave`.`gender` (`gender_name`) VALUES ('male');

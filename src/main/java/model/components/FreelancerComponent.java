@@ -1,13 +1,16 @@
 package model.components;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import model.beans.Freelancer;
 import model.database.DAO;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author skuarch
  */
-//@Component
+@Component
 public class FreelancerComponent {
 
     //==========================================================================
@@ -57,6 +60,38 @@ public class FreelancerComponent {
         } catch (Exception e) {
             throw e;
         }
+
+    }
+
+    //==========================================================================
+    public Freelancer getFreelancer(String email, String password) throws Exception {
+
+        if (email == null || email.length() < 1) {
+            throw new IllegalArgumentException("email is null or empty");
+        }
+
+        if (password == null || password.length() < 1) {
+            throw new IllegalArgumentException("password is null or empty");
+        }
+
+        HashMap parameters = new HashMap();
+        parameters.put("email", email);
+        parameters.put("password", password);
+        Freelancer f = null;
+        ArrayList<Freelancer> freelacerList = null;
+
+        try {
+
+            freelacerList = new DAO().query(parameters, "getFreelancer", new Freelancer());
+            if (freelacerList != null && freelacerList.size() > 0) {
+                f = freelacerList.get(0);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return f;
 
     }
 

@@ -1,7 +1,6 @@
 package model.util;
 
 import interceptors.Hibernate;
-import model.logic.StaticContext;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
