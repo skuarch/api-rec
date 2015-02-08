@@ -36,6 +36,7 @@ model/components/TransactionTypeComponent.class
 model/components/FreelancerComponent.class
 model/components/PersonComponent.class
 controllers/authentication/FreelancerAuthentication.class
+controllers/freelancer/UpdateFreelancer.class
 model/beans/Category.class
 model/beans/Affiliate.class
 model/components/TransactionComponent.class

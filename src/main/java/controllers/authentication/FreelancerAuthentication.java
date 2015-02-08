@@ -48,7 +48,7 @@ public class FreelancerAuthentication extends BaseController {
             f = freelancerComponent.getFreelancer(login.getEmail(), login.getPassword());
             
             if (f != null) {                
-                jsono = createFreelancerJson(f);
+                jsono = createFreelancerJson(f);                
                 jsono.put("validate", true);
             } else {                
                 jsono.put("validate", false);
@@ -71,6 +71,7 @@ public class FreelancerAuthentication extends BaseController {
         try {
             
             jsono = new JSONObject();
+            jsono.put("id", f.getId());
             jsono.put("name", f.getPerson().getName());
             jsono.put("lastName", f.getPerson().getLastName());
             jsono.put("email", f.getPerson().getEmail());

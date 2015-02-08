@@ -13,6 +13,7 @@ import model.components.PersonTypeComponent;
 import model.util.MD5Util;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FreelancerController extends BaseController {
 
-    private static final Logger logger = getLogger(FreelancerController.class);
+    private static final Logger logger = getLogger(FreelancerController.class);    
+    @Autowired
+    private FreelancerComponent freelancerComponent;    
 
     //==========================================================================
     @RequestMapping(value = {"/v1/freelancer/create", "v1/freelancer/create"}, method = RequestMethod.POST)
@@ -39,13 +42,7 @@ public class FreelancerController extends BaseController {
 
         try {
             
-            //some validations
-            if (freelancer == null) {
-                logger.error("FreelancerController.createFreelancer", new Exception("freelancer is null"));
-                jsono = new JSONObject("{\"error\":\"freelancer is null\",}");
-                return jsono.toString();
-            }
-
+            //some validations            
             if (freelancer.getPerson() == null) {
                 logger.error("FreelancerController.createFreelancer", new Exception("freelancer.person is null"));
                 jsono = new JSONObject("{\"error\":\"freelancer.person is null\",}");
@@ -77,7 +74,7 @@ public class FreelancerController extends BaseController {
                 freelancer.setKey(createKey(freelancer));
 
                 //update freelancer because he has a new key
-                updateFreelancer(freelancer);
+                freelancerComponent.updateFreelancer(freelancer);
                 jsono.put("key", freelancer.getKey());
 
                 //send mail to user
@@ -161,20 +158,7 @@ public class FreelancerController extends BaseController {
 
         return key;
     }
-
-    //==========================================================================
-    public void updateFreelancer(Freelancer freelancer) throws Exception {
-
-        try {
-
-            new FreelancerComponent().updateFreelancer(freelancer);
-
-        } catch (Exception e) {
-            throw e;
-        }
-
-    }
-
+    
     //==========================================================================
     private void sendMailNewFreelancer(Freelancer freelancer, String password, String displayLanguage) {
 

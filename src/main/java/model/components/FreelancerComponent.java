@@ -94,5 +94,21 @@ public class FreelancerComponent {
         return f;
 
     }
+    
+    //==========================================================================
+    public Freelancer getFreelancer(long id) throws Exception {        
+        
+        Freelancer f = null;
+        try {
+
+            f = new DAO().get(id, new Freelancer());
+
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return f;
+
+    }
 
 }
