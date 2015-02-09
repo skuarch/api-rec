@@ -23,8 +23,8 @@ public class Subcategory {
     @Column(name = "subcategory_name")
     private String name;
     
-    @Column(name = "subcategory_is_soft_delete", columnDefinition = "int default 0")
-    private int isSoftDelete = 0;
+    @Column(name = "subcategory_is_soft_deleted", columnDefinition = "int default 0")
+    private byte isSoftDeleted = 0;
     
     public Subcategory() {
     }
@@ -43,6 +43,14 @@ public class Subcategory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public byte getIsSoftDeleted() {
+        return isSoftDeleted;
+    }
+
+    public void setIsSoftDeleted(byte isSoftDeleted) {
+        this.isSoftDeleted = isSoftDeleted;
     }
     
 }

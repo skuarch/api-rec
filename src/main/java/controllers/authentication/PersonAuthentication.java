@@ -1,11 +1,13 @@
 package controllers.authentication;
 
+import controllers.application.BaseController;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Login;
 import model.beans.Person;
 import model.components.PersonComponent;
 import model.util.Validator;
 import org.apache.log4j.Logger;
-import static org.apache.log4j.Logger.getLogger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author skuarch
  */
 @RestController
-public class PersonAuthentication {
+public class PersonAuthentication extends BaseController {
 
     private static final Logger logger = getLogger(PersonAuthentication.class);
     
@@ -31,12 +33,14 @@ public class PersonAuthentication {
     
     //==========================================================================
     @RequestMapping(value = {"v1/authentication", "/v1/authentication"})
-    public @ResponseBody String authentication(@ModelAttribute Login login) {
+    public @ResponseBody String authentication(@ModelAttribute Login login, HttpServletResponse response) {
         
         JSONObject jsono = null;
         Person p = null;
 
         try {
+            
+            setContentType(response, MediaType.APPLICATION_JSON);
 
             //validations
             if (!Validator.validateEmail(login.getEmail())) {

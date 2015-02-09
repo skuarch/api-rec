@@ -40,8 +40,8 @@ public class Address {
     @Column(name = "address_city")
     private String city;
     
-    @Column(name = "address_is_soft_delete", columnDefinition = "int default 0")
-    private int isSoftDelete = 0;    
+    @Column(name = "address_is_soft_deleted", columnDefinition = "int default 0")
+    private byte isSoftDeleted = 0;    
     
     @Type(type = "timestamp")
     @Temporal(TemporalType.DATE)
@@ -101,14 +101,14 @@ public class Address {
         this.city = city;
     }
 
-    public int getIsSoftDelete() {
-        return isSoftDelete;
+    public byte getIsSoftDeleted() {
+        return isSoftDeleted;
     }
 
-    public void setIsSoftDelete(int isSoftDelete) {
-        this.isSoftDelete = isSoftDelete;
+    public void setIsSoftDeleted(byte isSoftDeleted) {
+        this.isSoftDeleted = isSoftDeleted;
     }
-
+    
     public Timestamp getCreationDate() {
         return creationDate;
     }

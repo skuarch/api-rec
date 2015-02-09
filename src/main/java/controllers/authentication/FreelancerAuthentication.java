@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import controllers.application.BaseController;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -27,13 +30,15 @@ public class FreelancerAuthentication extends BaseController {
     
     //==========================================================================
     @RequestMapping(value = {"v1/authentication/freelancer", "/v1/authentication/freelancer"})
-    public @ResponseBody String authentication(@ModelAttribute Login login){
+    public @ResponseBody String authentication(@ModelAttribute Login login, HttpServletResponse response){
     
         JSONObject jsono = null;
         Freelancer f = null;
 
         try {
 
+            setContentType(response, MediaType.APPLICATION_JSON);
+            
             jsono = new JSONObject();
             
             //validations

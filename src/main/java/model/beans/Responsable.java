@@ -27,7 +27,7 @@ public class Responsable {
     private Person person;
     
     @Column(name = "responsable_is_soft_deleted")
-    private int softDeleted;
+    private byte softDeleted;
     
     public Responsable() {
     }
@@ -48,11 +48,11 @@ public class Responsable {
         this.person = person;
     }
 
-    public int getSoftDeleted() {
+    public byte getSoftDeleted() {
         return softDeleted;
     }
 
-    public void setSoftDeleted(int softDeleted) {
+    public void setSoftDeleted(byte softDeleted) {
         this.softDeleted = softDeleted;
     }
     

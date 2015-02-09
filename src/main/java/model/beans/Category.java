@@ -24,7 +24,7 @@ public class Category {
     private String name;
     
     @Column(name = "category_is_soft_deleted", columnDefinition = "int default 0")
-    private int isSoftDelete = 0;
+    private byte isSoftDeleted = 0;
     
     public Category() {
     }
@@ -45,12 +45,12 @@ public class Category {
         this.name = name;
     }
 
-    public int getIsSoftDelete() {
-        return isSoftDelete;
+    public byte getIsSoftDeleted() {
+        return isSoftDeleted;
     }
 
-    public void setIsSoftDelete(int isSoftDelete) {
-        this.isSoftDelete = isSoftDelete;
+    public void setIsSoftDeleted(byte isSoftDeleted) {
+        this.isSoftDeleted = isSoftDeleted;
     }
     
 }

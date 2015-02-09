@@ -54,7 +54,7 @@ public class Freelancer {
     private Timestamp lastLogin = new Timestamp(System.currentTimeMillis());
     
     @Column(name = "freelancer_is_soft_deleted", columnDefinition = "int default 0")
-    private int isSoftDeleted = 0;
+    private byte isSoftDeleted = 0;
     
     //==========================================================================
     public Freelancer() {
@@ -92,11 +92,11 @@ public class Freelancer {
         this.treasuryId = treasuryId;
     }
 
-    public int getIsSoftDeleted() {
+    public byte getIsSoftDeleted() {
         return isSoftDeleted;
     }
 
-    public void setIsSoftDeleted(int isSoftDeleted) {
+    public void setIsSoftDeleted(byte isSoftDeleted) {
         this.isSoftDeleted = isSoftDeleted;
     }
    

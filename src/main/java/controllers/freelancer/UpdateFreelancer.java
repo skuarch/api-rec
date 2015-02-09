@@ -1,11 +1,12 @@
 package controllers.freelancer;
 
+import controllers.application.BaseController;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Freelancer;
 import model.components.FreelancerComponent;
 import org.apache.log4j.Logger;
-import static org.apache.log4j.Logger.getLogger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author skuarch
  */
 @RestController
-public class UpdateFreelancer {
+public class UpdateFreelancer extends BaseController {
     
     private static final Logger logger = getLogger(UpdateFreelancer.class);
     @Autowired
@@ -35,8 +36,11 @@ public class UpdateFreelancer {
         
         try {
             
+            setContentType(response, MediaType.APPLICATION_JSON);
+            
             f = freelancerComponent.getFreelancer(freelancer.getId());
             freelancer.setId(f.getId());
+            freelancer.getPerson().setId(f.getPerson().getId());
             freelancer.getPerson().setPassword(f.getPerson().getPassword());
             freelancer.getPerson().setPersonType(f.getPerson().getPersonType());
             freelancer.getAddress().setId(f.getAddress().getId());            

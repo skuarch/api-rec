@@ -18,8 +18,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "mail_template")
 @NamedQueries({
-    @NamedQuery(name = "getTemplateAffiliate", query = "from MailTemplate mt where mt.name = :name and mt.displayLanguage = :displayLanguage and isSoftDelete = 0"),
-    @NamedQuery(name = "getTemplate", query = "from MailTemplate mt where mt.name = :name and mt.displayLanguage = :displayLanguage and isSoftDelete = 0")
+    @NamedQuery(name = "getTemplateAffiliate", query = "from MailTemplate mt where mt.name = :name and mt.displayLanguage = :displayLanguage and isSoftDeleted = 0"),
+    @NamedQuery(name = "getTemplate", query = "from MailTemplate mt where mt.name = :name and mt.displayLanguage = :displayLanguage and isSoftDeleted = 0")
 })
 public class MailTemplate {
 
@@ -42,7 +42,7 @@ public class MailTemplate {
     private String subject;
     
     @NotNull
-    @Column(name = "mail_template_message", nullable = false)
+    @Column(name = "mail_template_message", nullable = false, columnDefinition = "text")
     private String message;
     
     @NotNull
@@ -50,8 +50,8 @@ public class MailTemplate {
     private String displayLanguage;
     
     @NotNull
-    @Column(name = "mail_template_is_soft_delete", nullable = false, columnDefinition = "int default 0")
-    private short isSoftDelete;
+    @Column(name = "mail_template_is_soft_deleted", nullable = false, columnDefinition = "int default 0")
+    private byte isSoftDeleted;
     
     public MailTemplate() {
     }
@@ -104,12 +104,12 @@ public class MailTemplate {
         this.displayLanguage = displayLanguage;
     }
 
-    public short getIsSoftDelete() {
-        return isSoftDelete;
+    public byte getIsSoftDeleted() {
+        return isSoftDeleted;
     }
 
-    public void setIsSoftDelete(short isSoftDelete) {
-        this.isSoftDelete = isSoftDelete;
+    public void setIsSoftDeleted(byte isSoftDeleted) {
+        this.isSoftDeleted = isSoftDeleted;
     }
     
 }

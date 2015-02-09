@@ -32,8 +32,8 @@ public class Configuration {
     @Column(name = "configuration_smtp_password", nullable = false)
     private String smtpPassword;
     
-    @Column(name = "configuration_is_soft_delete", columnDefinition = "int default 0")
-    private int isSoftDelete = 0;
+    @Column(name = "configuration_is_soft_deleted", columnDefinition = "int default 0")
+    private byte isSoftDeleted = 0;
     
     //==========================================================================
     public Configuration() {
@@ -79,12 +79,12 @@ public class Configuration {
         this.smtpPassword = smtpPassword;
     }
 
-    public int getIsSoftDelete() {
-        return isSoftDelete;
+    public byte getIsSoftDeleted() {
+        return isSoftDeleted;
     }
 
-    public void setIsSoftDelete(int isSoftDelete) {
-        this.isSoftDelete = isSoftDelete;
+    public void setIsSoftDeleted(byte isSoftDeleted) {
+        this.isSoftDeleted = isSoftDeleted;
     }
     
 }

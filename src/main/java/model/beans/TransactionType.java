@@ -24,7 +24,7 @@ public class TransactionType {
     private String name;
     
     @Column(name = "transaction_type_is_soft_deleted", nullable = false, columnDefinition = "int default 0")
-    private short isSoftDeleted = 0;    
+    private byte isSoftDeleted = 0;    
 
     public TransactionType() {
     }
@@ -45,11 +45,11 @@ public class TransactionType {
         this.name = name;
     }
 
-    public short getIsSoftDeleted() {
+    public byte getIsSoftDeleted() {
         return isSoftDeleted;
     }
 
-    public void setIsSoftDeleted(short isSoftDeleted) {
+    public void setIsSoftDeleted(byte isSoftDeleted) {
         this.isSoftDeleted = isSoftDeleted;
     }
     

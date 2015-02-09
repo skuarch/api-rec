@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "person_type")
 @NamedQueries({
-    @NamedQuery(name = "getPersonTypeByName", query = "from PersonType pt where pt.name = :name and pt.isSoftDelete = 0")
+    @NamedQuery(name = "getPersonTypeByName", query = "from PersonType pt where pt.name = :name and pt.isSoftDeleted = 0")
 })
 public class PersonType {
     
@@ -28,8 +28,8 @@ public class PersonType {
     @Column(name = "person_type_name", nullable = false)
     private String name;
     
-    @Column(name = "person_type_is_soft_delete", columnDefinition = "int default 0")
-    private int isSoftDelete = 0;
+    @Column(name = "person_type_is_soft_deleted", columnDefinition = "int default 0")
+    private byte isSoftDeleted = 0;
 
     public PersonType() {
     }
@@ -48,14 +48,14 @@ public class PersonType {
 
     public void setName(String name) {
         this.name = name;
+    }   
+
+    public byte getIsSoftDeleted() {
+        return isSoftDeleted;
     }
 
-    public int getIsSoftDelete() {
-        return isSoftDelete;
+    public void setIsSoftDeleted(byte isSoftDeleted) {
+        this.isSoftDeleted = isSoftDeleted;
     }
-
-    public void setIsSoftDelete(int isSoftDelete) {
-        this.isSoftDelete = isSoftDelete;
-    }
-        
+    
 }

@@ -4,6 +4,7 @@ import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Freelancer;
 import model.beans.Person;
 import model.beans.PersonType;
@@ -41,6 +42,8 @@ public class FreelancerController extends BaseController {
         String password = freelancer.getPerson().getPassword();
 
         try {
+            
+            setContentType(response, MediaType.APPLICATION_JSON);
             
             //some validations            
             if (freelancer.getPerson() == null) {

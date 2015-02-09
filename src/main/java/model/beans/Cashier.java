@@ -29,7 +29,7 @@ public class Cashier {
     private Person person;
     
     @Column(name = "chashier_is_soft_deleted", columnDefinition = "int default 0")
-    private int isSoftDelete = 0;
+    private byte isSoftDeleted = 0;
     
     public Cashier() {
     }
@@ -50,12 +50,12 @@ public class Cashier {
         this.person = person;
     }
 
-    public int getIsSoftDelete() {
-        return isSoftDelete;
+    public byte getIsSoftDeleted() {
+        return isSoftDeleted;
     }
 
-    public void setIsSoftDelete(int isSoftDelete) {
-        this.isSoftDelete = isSoftDelete;
+    public void setIsSoftDeleted(byte isSoftDeleted) {
+        this.isSoftDeleted = isSoftDeleted;
     }
     
 }
