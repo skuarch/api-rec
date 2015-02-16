@@ -62,12 +62,12 @@
         </mvc:message-converters>
     </mvc:annotation-driven>-->
 
-    <!--<mvc:interceptors>
+    <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**/*"/>
             <bean id="RequestInceptor" class="interceptors.RequestInterceptor">                
             </bean>
         </mvc:interceptor>
-    </mvc:interceptors>-->
+    </mvc:interceptors>
         
 </beans>

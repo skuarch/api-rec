@@ -14,6 +14,7 @@
         <mapping class="model.beans.Person"/>    
         <mapping class="model.beans.PersonType"/>    
         <mapping class="model.beans.RequestBean"/>    
+        <mapping class="model.beans.Responsable"/>    
         <mapping class="model.beans.Transaction"/>    
         <mapping class="model.beans.TransactionType"/>
     </session-factory>

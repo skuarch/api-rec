@@ -39,6 +39,10 @@ public class Establishment {
     @Column(name = "establishment_name", nullable = false)
     private String name;
     
+    @OneToOne
+    @JoinColumn(name = "responsable_id")
+    private Responsable responsable;
+    
     @Type(type="timestamp")
     @Temporal(TemporalType.DATE)
     @Column(name = "establishment_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP", updatable=false)    
@@ -94,6 +98,14 @@ public class Establishment {
 
     public void setRegistrationDate(Timestamp registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public Responsable getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(Responsable responsable) {
+        this.responsable = responsable;
     }
 
 }

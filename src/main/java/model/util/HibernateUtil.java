@@ -71,7 +71,7 @@ public class HibernateUtil {
     }
 
     //==========================================================================
-    public static SessionFactory getSessionFactory() {
+    public synchronized static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
     

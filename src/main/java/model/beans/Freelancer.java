@@ -24,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "freelancer")
 @NamedQueries({
-        @NamedQuery(name = "getFreelancer", query = "from Freelancer f where f.person.email = :email and f.person.password = :password and f.isSoftDeleted = 0")        
+        @NamedQuery(name = "getFreelancer", query = "from Freelancer f where f.person.email = :email and f.password = :password and f.isSoftDeleted = 0")        
 })
 public class Freelancer {
 
@@ -32,6 +32,9 @@ public class Freelancer {
     @Column(name = "freelancer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;    
+    
+    @Column(name = "freelancer_password", nullable = false, columnDefinition = "varchar(32)")
+    private String password; 
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="person_id", nullable = false)
@@ -114,6 +117,14 @@ public class Freelancer {
 
     public void setLastLogin(Timestamp lastLogin) {
         this.lastLogin = lastLogin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

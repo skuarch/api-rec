@@ -49,7 +49,7 @@ public class RequestBean {
     private int localPort;
     @Column(name = "request_header_names")
     private String headerNames;
-    @Column(name = "request_attribute_names")
+    @Column(name = "request_attribute_names", columnDefinition = "text")
     private String attributesNames;
     @Column(name = "request_auth_type")
     private String authType;

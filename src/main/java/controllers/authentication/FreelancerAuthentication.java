@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import controllers.application.BaseController;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
@@ -42,6 +41,11 @@ public class FreelancerAuthentication extends BaseController {
             jsono = new JSONObject();
             
             //validations
+            if(login == null){
+                jsono.put("validate", false);
+                return jsono.toString();
+            }            
+            
             if (!Validator.validateEmail(login.getEmail())) {
                 jsono.put("validate", false);
             }
@@ -92,6 +96,7 @@ public class FreelancerAuthentication extends BaseController {
             jsono.put("type", f.getPerson().getPersonType().getName());            
             jsono.put("phone", f.getPerson().getPhone());            
             jsono.put("registrationDate", f.getPerson().getRegistrationDate());                        
+            jsono.put("personId", f.getPerson().getId());                        
             
         } catch (Exception e) {
             throw e;

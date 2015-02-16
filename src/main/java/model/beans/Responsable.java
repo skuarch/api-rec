@@ -22,6 +22,9 @@ public class Responsable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private long id;
     
+    @Column(name = "responsable_password",nullable = true ,columnDefinition = "varchar(32)")
+    private String password; 
+    
     @OneToOne
     @JoinColumn(name ="person_id")
     private Person person;
@@ -54,6 +57,14 @@ public class Responsable {
 
     public void setSoftDeleted(byte softDeleted) {
         this.softDeleted = softDeleted;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

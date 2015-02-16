@@ -7,7 +7,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
+import model.beans.PersonType;
 import model.components.AffiliateComponent;
+import model.components.PersonTypeComponent;
 import model.logic.Constants;
 import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
@@ -27,6 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AffiliateController extends BaseController {
 
     private static final Logger logger = getLogger(AffiliateController.class);    
+    
+    @Autowired
+    private PersonTypeComponent personTypeComponent;
 
     //==========================================================================
     /**
@@ -52,10 +57,13 @@ public class AffiliateController extends BaseController {
             setContentType(response, MediaType.APPLICATION_JSON);
             jsono = new JSONObject();
 
+            //get person type
+            affiliate.getPerson().setPersonType(personTypeComponent.getPersonType("affiliate"));
+            
             //create affiliate
             id = new AffiliateComponent().createAffiliate(affiliate);
             affiliate.setId(id);
-            jsono.append("id", id);
+            jsono.append("created", true);
 
             //create transaction            
             TransactionUtil.createTransaction(Constants.TRANSACTION_NEW_AFFILIATE, affiliate.getId());
@@ -68,6 +76,7 @@ public class AffiliateController extends BaseController {
         } catch (Exception e) {
             logger.error("AffiliateController.createAffiliate", e);
             jsono = new JSONObject("{\"error\":\"" + e.getMessage() + "\",}");
+            jsono.put("created", false);
         }
 
         return jsono.toString();
@@ -75,6 +84,7 @@ public class AffiliateController extends BaseController {
     }
 
     //==========================================================================
+    @Deprecated
     private void sendMailNewAffiliate(Affiliate affiliate, String displayLanguage) {
 
         if (affiliate == null) {

@@ -29,7 +29,10 @@ public class Affiliate {
     @Id
     @Column(name = "affiliate_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)      
-    private long id;    
+    private long id; 
+    
+    @Column(name = "affiliate_password", nullable = false, columnDefinition = "varchar(32)")
+    private String password; 
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="person_id", nullable = false)
@@ -38,6 +41,10 @@ public class Affiliate {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="address_id", nullable = false)
     private Address address;        
+    
+    @OneToOne
+    @JoinColumn(name ="freelancer_id")
+    private Freelancer freelancer;        
     
     @OneToMany(mappedBy = "affiliate", cascade = CascadeType.ALL)    
     private List<Establishment> establishment = new ArrayList<>();
@@ -101,5 +108,20 @@ public class Affiliate {
     public void setRegistrationDate(Timestamp registrationDate) {
         this.registrationDate = registrationDate;
     }   
-    
+
+    public Freelancer getFreelancer() {
+        return freelancer;
+    }
+
+    public void setFreelancer(Freelancer freelancer) {
+        this.freelancer = freelancer;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }    
 }

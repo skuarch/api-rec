@@ -28,9 +28,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FreelancerController extends BaseController {
 
-    private static final Logger logger = getLogger(FreelancerController.class);    
+    private static final Logger logger = getLogger(FreelancerController.class);
     @Autowired
-    private FreelancerComponent freelancerComponent;    
+    private FreelancerComponent freelancerComponent;
 
     //==========================================================================
     @RequestMapping(value = {"/v1/freelancer/create", "v1/freelancer/create"}, method = RequestMethod.POST)
@@ -39,12 +39,12 @@ public class FreelancerController extends BaseController {
 
         long id = 0;
         JSONObject jsono = new JSONObject();
-        String password = freelancer.getPerson().getPassword();
+        String password = freelancer.getPassword();
 
         try {
-            
+
             setContentType(response, MediaType.APPLICATION_JSON);
-            
+
             //some validations            
             if (freelancer.getPerson() == null) {
                 logger.error("FreelancerController.createFreelancer", new Exception("freelancer.person is null"));
@@ -58,7 +58,7 @@ public class FreelancerController extends BaseController {
                 return jsono.toString();
             }
 
-            if (freelancer.getPerson().getPassword() == null || freelancer.getPerson().getPassword().length() < 1) {
+            if (freelancer.getPassword() == null || freelancer.getPassword().length() < 1) {
                 logger.error("FreelancerController.createFreelancer", new Exception("freelancer.password is null"));
                 jsono = new JSONObject("{\"error\":\"freelancer.password is null\",}");
                 return jsono.toString();
@@ -106,12 +106,9 @@ public class FreelancerController extends BaseController {
 
             if (person == null) {
                 exists = false;
-            }
-
-            if (person != null) {
-                if (person.getEmail().length() > 1) {
-                    exists = true;
-                }
+            } else {
+                //it can't exist 2 freelancers with the same email
+                exists = person.getPersonType().getName().equalsIgnoreCase("freelancer");
             }
 
         } catch (Exception e) {
@@ -133,7 +130,7 @@ public class FreelancerController extends BaseController {
 
             personType = new PersonTypeComponent().getPersonType("freelancer");
             freelancer.getPerson().setPersonType(personType);
-            freelancer.getPerson().setPassword(MD5Util.getHash(freelancer.getPerson().getPassword()));
+            freelancer.setPassword(MD5Util.getHash(freelancer.getPassword()));
             id = new FreelancerComponent().createFreelancer(freelancer);
 
         } catch (Exception e) {
@@ -161,7 +158,7 @@ public class FreelancerController extends BaseController {
 
         return key;
     }
-    
+
     //==========================================================================
     private void sendMailNewFreelancer(Freelancer freelancer, String password, String displayLanguage) {
 

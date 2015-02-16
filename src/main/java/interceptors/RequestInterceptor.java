@@ -1,5 +1,6 @@
 package interceptors;
 
+import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.beans.RequestBean;
@@ -15,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class RequestInterceptor implements HandlerInterceptor {
 
     private static final Logger logger = Logger.getLogger(RequestInterceptor.class);
-    
+
     //==========================================================================
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
@@ -42,32 +43,122 @@ public class RequestInterceptor implements HandlerInterceptor {
 
             RequestBean rb = new RequestBean();
 
-            rb.setRemoteHost(request.getRemoteHost());
-            rb.setContentType(request.getContentType());
-            rb.setLocalAddress(request.getLocalAddr());
-            rb.setMethod(request.getMethod());
-            rb.setPathInfo(request.getPathInfo());
-            rb.setProtocol(request.getProtocol());
-            rb.setRemoteUser(request.getRemoteUser());
-            rb.setUri(request.getRequestURI());
-            rb.setScheme(request.getScheme());
-            rb.setServletPath(request.getServletPath());
+            if (request.getRemoteHost() != null) {
+                rb.setRemoteHost(request.getRemoteHost());
+            }
+
+            if (request.getContentType() != null) {
+                rb.setContentType(request.getContentType());
+            }
+
+            if (request.getRemoteHost() != null) {
+                rb.setRemoteHost(request.getRemoteHost());
+            }
+
+            if (request.getLocalAddr() != null) {
+                rb.setLocalAddress(request.getLocalAddr());
+            }
+
+            if (request.getMethod() != null) {
+                rb.setMethod(request.getMethod());
+            }
+
+            if (request.getPathInfo() != null) {
+                rb.setPathInfo(request.getPathInfo());
+            }
+
+            if (request.getProtocol() != null) {
+                rb.setProtocol(request.getProtocol());
+            }
+
+            if (request.getRemoteUser() != null) {
+                rb.setRemoteUser(request.getRemoteUser());
+            }
+
+            if (request.getRequestURI() != null) {
+                rb.setUri(request.getRequestURI());
+            }
+
+            if (request.getScheme() != null) {
+                rb.setScheme(request.getScheme());
+            }
+
+            if (request.getServletPath() != null) {
+                rb.setServletPath(request.getServletPath());
+            }
+
             rb.setContentLength(request.getContentLength());
-            //rb.setUrl(request.getRequestURL().toString());
+
+            if (request.getRequestURL().toString() != null) {
+                rb.setUrl(request.getRequestURL().toString());
+            }
+
             rb.setRemotePort(request.getRemotePort());
+
             rb.setLocalPort(request.getLocalPort());
-            //rb.setHeaderNames(request.getHeaderNames().toString());
-            //rb.setAttributesNames(request.getAttributeNames().toString());
-            rb.setAuthType(request.getAuthType());
-            rb.setCharacterEncoding(request.getCharacterEncoding());
-            rb.setScheme(request.getScheme());
-            rb.setLocale(request.getLocale().toString());
-            //rb.setParameterNames(request.getParameterNames().toString());
-            rb.setUserAgent(request.getHeader("User-Agent"));
-            rb.setAcceptEncoding(request.getHeader("Accept-Encoding"));
-            rb.setOrigin(request.getHeader("Origin"));
-            rb.setAccept(request.getHeader("Accept"));
-            rb.setConnection(request.getHeader("Connection"));
+
+            if (request.getHeaderNames() != null) {
+                Enumeration e = request.getHeaderNames();                
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; e.hasMoreElements(); i++) {
+                    sb.append(e.nextElement().toString()).append(", ");                    
+                }
+                rb.setHeaderNames(sb.toString());
+            }
+
+            if (request.getAttributeNames() != null) {                
+                Enumeration e = request.getAttributeNames();                
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; e.hasMoreElements(); i++) {
+                    sb.append(e.nextElement().toString()).append(", ");                    
+                }
+                rb.setAttributesNames(sb.toString());
+            }
+
+            if (request.getAuthType() != null) {
+                rb.setAuthType(request.getAuthType());
+            }
+
+            if (request.getCharacterEncoding() != null) {
+                rb.setCharacterEncoding(request.getCharacterEncoding());
+            }
+
+            if (request.getScheme() != null) {
+                rb.setScheme(request.getScheme());
+            }
+
+            if (request.getLocale() != null) {
+                rb.setLocale(request.getLocale().toString());
+            }
+
+            if (request.getParameterNames() != null) {
+                Enumeration e = request.getParameterNames();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; e.hasMoreElements(); i++) {
+                    sb.append(e.nextElement().toString()).append(", ");                    
+                }
+                rb.setParameterNames(sb.toString());
+            }
+
+            if (request.getHeader("User-Agent") != null) {
+                rb.setUserAgent(request.getHeader("User-Agent"));
+            }
+
+            if (request.getHeader("Accept-Encoding") != null) {
+                rb.setAcceptEncoding(request.getHeader("Accept-Encoding"));
+            }
+
+            if (request.getHeader("Origin") != null) {
+                rb.setOrigin(request.getHeader("Origin"));
+            }
+
+            if (request.getHeader("Accept") != null) {
+                rb.setAccept(request.getHeader("Accept"));
+            }
+
+            if (request.getHeader("Connection") != null) {
+                rb.setConnection(request.getHeader("Connection"));
+            }
 
             new DAO().create(rb);
 

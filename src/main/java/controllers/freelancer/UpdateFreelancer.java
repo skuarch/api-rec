@@ -41,7 +41,7 @@ public class UpdateFreelancer extends BaseController {
             f = freelancerComponent.getFreelancer(freelancer.getId());
             freelancer.setId(f.getId());
             freelancer.getPerson().setId(f.getPerson().getId());
-            freelancer.getPerson().setPassword(f.getPerson().getPassword());
+            freelancer.setPassword(f.getPassword());
             freelancer.getPerson().setPersonType(f.getPerson().getPersonType());
             freelancer.getAddress().setId(f.getAddress().getId());            
             freelancerComponent.updateFreelancer(freelancer);

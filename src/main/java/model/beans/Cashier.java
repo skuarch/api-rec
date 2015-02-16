@@ -22,7 +22,10 @@ public class Cashier {
     @Column(name = "cashier_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Min(1)
-    private long id;    
+    private long id;   
+    
+    @Column(name = "cashier_password", nullable = false, columnDefinition = "varchar(32)")
+    private String password; 
     
     @OneToOne
     @JoinColumn(name ="person_id", nullable = false)
@@ -56,6 +59,14 @@ public class Cashier {
 
     public void setIsSoftDeleted(byte isSoftDeleted) {
         this.isSoftDeleted = isSoftDeleted;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

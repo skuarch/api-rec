@@ -1,6 +1,5 @@
 package model.beans;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,11 +22,10 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name ="person")
-@NamedQueries({
-    @NamedQuery(name = "getPersonByEmailAndPassword", query = "from Person p where p.email = :email and p.password = :password and isSoftDeleted = 0"),
+@NamedQueries({    
     @NamedQuery(name = "getPersonByEmail", query = "from Person p where p.email = :email and isSoftDeleted = 0")        
 })
-public class Person implements Serializable {
+public class Person {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,10 +39,7 @@ public class Person implements Serializable {
     private String lastName;
     
     @Column(name = "person_email", nullable = false,columnDefinition = "varchar(128)")
-    private String email;               
-    
-    @Column(name = "person_password", nullable = false, columnDefinition = "varchar(32)")
-    private String password;    
+    private String email;       
     
     @Column(name = "person_phone", nullable = false)
     private String phone;    
@@ -88,14 +83,6 @@ public class Person implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public byte getIsSoftDeleted() {
