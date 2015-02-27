@@ -44,8 +44,8 @@ public class Freelancer {
     @JoinColumn(name ="address_id", nullable = false)
     private Address address;  
     
-    @Column(name = "freelance_treasury_id")
-    private String treasuryId;
+    @Column(name = "freelance_tax_id")
+    private String taxId;
     
     @Column(name = "freelance_key")
     private String key;
@@ -85,14 +85,14 @@ public class Freelancer {
 
     public void setAddress(Address address) {
         this.address = address;
+    }    
+
+    public String getTaxId() {
+        return taxId;
     }
 
-    public String getTreasuryId() {
-        return treasuryId;
-    }
-
-    public void setTreasuryId(String treasuryId) {
-        this.treasuryId = treasuryId;
+    public void setTaxId(String taxId) {
+        this.taxId = taxId;
     }
 
     public byte getIsSoftDeleted() {

@@ -3,6 +3,7 @@ package model.components;
 import java.util.HashMap;
 import java.util.List;
 import model.beans.Person;
+import model.beans.Responsable;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
 
@@ -115,6 +116,27 @@ public class PersonComponent {
             throw e;
         }
 
+    }
+    
+    //==========================================================================
+    public long createPerson(Person person) throws Exception{
+    
+        if(person == null){
+            throw new IllegalArgumentException("person is null");
+        }
+        
+        long id;
+        
+        try {
+            
+            id = new DAO().create(person);
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return id;
+        
     }
 
 }

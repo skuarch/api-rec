@@ -3,11 +3,8 @@ package controllers.affiliate;
 import controllers.application.BaseController;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
-import model.beans.PersonType;
 import model.components.AffiliateComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
@@ -17,7 +14,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,11 +37,8 @@ public class AffiliateController extends BaseController {
      * @param response HttpServletResponse
      * @param locale locale
      * @return String
-     */
-    //@RequestMapping(value = {"/v1/affiliate/create", "v1/affiliate/create"}, consumes = MediaType.APPLICATION_JSON, produces = MediaType.APPLICATION_JSON, method = RequestMethod.POST)
-    @RequestMapping(value = {"/v1/affiliate/create", "v1/affiliate/create"})
-    //@Produces(MediaType.APPLICATION_JSON)
-    //@Consumes(MediaType.APPLICATION_JSON)
+     */    
+    @RequestMapping(value = {"/v1/affiliate/create", "v1/affiliate/create"})    
     public @ResponseBody
     String createAffiliate(@ModelAttribute Affiliate affiliate, HttpServletResponse response, Locale locale) {
 

@@ -86,7 +86,7 @@ public class FreelancerAuthentication extends BaseController {
             jsono.put("email", f.getPerson().getEmail());
             jsono.put("lastLogin", f.getLastLogin());            
             jsono.put("key", f.getKey());            
-            jsono.put("treasuryId", f.getTreasuryId());            
+            jsono.put("taxId", f.getTaxId());            
             jsono.put("addressAll", f.getAddress().getAll());            
             jsono.put("city", f.getAddress().getCity());            
             jsono.put("country", f.getAddress().getCountry());            

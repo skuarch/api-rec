@@ -2,13 +2,28 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">   
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">   
    
     <!-- beans -->
     <bean id="login" class="model.beans.Login">       
-    </bean>
+    </bean>    
     
     <!-- components -->
+    <bean id="addressComponent" class="model.components.AddressComponent">       
+    </bean>
+    
+    <bean id="affiliateComponent" class="model.components.AffiliateComponent">       
+    </bean>
+    
+    <bean id="categoryComponent" class="model.components.CategoryComponent">       
+    </bean>
+    
+    <bean id="cashierComponent" class="model.components.CashierComponent">       
+    </bean>
+    
+    <bean id="establishmentComponent" class="model.components.EstablishmentComponent">       
+    </bean>
+    
     <bean id="freelancerComponent" class="model.components.FreelancerComponent">       
     </bean>
     
@@ -16,6 +31,12 @@
     </bean>
     
     <bean id="personTypeComponent" class="model.components.PersonTypeComponent">       
+    </bean>
+    
+    <bean id="responsableComponent" class="model.components.ResponsableComponent">       
+    </bean>
+    
+    <bean id="transactionComponent" class="model.components.TransactionComponent">       
     </bean>
     
 </beans>

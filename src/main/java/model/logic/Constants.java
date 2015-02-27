@@ -7,6 +7,7 @@ package model.logic;
 public class Constants {
     
     public static final short TRANSACTION_NEW_AFFILIATE = 1;
+    public static final short TRANSACTION_NEW_ESTABLISHMENT = 3;
     
     //==========================================================================
     private Constants(){

@@ -4,11 +4,17 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/interceptors/Hibernate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/TransactionComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateController.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateEstablishment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/TransactionTypeComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Configuration.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Freelancer.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/AddressComponent.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerCreateEstablishment.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/ResponsableComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Subcategory.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/MD5Util.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/category/GetCategories.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/EstablishmentComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Category.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/net/Mail.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/authentication/FreelancerAuthentication.java
@@ -22,6 +28,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerCreateAffiliate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Gender.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Company.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/CategoryComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Person.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/MailTemplateComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/application/Error404.java
@@ -29,8 +36,10 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/TransactionType.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/application/Index.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/UpdatePasswordBean.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/CashierComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/Validator.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/PersonType.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/UpdatePasswordFreelancer.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/database/DAO.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/HibernateUtil.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Address.java

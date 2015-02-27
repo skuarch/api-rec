@@ -3,12 +3,13 @@ package model.components;
 import model.beans.Transaction;
 import model.beans.TransactionType;
 import model.database.DAO;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author skuarch
  */
-//@Component
+@Component
 public class TransactionComponent {
 
     public TransactionComponent() {

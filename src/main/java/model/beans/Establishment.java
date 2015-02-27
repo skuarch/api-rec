@@ -1,13 +1,21 @@
 package model.beans;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,34 +29,49 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name = "establishment")
-public class Establishment {
+public class Establishment implements Serializable {
 
-    @Id    
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "establishment_id")
     private long id;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "affiliate_id")
-    private Affiliate affiliate;
+    private Affiliate affiliate;*/
 
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;    
-    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
+
     @Column(name = "establishment_name", nullable = false)
     private String name;
     
+    @Column(name = "establishment_subcategory", nullable = true)
+    private String subcategory;
+
     @OneToOne
     @JoinColumn(name = "responsable_id")
     private Responsable responsable;
-    
-    @Type(type="timestamp")
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "establishment_cashier",
+            joinColumns = {@JoinColumn(name = "establihsment_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "cashier_id",nullable = false, updatable = false)})
+    private List<Cashier> cashier = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "establishment_category",
+            joinColumns = {@JoinColumn(name = "establihsment_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "category_id",nullable = false, updatable = false)})
+    private List<Category> category = new ArrayList<>();
+
+    @Type(type = "timestamp")
     @Temporal(TemporalType.DATE)
-    @Column(name = "establishment_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP", updatable=false)    
+    @Column(name = "establishment_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP", updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Timestamp registrationDate = new Timestamp(System.currentTimeMillis());
-    
+
     @Column(name = "establishment_is_soft_deleted", nullable = false, columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
 
@@ -66,14 +89,6 @@ public class Establishment {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Affiliate getAffiliate() {
-        return affiliate;
-    }
-
-    public void setAffiliate(Affiliate affiliate) {
-        this.affiliate = affiliate;
     }
 
     public byte getIsSoftDeleted() {
@@ -106,6 +121,30 @@ public class Establishment {
 
     public void setResponsable(Responsable responsable) {
         this.responsable = responsable;
+    }
+
+    public List<Cashier> getCashier() {
+        return cashier;
+    }
+
+    public void setCashier(List<Cashier> cashier) {
+        this.cashier = cashier;
+    }
+
+    public List<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(List<Category> category) {
+        this.category = category;
+    }
+
+    public String getSubcategory() {
+        return subcategory;
+    }
+
+    public void setSubcategory(String subcategory) {
+        this.subcategory = subcategory;
     }
 
 }

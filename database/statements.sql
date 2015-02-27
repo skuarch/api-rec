@@ -11,6 +11,7 @@ INSERT INTO `regaloenclave`.`configuration` (`configuration_smtp_host`, `configu
 #transaction type
 INSERT INTO `regaloenclave`.`transaction_type` (`transaction_type_name`) VALUES ('new affiliate');
 INSERT INTO `regaloenclave`.`transaction_type` (`transaction_type_name`) VALUES ('new freelancer');
+INSERT INTO `regaloenclave`.`transaction_type` (`transaction_type_name`) VALUES ('new establishment');
 
 #gender
 INSERT INTO `regaloenclave`.`gender` (`gender_name`) VALUES ('male');
@@ -22,5 +23,23 @@ INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('affiliat
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('freelancer');
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('cashier');
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('responsable');
+
+#category
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('arte y cultura');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('bares y antros');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('bellaza y cosmetica');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('casinos y lugares de apuestas');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('departamentales');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('deportes y espacimiento');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('electronica y linea blanca');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Informatica y telefonia');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('joyeria y accesorios');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('moda y calzado');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('muebles y decoracion');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('regalos y juguetes');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('restaurantes y cafeterias');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('salud');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('servicios');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('viajes y hoteles');
 
 

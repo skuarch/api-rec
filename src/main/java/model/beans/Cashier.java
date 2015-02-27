@@ -6,9 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 
 /**
  *
@@ -19,21 +19,20 @@ import javax.validation.constraints.Min;
 public class Cashier {
 
     @Id
-    @Column(name = "cashier_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)    
-    @Min(1)
-    private long id;   
-    
+    @Column(name = "cashier_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @Column(name = "cashier_password", nullable = false, columnDefinition = "varchar(32)")
-    private String password; 
-    
+    private String password;
+
     @OneToOne
-    @JoinColumn(name ="person_id", nullable = false)
+    @JoinColumn(name = "person_id", nullable = false)
     private Person person;
-    
+
     @Column(name = "chashier_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
-    
+
     public Cashier() {
     }
 
@@ -68,5 +67,5 @@ public class Cashier {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 }

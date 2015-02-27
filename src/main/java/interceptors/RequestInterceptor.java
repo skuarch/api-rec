@@ -19,7 +19,7 @@ public class RequestInterceptor implements HandlerInterceptor {
 
     //==========================================================================
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {        
         new Thread(() -> {
             createRequestBean(request);
         }).start();
@@ -37,8 +37,8 @@ public class RequestInterceptor implements HandlerInterceptor {
     }
 
     //==========================================================================
-    private void createRequestBean(HttpServletRequest request) {
-
+    private void createRequestBean(HttpServletRequest request) {        
+        
         try {
 
             RequestBean rb = new RequestBean();
@@ -98,19 +98,19 @@ public class RequestInterceptor implements HandlerInterceptor {
             rb.setLocalPort(request.getLocalPort());
 
             if (request.getHeaderNames() != null) {
-                Enumeration e = request.getHeaderNames();                
+                Enumeration e = request.getHeaderNames();
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; e.hasMoreElements(); i++) {
-                    sb.append(e.nextElement().toString()).append(", ");                    
+                    sb.append(e.nextElement().toString()).append(", ");
                 }
                 rb.setHeaderNames(sb.toString());
             }
 
-            if (request.getAttributeNames() != null) {                
-                Enumeration e = request.getAttributeNames();                
+            if (request.getAttributeNames() != null) {
+                Enumeration e = request.getAttributeNames();
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; e.hasMoreElements(); i++) {
-                    sb.append(e.nextElement().toString()).append(", ");                    
+                    sb.append(e.nextElement().toString()).append(", ");
                 }
                 rb.setAttributesNames(sb.toString());
             }
@@ -135,7 +135,7 @@ public class RequestInterceptor implements HandlerInterceptor {
                 Enumeration e = request.getParameterNames();
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; e.hasMoreElements(); i++) {
-                    sb.append(e.nextElement().toString()).append(", ");                    
+                    sb.append(e.nextElement().toString()).append(", ");
                 }
                 rb.setParameterNames(sb.toString());
             }
@@ -163,7 +163,7 @@ public class RequestInterceptor implements HandlerInterceptor {
             new DAO().create(rb);
 
         } catch (Exception e) {
-            logger.error("error", e);
+            logger.error("RequestInterceptor.createRequestBean", e);
         }
     }
 

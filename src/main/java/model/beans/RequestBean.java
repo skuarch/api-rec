@@ -57,7 +57,7 @@ public class RequestBean {
     private String characterEncoding;   
     @Column(name = "request_locale")
     private String locale;
-    @Column(name = "request_parameter_names")
+    @Column(name = "request_parameter_names", columnDefinition = "text")
     private String ParameterNames;    
     @Column(name = "request_user_agent")
     private String userAgent;

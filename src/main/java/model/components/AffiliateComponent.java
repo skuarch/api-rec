@@ -1,5 +1,8 @@
 package model.components;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import model.beans.Affiliate;
 import model.database.DAO;
 import org.hibernate.HibernateException;
@@ -44,6 +47,71 @@ public class AffiliateComponent {
 
         return id;
 
+    }
+    
+    
+    //==========================================================================
+    /**
+     * get affiliate by id.
+     * @param id long
+     * @return Affiliate
+     * @throws Exception if argument is incorrect 
+     */
+    public Affiliate getAffiliate(long id) throws Exception{
+        
+        if(id < 1){
+            throw new IllegalArgumentException("id is less than 0");
+        }
+        
+        Affiliate affiliate = null;
+        
+        try {
+            
+            affiliate = new DAO().get(id, new Affiliate());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return affiliate;
+        
+    }
+
+    //==========================================================================
+    public void updateAffiliate(Affiliate affiliate) throws Exception {
+        
+        if(affiliate == null){
+            throw new IllegalArgumentException("affiliate is null");
+        }
+        
+        try {
+            
+            new DAO().update(affiliate);
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+    }
+    
+    //==========================================================================
+    public ArrayList<Affiliate> getAffiliatesByFreelancer(long freelancerId) throws Exception{
+        
+        ArrayList<Affiliate> affiliates = null;
+        HashMap parameters;
+        
+        try {
+            
+            parameters = new HashMap<>();
+            parameters.put("id", freelancerId + "");            
+            affiliates = new DAO().query(parameters, "getAffiliateByFreelancer", new Affiliate());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+ 
+        return affiliates;
+    
     }
 
 }
