@@ -1,6 +1,8 @@
 package model.beans;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,10 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -20,10 +18,10 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name = "transaction")
-public class Transaction {
+public class Transaction implements Serializable {
 
     @Id
-    @Column(name = "transaction_id", nullable = false)
+    @Column(name = "transaction_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;    
     
@@ -34,11 +32,8 @@ public class Transaction {
     @JoinColumn(name = "transaction_type_id")
     private TransactionType transactionType;
     
-    @Type(type="timestamp")
-    @Temporal(TemporalType.DATE)
-    @Column(name = "transaction_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP", updatable=false)    
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private Timestamp registrationDate = new Timestamp(System.currentTimeMillis());
+    @Column(name = "transaction_registration_date", nullable = false, length = 19)
+    private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     
     @Column(name = "transaction_is_soft_deleted", nullable = false, columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;    
@@ -71,11 +66,11 @@ public class Transaction {
         this.transactionType = transactionType;
     }
 
-    public Timestamp getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Timestamp registrationDate) {
+    public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
 

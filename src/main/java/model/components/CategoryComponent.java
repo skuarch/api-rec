@@ -31,5 +31,25 @@ public class CategoryComponent {
 
         return categories;
     }   
+    
+    public Category getCategory(long id) throws Exception{
+        
+        if(id < 1){
+            throw new IllegalArgumentException("id is less than 1");
+        }
+        
+        Category category = null;
+        
+        try {
+            
+            category = new DAO().get(id, new Category());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return category;
+        
+    }
 
 }

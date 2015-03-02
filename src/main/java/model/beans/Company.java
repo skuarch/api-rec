@@ -1,7 +1,9 @@
 package model.beans;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,10 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -24,7 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name = "company")
-public class Company {
+public class Company implements Serializable {
 
     @Id
     @Column(name = "company_id", nullable = false)
@@ -56,12 +54,9 @@ public class Company {
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Establishment> establishment = new ArrayList<>();
-
-    @Type(type = "timestamp")
-    @Temporal(TemporalType.DATE)
-    @Column(name = "company_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP", updatable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private Timestamp registrationDate = new Timestamp(System.currentTimeMillis());
+    
+    @Column(name = "company_registration_date", nullable = false, length = 19)
+    private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());    
 
     @Column(name = "company_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
@@ -130,11 +125,11 @@ public class Company {
         this.establishment = establishment;
     }
 
-    public Timestamp getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Timestamp registrationDate) {
+    public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
 

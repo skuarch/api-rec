@@ -1,6 +1,8 @@
 package model.beans;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,10 +18,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -30,10 +28,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NamedQueries({
     @NamedQuery(name = "getAffiliateByFreelancer", query = "from Affiliate a where a.freelancer.id = :id and a.isSoftDeleted = 0")
 })
-public class Affiliate {
+public class Affiliate implements Serializable {
 
     @Id
-    @Column(name = "affiliate_id", nullable = false)
+    @Column(name = "affiliate_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -55,17 +53,14 @@ public class Affiliate {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "affiliate_establishment",
             joinColumns = {@JoinColumn(name = "affiliate_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "establihsment_id",nullable = false, updatable = false)})
+            inverseJoinColumns = {@JoinColumn(name = "establishment_id",nullable = false, updatable = false)})
     private List<Establishment> establishment;
 
     @Column(name = "affiliate_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
 
-    @Type(type = "timestamp")
-    @Temporal(TemporalType.DATE)
-    @Column(name = "affiliate_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP", updatable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private Timestamp registrationDate = new Timestamp(System.currentTimeMillis());
+    @Column(name = "affiliate_registration_date", nullable = false, length = 19)
+    private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
     public Affiliate() {
     }
@@ -102,14 +97,14 @@ public class Affiliate {
         this.address = address;
     }
 
-    public Timestamp getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Timestamp registrationDate) {
+    public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
-
+    
     public Freelancer getFreelancer() {
         return freelancer;
     }

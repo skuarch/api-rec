@@ -1,6 +1,8 @@
 package model.beans;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +14,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -26,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NamedQueries({
         @NamedQuery(name = "getFreelancer", query = "from Freelancer f where f.person.email = :email and f.password = :password and f.isSoftDeleted = 0")        
 })
-public class Freelancer {
+public class Freelancer implements Serializable {
 
     @Id    
     @Column(name = "freelancer_id")
@@ -50,11 +48,8 @@ public class Freelancer {
     @Column(name = "freelance_key")
     private String key;
     
-    @Type(type="timestamp")
-    @Temporal(TemporalType.DATE)
-    @Column(name = "freelancer_last_login", updatable=true)    
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private Timestamp lastLogin = new Timestamp(System.currentTimeMillis());
+    @Column(name = "freelancer_last_login")
+    private String lastLogin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());        
     
     @Column(name = "freelancer_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
@@ -111,11 +106,11 @@ public class Freelancer {
         this.key = key;
     }
 
-    public Timestamp getLastLogin() {
+    public String getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Timestamp lastLogin) {
+    public void setLastLogin(String lastLogin) {
         this.lastLogin = lastLogin;
     }
 

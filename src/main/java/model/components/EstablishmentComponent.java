@@ -1,5 +1,6 @@
 package model.components;
 
+import java.util.ArrayList;
 import model.beans.Establishment;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
@@ -50,6 +51,23 @@ public class EstablishmentComponent {
             throw e;
         }
 
+    }
+    
+    //==========================================================================
+    public ArrayList<Establishment> getEstablishmentByFreelancer(long id){
+    
+        if(id < 1){
+            throw new IllegalArgumentException("id is less than 0");
+        }
+        
+        try {
+            
+        } catch (Exception e) {
+            throw e;
+        }        
+        
+        return null;
+    
     }
 
 }

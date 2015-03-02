@@ -8,7 +8,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
-import model.beans.AffiliateEstablishment;
+import model.beans.AffiliateEstablishmentBasic;
 import model.beans.Cashier;
 import model.beans.Establishment;
 import model.beans.Person;
@@ -56,12 +56,12 @@ public class FreelancerCreateEstablishment extends BaseController {
     @RequestMapping(value = {"/v1/affiliate/create/establishment", "v1/affiliate/create/establishment"})
     public @ResponseBody
     String createEstablishment(
-            @ModelAttribute AffiliateEstablishment affiliateEstablishment,
+            @ModelAttribute AffiliateEstablishmentBasic affiliateEstablishmentBasic,
             HttpServletResponse response,
             Locale locale) {
 
         JSONObject jsono = null;
-        
+
         Affiliate affiliate = null;
 
         List<Establishment> establishmentList = null;
@@ -87,57 +87,61 @@ public class FreelancerCreateEstablishment extends BaseController {
             jsono = new JSONObject();
 
             //do some validations
-            if(affiliateEstablishment.getAffiliateId() < 1){
+            if (affiliateEstablishmentBasic.getAffiliateId() < 1) {
                 jsono.put("created", false);
                 return jsono.toString();
             }
-            
-            if(affiliateEstablishment.getEstablishment().getAddress() == null){
+
+            if (affiliateEstablishmentBasic.getEstablishment().getAddress() == null) {
                 jsono.put("created", false);
                 return jsono.toString();
             }
-            
-            if(affiliateEstablishment.getEstablishment().getResponsable() == null){
+
+            if (affiliateEstablishmentBasic.getEstablishment().getResponsable() == null) {
                 jsono.put("created", false);
                 return jsono.toString();
             }
-            
-            if(affiliateEstablishment.getEstablishment() == null){
+
+            if (affiliateEstablishmentBasic.getEstablishment() == null) {
                 jsono.put("created", false);
                 return jsono.toString();
             }
-            
-            if(affiliateEstablishment.getEstablishment().getName() == null || affiliateEstablishment.getEstablishment().getName().length() < 0){
+
+            if (affiliateEstablishmentBasic.getEstablishment().getName() == null || affiliateEstablishmentBasic.getEstablishment().getName().length() < 0) {
                 jsono.put("created", false);
                 return jsono.toString();
             }
-            
-            if(affiliateEstablishment.getEstablishment().getCashier() == null || affiliateEstablishment.getEstablishment().getCashier().size() < 0){
+
+            if (affiliateEstablishmentBasic.getEstablishment().getCashier() == null || affiliateEstablishmentBasic.getEstablishment().getCashier().size() < 0) {
                 jsono.put("created", false);
                 return jsono.toString();
             }
-            
-            if(affiliateEstablishment.getEstablishment().getCategory()== null || affiliateEstablishment.getEstablishment().getCategory().size() < 0){
+
+            if (affiliateEstablishmentBasic.getEstablishment().getCategory() == null || affiliateEstablishmentBasic.getEstablishment().getCategory().size() < 0) {
                 jsono.put("created", false);
                 return jsono.toString();
-            }            
-            
+            }
+
             //get affiliate
             affiliate = affiliateComponent.getAffiliate(
-                    affiliateEstablishment.getAffiliateId()
+                    affiliateEstablishmentBasic.getAffiliateId()
             );
             
+            //get establishment
+            establishment = affiliateEstablishmentBasic.getEstablishment();
+            responsable = establishment.getResponsable();
+            cashier = establishment.getCashier().get(0);
+
             //get personType responsable----------------------------------------
             responsablePersonType = personTypeComponent.getPersonType("responsable");
 
             //create person responsable
-            responsablePerson = affiliateEstablishment.getEstablishment().getResponsable().getPerson();
+            responsablePerson = responsable.getPerson();
             responsablePerson.setPersonType(responsablePersonType);
             responsablePersonId = personComponent.createPerson(responsablePerson);
             responsablePerson.setId(responsablePersonId);
 
-            //create responsable
-            responsable = affiliateEstablishment.getEstablishment().getResponsable();
+            //create responsable            
             responsable.setPerson(responsablePerson);
             responsableId = responsableComponent.createResponsable(responsable);
             responsable.setId(responsableId);
@@ -146,26 +150,24 @@ public class FreelancerCreateEstablishment extends BaseController {
             cashierPersonType = personTypeComponent.getPersonType("cashier");
 
             //create person cashier           
-            cashierPerson = affiliateEstablishment.getEstablishment().getCashier().get(0).getPerson();
+            cashierPerson = cashier.getPerson();
             cashierPerson.setPersonType(cashierPersonType);
             cashierPersonId = personComponent.createPerson(cashierPerson);
             cashierPerson.setId(cashierPersonId);
-            
-            //create cashier
-            cashier = affiliateEstablishment.getEstablishment().getCashier().get(0);
-            cashier.setPerson(cashierPerson);            
+
+            //create cashier            
+            cashier.setPerson(cashierPerson);
             cashierId = cashierComponent.createCashier(cashier);
             cashier.setId(cashierId);
             cashierList = new ArrayList<>();
             cashierList.add(cashier);
-            
-            //create establishment----------------------------------------------
-            establishment = affiliateEstablishment.getEstablishment();                        
+
+            //create establishment----------------------------------------------            
             establishment.setResponsable(responsable);
             establishment.setCashier(cashierList);
             establishmentId = establishmentComponent.createEstablishment(establishment);
             establishment.setId(establishmentId);
-            establishmentList = new ArrayList<>();
+            establishmentList = affiliate.getEstablishment();
             establishmentList.add(establishment);
             
             //update affiliate            
@@ -177,10 +179,9 @@ public class FreelancerCreateEstablishment extends BaseController {
 
             //create transaction
             TransactionUtil.createTransaction(Constants.TRANSACTION_NEW_ESTABLISHMENT, establishment.getId());
-            
+
             //send email to responsable
             //send mail to cashier            
-            
         } catch (Exception e) {
             logger.error("FreelancerCreateEstablishment.createEstablishment", e);
             jsono = new JSONObject("{\"error\":\"" + e.toString() + "\",}");

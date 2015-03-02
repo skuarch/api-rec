@@ -43,6 +43,8 @@ public class FreelancerGetAffiliates extends BaseController {
             
         } catch (Exception e) {
             logger.error("FreelancerGetAffiliates.getAffiliatesByFreelancer", e);            
+            jsona = new JSONArray();
+            jsona.put("error");
         }
         
         return jsona.toString();

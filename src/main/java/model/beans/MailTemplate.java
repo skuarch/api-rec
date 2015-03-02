@@ -1,5 +1,6 @@
 package model.beans;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "getTemplateAffiliate", query = "from MailTemplate mt where mt.name = :name and mt.displayLanguage = :displayLanguage and isSoftDeleted = 0"),
     @NamedQuery(name = "getTemplate", query = "from MailTemplate mt where mt.name = :name and mt.displayLanguage = :displayLanguage and isSoftDeleted = 0")
 })
-public class MailTemplate {
+public class MailTemplate implements Serializable {
 
     @Id
     @Min(1)

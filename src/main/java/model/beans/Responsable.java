@@ -1,5 +1,6 @@
 package model.beans;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,10 +16,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "responsable")
-public class Responsable {
+public class Responsable implements Serializable {
 
     @Id
-    @Column(name = "responsable_id", nullable = false)
+    @Column(name = "responsable_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private long id;
     

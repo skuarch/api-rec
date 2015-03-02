@@ -13,6 +13,8 @@ controllers/freelancer/UpdatePasswordFreelancer.class
 model/util/Validator.class
 model/components/ResponsableComponent.class
 model/beans/PersonType.class
+model/beans/AffiliateEstablishmet.class
+controllers/freelancer/FreelancerGetAffiliates.class
 model/beans/UpdatePasswordBean.class
 model/beans/Gender.class
 model/net/Mail$1.class
@@ -26,6 +28,7 @@ interceptors/Hibernate.class
 model/components/AffiliateComponent.class
 servlets/GlobalContext.class
 model/components/AddressComponent.class
+controllers/affiliate/AffiliateGetEstablishment.class
 model/logic/MailSender.class
 controllers/freelancer/FreelancerCreateAffiliate.class
 model/beans/RequestBean.class
@@ -37,13 +40,14 @@ model/beans/Company.class
 controllers/category/GetCategories.class
 controllers/application/Index.class
 controllers/freelancer/FreelancerCreateEstablishment.class
+model/components/AffiliateEstablishmentComponent.class
+model/beans/AffiliateEstablishmentBasic.class
 interceptors/RequestInterceptor.class
 model/beans/Freelancer.class
 model/components/TransactionTypeComponent.class
 model/components/FreelancerComponent.class
 model/components/PersonComponent.class
 controllers/authentication/FreelancerAuthentication.class
-model/beans/AffiliateEstablishment.class
 model/components/EstablishmentComponent.class
 controllers/freelancer/UpdateFreelancer.class
 model/beans/Category.class
@@ -56,4 +60,5 @@ model/components/PersonTypeComponent.class
 model/components/CategoryComponent.class
 model/database/DAO.class
 model/beans/EstablishmentType.class
+controllers/affiliate/GetAffiliate.class
 model/beans/Person.class

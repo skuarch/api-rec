@@ -1,12 +1,13 @@
 package model.beans;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,11 +17,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "cashier")
-public class Cashier {
+public class Cashier implements Serializable {
 
     @Id
     @Column(name = "cashier_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "cashier_password", nullable = false, columnDefinition = "varchar(32)")

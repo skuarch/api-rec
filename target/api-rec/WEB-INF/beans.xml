@@ -15,6 +15,9 @@
     <bean id="affiliateComponent" class="model.components.AffiliateComponent">       
     </bean>
     
+    <bean id="affiliateEstablishmet" class="model.components.AffiliateEstablishmentComponent">       
+    </bean>
+    
     <bean id="categoryComponent" class="model.components.CategoryComponent">       
     </bean>
     

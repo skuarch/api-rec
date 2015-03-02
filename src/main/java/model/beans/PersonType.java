@@ -1,5 +1,6 @@
 package model.beans;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "getPersonTypeByName", query = "from PersonType pt where pt.name = :name and pt.isSoftDeleted = 0")
 })
-public class PersonType {
+public class PersonType implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

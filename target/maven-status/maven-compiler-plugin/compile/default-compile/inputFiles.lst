@@ -2,9 +2,9 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Affiliate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/EstablishmentType.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/interceptors/Hibernate.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/AffiliateEstablishmentComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/TransactionComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateController.java
-/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateEstablishment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/TransactionTypeComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Configuration.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Freelancer.java
@@ -25,7 +25,9 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/logic/StaticContext.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/PersonTypeComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/UpdateFreelancer.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateEstablishmentBasic.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerCreateAffiliate.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateGetEstablishment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Gender.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Company.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/CategoryComponent.java
@@ -39,7 +41,10 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/CashierComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/Validator.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/PersonType.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateEstablishmet.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/GetAffiliate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/UpdatePasswordFreelancer.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerGetAffiliates.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/database/DAO.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/HibernateUtil.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Address.java

@@ -1,5 +1,6 @@
 package model.beans;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "establishment_type")
-public class EstablishmentType {
+public class EstablishmentType implements Serializable {
 
     @Id
     @Column(name = "establishment_type_id")

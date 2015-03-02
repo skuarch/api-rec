@@ -2,7 +2,6 @@ package model.components;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import model.beans.Affiliate;
 import model.database.DAO;
 import org.hibernate.HibernateException;
@@ -96,6 +95,10 @@ public class AffiliateComponent {
     
     //==========================================================================
     public ArrayList<Affiliate> getAffiliatesByFreelancer(long freelancerId) throws Exception{
+        
+        if(freelancerId < 1){
+            throw new IllegalArgumentException("freelancerId is less than 0");
+        }
         
         ArrayList<Affiliate> affiliates = null;
         HashMap parameters;

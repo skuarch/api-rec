@@ -4,12 +4,12 @@ package model.beans;
  *
  * @author skuarch
  */
-public class AffiliateEstablishment {
+public class AffiliateEstablishmentBasic {
 
     private long affiliateId;
     private Establishment establishment;    
     
-    public AffiliateEstablishment() {
+    public AffiliateEstablishmentBasic() {
     }
 
     public long getAffiliateId() {

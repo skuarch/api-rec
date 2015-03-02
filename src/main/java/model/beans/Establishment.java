@@ -1,8 +1,9 @@
 package model.beans;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,15 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -32,13 +27,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Establishment implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "establishment_id")
     private long id;
-
-    /*@ManyToOne
-    @JoinColumn(name = "affiliate_id")
-    private Affiliate affiliate;*/
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
@@ -56,21 +47,18 @@ public class Establishment implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "establishment_cashier",
-            joinColumns = {@JoinColumn(name = "establihsment_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "cashier_id",nullable = false, updatable = false)})
+            joinColumns = {@JoinColumn(name = "establishment_id")},
+            inverseJoinColumns = {@JoinColumn(name = "cashier_id")})    
     private List<Cashier> cashier = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "establishment_category",
-            joinColumns = {@JoinColumn(name = "establihsment_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "category_id",nullable = false, updatable = false)})
+            joinColumns = {@JoinColumn(name = "establishment_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})    
     private List<Category> category = new ArrayList<>();
 
-    @Type(type = "timestamp")
-    @Temporal(TemporalType.DATE)
-    @Column(name = "establishment_registration_date", nullable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP", updatable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private Timestamp registrationDate = new Timestamp(System.currentTimeMillis());
+    @Column(name = "establishment_registration_date", nullable = false, length = 19)
+    private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());    
 
     @Column(name = "establishment_is_soft_deleted", nullable = false, columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
@@ -107,14 +95,13 @@ public class Establishment implements Serializable {
         this.name = name;
     }
 
-    public Timestamp getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Timestamp registrationDate) {
+    public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
-
     public Responsable getResponsable() {
         return responsable;
     }

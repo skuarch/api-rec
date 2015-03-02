@@ -1,13 +1,11 @@
 package model.beans;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -21,7 +19,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "getCategories", query = "from Category c where isSoftDeleted = 0")    
 })
-public class Category {
+public class Category implements Serializable {
 
     @Id    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
