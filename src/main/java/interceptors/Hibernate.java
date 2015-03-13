@@ -23,7 +23,7 @@ public class Hibernate extends EmptyInterceptor {
             String[] propertyNames,
             Type[] types) {
 
-        logger.info(entity.getClass() + " deleted");
+        //logger.info(entity.getClass() + " deleted");
     }
 
     //==========================================================================
@@ -35,7 +35,7 @@ public class Hibernate extends EmptyInterceptor {
             String[] propertyNames,
             Type[] types) {
 
-        logger.info(entity.getClass() + " updated");
+        //logger.info(entity.getClass() + " updated");
 
         return true;
     }
@@ -49,7 +49,7 @@ public class Hibernate extends EmptyInterceptor {
             Type[] types) {
 
         // log loading events
-        logger.info(entity.getClass() + " loading");
+        //logger.info(entity.getClass() + " loading");
         return true;
     }
 
@@ -61,7 +61,7 @@ public class Hibernate extends EmptyInterceptor {
             String[] propertyNames,
             Type[] types) {
 
-        logger.info(entity.getClass() + " created");
+        //logger.info(entity.getClass() + " created");
         return true;
 
     }

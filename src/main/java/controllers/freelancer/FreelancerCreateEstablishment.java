@@ -64,7 +64,7 @@ public class FreelancerCreateEstablishment extends BaseController {
 
         Affiliate affiliate = null;
 
-        List<Establishment> establishmentList = null;
+        List<Establishment> establishmentSet = null;
         Establishment establishment = null;
         long establishmentId;
 
@@ -167,11 +167,11 @@ public class FreelancerCreateEstablishment extends BaseController {
             establishment.setCashier(cashierList);
             establishmentId = establishmentComponent.createEstablishment(establishment);
             establishment.setId(establishmentId);
-            establishmentList = affiliate.getEstablishment();
-            establishmentList.add(establishment);
+            establishmentSet = affiliate.getEstablishment();
+            establishmentSet.add(establishment);
             
             //update affiliate            
-            affiliate.setEstablishment(establishmentList);
+            affiliate.setEstablishment(establishmentSet);
             affiliateComponent.updateAffiliate(affiliate);
 
             //everything is ok            

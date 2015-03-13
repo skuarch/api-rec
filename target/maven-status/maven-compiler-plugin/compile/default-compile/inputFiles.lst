@@ -1,8 +1,11 @@
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/responsable/UpdateResponsable.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/logic/Constants.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Affiliate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/EstablishmentType.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/interceptors/Hibernate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/AffiliateEstablishmentComponent.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/GenderComponent.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/GetCashier.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/TransactionComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateController.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/TransactionTypeComponent.java
@@ -13,6 +16,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/ResponsableComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Subcategory.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/MD5Util.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CreateCashier.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/category/GetCategories.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/EstablishmentComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Category.java
@@ -22,6 +26,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/PersonComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/application/Test.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Responsable.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/establishment/UpdateEstablishment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/logic/StaticContext.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/PersonTypeComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/UpdateFreelancer.java
@@ -31,6 +36,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Gender.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Company.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/CategoryComponent.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/UpdateAffiliate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Person.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/MailTemplateComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/application/Error404.java
@@ -52,9 +58,12 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/FreelancerComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Establishment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/AffiliateComponent.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/UpdateCashier.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Transaction.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Login.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/MailTemplate.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/UpdatePasswordCashier.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/establishment/GetEstablishment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/TransactionUtil.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/ConfigurationComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerController.java

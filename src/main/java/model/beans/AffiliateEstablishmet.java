@@ -3,8 +3,6 @@ package model.beans;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,10 +14,10 @@ import javax.persistence.Table;
 @Table(name = "affiliate_establishment")
 public class AffiliateEstablishmet implements Serializable {
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "affiliate_establishment_id")
-    private long id;
+    private long id;*/
     
     @Id
     @Column(name = "affiliate_id")

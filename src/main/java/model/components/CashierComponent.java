@@ -51,5 +51,26 @@ public class CashierComponent {
         }
 
     }
+    
+    //==========================================================================
+    public Cashier getCashier(long id) throws Exception {
+
+        if (id < 1) {
+            throw new IllegalArgumentException("id is less than 1");
+        }
+
+        Cashier cashier = null;
+        
+        try {
+
+            cashier = new DAO().get(id, new Cashier());
+
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return cashier;
+
+    }
 
 }

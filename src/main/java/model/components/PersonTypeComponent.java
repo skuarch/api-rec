@@ -2,6 +2,7 @@ package model.components;
 
 import java.util.HashMap;
 import java.util.List;
+import model.beans.Person;
 import model.beans.PersonType;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
@@ -45,6 +46,24 @@ public class PersonTypeComponent {
 
         return pt;
 
+    }
+
+    //==========================================================================
+    public void updatePerson(Person person) throws Exception {
+        
+        if(person == null){
+            throw new IllegalArgumentException("person is null");
+        }
+        
+
+        try {
+            
+            new DAO().update(person);
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
     }
 
 }

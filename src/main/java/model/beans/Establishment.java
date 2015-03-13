@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -37,7 +40,7 @@ public class Establishment implements Serializable {
 
     @Column(name = "establishment_name", nullable = false)
     private String name;
-    
+
     @Column(name = "establishment_subcategory", nullable = true)
     private String subcategory;
 
@@ -45,20 +48,28 @@ public class Establishment implements Serializable {
     @JoinColumn(name = "responsable_id")
     private Responsable responsable;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     @JoinTable(name = "establishment_cashier",
-            joinColumns = {@JoinColumn(name = "establishment_id")},
-            inverseJoinColumns = {@JoinColumn(name = "cashier_id")})    
-    private List<Cashier> cashier = new ArrayList<>();
+            joinColumns = {
+                @JoinColumn(name = "establishment_id", unique = false, nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                @JoinColumn(name = "cashier_id", unique = false, nullable = false, updatable = false)})
+    private List<Cashier> cashier = new ArrayList<>();    
+    
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     @JoinTable(name = "establishment_category",
-            joinColumns = {@JoinColumn(name = "establishment_id")},
-            inverseJoinColumns = {@JoinColumn(name = "category_id")})    
+            joinColumns = {
+                @JoinColumn(name = "establishment_id", referencedColumnName = "establishment_id", unique = false, nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                @JoinColumn(name = "category_id", unique = false, nullable = false, updatable = false)})
     private List<Category> category = new ArrayList<>();
+    
 
     @Column(name = "establishment_registration_date", nullable = false, length = 19)
-    private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());    
+    private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
     @Column(name = "establishment_is_soft_deleted", nullable = false, columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
@@ -102,6 +113,7 @@ public class Establishment implements Serializable {
     public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
+
     public Responsable getResponsable() {
         return responsable;
     }
@@ -111,10 +123,15 @@ public class Establishment implements Serializable {
     }
 
     public List<Cashier> getCashier() {
-        return cashier;
+        if (!cashier.isEmpty()) {
+            List<Cashier> c = cashier.stream().distinct().collect(Collectors.toList());
+            return c;
+        } else {
+            return cashier;
+        }
     }
 
-    public void setCashier(List<Cashier> cashier) {
+    public void setCashier(List<Cashier> cashier) {        
         this.cashier = cashier;
     }
 

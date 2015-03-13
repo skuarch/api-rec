@@ -1,6 +1,7 @@
 package model.util;
 
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 
 /**
@@ -29,7 +30,7 @@ public class MD5Util {
             
             m = MessageDigest.getInstance("MD5");
             m.reset();
-            m.update(text.getBytes());
+            m.update(text.getBytes(Charset.forName("UTF-8")));
             digest = m.digest();
             bigInt = new BigInteger(1, digest);
             hashtext = bigInt.toString(16);

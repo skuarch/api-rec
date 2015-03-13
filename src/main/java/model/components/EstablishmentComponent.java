@@ -70,4 +70,25 @@ public class EstablishmentComponent {
     
     }
 
+    //==========================================================================
+    public Establishment getEstablishment(long id) throws Exception {
+        
+        if(id < 1){
+            throw new IllegalArgumentException("id is less than 0");
+        }
+        
+        Establishment establishment = null;
+        
+        try {
+            
+            establishment = new DAO().get(id, new Establishment());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return establishment;
+        
+    }
+
 }

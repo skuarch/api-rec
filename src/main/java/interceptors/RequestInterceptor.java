@@ -20,9 +20,9 @@ public class RequestInterceptor implements HandlerInterceptor {
     //==========================================================================
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {        
-        new Thread(() -> {
+        /*new Thread(() -> {
             createRequestBean(request);
-        }).start();
+        }).start();*/
         return true;
     }
 

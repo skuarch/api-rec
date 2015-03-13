@@ -23,10 +23,10 @@ public class Test extends BaseController {
 
         try {
 
-            mav = new ModelAndView("application/test");
+            /*mav = new ModelAndView("application/test");
             Affiliate affiliate = new DAO().get(1, new Affiliate());
-            List<Establishment> establiments = affiliate.getEstablishment();
-            System.out.println(establiments.get(0).getName());
+            Set<Establishment> establiments = affiliate.getEstablishment();
+            System.out.println(establiments.get(0).getName());*/
 
         } catch (Exception e) {
             e.printStackTrace();

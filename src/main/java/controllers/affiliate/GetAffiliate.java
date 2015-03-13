@@ -30,7 +30,7 @@ public class GetAffiliate {
         
         try {
             
-            affiliate = affiliateComponent.getAffiliate(affiliate.getId());
+            affiliate = affiliateComponent.getAffiliate(affiliate.getId());            
             jsono = new JSONObject(affiliate);
             
         } catch (Exception e) {

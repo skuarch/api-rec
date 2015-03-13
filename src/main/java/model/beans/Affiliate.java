@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -50,11 +53,16 @@ public class Affiliate implements Serializable {
     @JoinColumn(name = "freelancer_id")
     private Freelancer freelancer;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     @JoinTable(name = "affiliate_establishment",
-            joinColumns = {@JoinColumn(name = "affiliate_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "establishment_id",nullable = false, updatable = false)})
+            joinColumns = {
+                @JoinColumn(name = "affiliate_id", unique = false, nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                @JoinColumn(name = "establishment_id", unique = false, nullable = false, updatable = false)}
+    )
     private List<Establishment> establishment;
+    
 
     @Column(name = "affiliate_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
@@ -104,7 +112,7 @@ public class Affiliate implements Serializable {
     public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
-    
+
     public Freelancer getFreelancer() {
         return freelancer;
     }
@@ -122,7 +130,12 @@ public class Affiliate implements Serializable {
     }
 
     public List<Establishment> getEstablishment() {
-        return establishment;
+        if (!establishment.isEmpty()) {
+            List<Establishment> e = establishment.stream().distinct().collect(Collectors.toList());
+            return e;
+        } else {
+            return establishment;
+        }
     }
 
     public void setEstablishment(List<Establishment> establishment) {
