@@ -130,7 +130,11 @@ public class FreelancerController extends BaseController {
 
             personType = new PersonTypeComponent().getPersonType("freelancer");
             freelancer.getPerson().setPersonType(personType);
-            freelancer.setPassword(MD5Util.getHash(freelancer.getPassword()));
+            
+            if(freelancer.getPassword().length() != 32){
+                freelancer.setPassword(MD5Util.getHash(freelancer.getPassword()));
+            }     
+            
             id = new FreelancerComponent().createFreelancer(freelancer);
 
         } catch (Exception e) {
