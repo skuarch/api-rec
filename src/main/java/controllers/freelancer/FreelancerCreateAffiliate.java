@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
 import model.components.AffiliateComponent;
+import model.components.ContactComponent;
+import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
 import model.util.TransactionUtil;
@@ -30,6 +32,10 @@ public class FreelancerCreateAffiliate extends BaseController {
 
     @Autowired
     private PersonTypeComponent personTypeComponent;
+    @Autowired
+    private ContactComponent contactComponent;
+    @Autowired
+    private PersonComponent personComponent;
 
     //==========================================================================
     /**
@@ -46,14 +52,23 @@ public class FreelancerCreateAffiliate extends BaseController {
         
         long id = 0;
         JSONObject jsono = null;
+        long contactId = 0;
+        long personContacId = 0;
 
         try {
 
             setContentType(response, MediaType.APPLICATION_JSON);
             jsono = new JSONObject();
-
+            
             //get person type
+            affiliate.getContact().getPerson().setPersonType(personTypeComponent.getPersonType("contact"));
             affiliate.getPerson().setPersonType(personTypeComponent.getPersonType("affiliate"));
+            
+            //save the contact
+            personContacId = personComponent.createPerson(affiliate.getContact().getPerson());
+            affiliate.getContact().getPerson().setId(personContacId);            
+            contactId = contactComponent.createContact(affiliate.getContact());
+            affiliate.getContact().setId(contactId);
 
             //create affiliate
             id = new AffiliateComponent().createAffiliate(affiliate);

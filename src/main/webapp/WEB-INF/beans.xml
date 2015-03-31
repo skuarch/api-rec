@@ -5,41 +5,21 @@
                            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">   
    
     <!-- beans -->
-    <bean id="login" class="model.beans.Login">       
-    </bean>    
+    <bean id="login" class="model.beans.Login"></bean>    
     
     <!-- components -->
-    <bean id="addressComponent" class="model.components.AddressComponent">       
-    </bean>
-    
-    <bean id="affiliateComponent" class="model.components.AffiliateComponent">       
-    </bean>
-    
-    <bean id="affiliateEstablishmet" class="model.components.AffiliateEstablishmentComponent">       
-    </bean>
-    
-    <bean id="categoryComponent" class="model.components.CategoryComponent">       
-    </bean>
-    
-    <bean id="cashierComponent" class="model.components.CashierComponent">       
-    </bean>
-    
-    <bean id="establishmentComponent" class="model.components.EstablishmentComponent">       
-    </bean>
-    
-    <bean id="freelancerComponent" class="model.components.FreelancerComponent">       
-    </bean>
-    
-    <bean id="personComponent" class="model.components.PersonComponent">       
-    </bean>
-    
-    <bean id="personTypeComponent" class="model.components.PersonTypeComponent">       
-    </bean>
-    
-    <bean id="responsableComponent" class="model.components.ResponsableComponent">       
-    </bean>
-    
-    <bean id="transactionComponent" class="model.components.TransactionComponent">       
-    </bean>
+    <bean id="addressComponent" class="model.components.AddressComponent"></bean>    
+    <bean id="affiliateComponent" class="model.components.AffiliateComponent"></bean>    
+    <bean id="affiliateEstablishmet" class="model.components.AffiliateEstablishmentComponent"></bean>    
+    <bean id="categoryComponent" class="model.components.CategoryComponent"></bean>
+    <bean id="cashierComponent" class="model.components.CashierComponent"></bean>   
+    <bean id="contactComponent" class="model.components.ContactComponent"></bean>    
+    <bean id="companyComponent" class="model.components.CompanyComponent"></bean>    
+    <bean id="establishmentComponent" class="model.components.EstablishmentComponent"></bean>    
+    <bean id="freelancerComponent" class="model.components.FreelancerComponent"></bean>    
+    <bean id="personComponent" class="model.components.PersonComponent"></bean>    
+    <bean id="personTypeComponent" class="model.components.PersonTypeComponent"></bean>    
+    <bean id="responsableComponent" class="model.components.ResponsableComponent"></bean>    
+    <bean id="transactionComponent" class="model.components.TransactionComponent"></bean>
     
 </beans>

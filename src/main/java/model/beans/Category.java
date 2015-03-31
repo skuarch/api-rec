@@ -28,9 +28,6 @@ public class Category implements Serializable {
     
     @Column(name = "category_name", nullable = false)
     private String name;
-    
-    @Column(name = "category_name_en", nullable = false)
-    private String nameEn;  
         
     @Column(name = "category_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
@@ -60,14 +57,6 @@ public class Category implements Serializable {
 
     public void setIsSoftDeleted(byte isSoftDeleted) {
         this.isSoftDeleted = isSoftDeleted;
-    }
-
-    public String getNameEn() {
-        return nameEn;
-    }
-
-    public void setNameEn(String nameEn) {
-        this.nameEn = nameEn;
-    } 
+    }    
     
 }

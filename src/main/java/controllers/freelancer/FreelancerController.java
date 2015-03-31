@@ -66,7 +66,7 @@ public class FreelancerController extends BaseController {
 
             if (existsPerson(freelancer.getPerson().getEmail())) {
                 //the email already exists
-                jsono.append("exists", "true");
+                jsono.append("exists", true);
             } else {
 
                 //create freelancer because I will use the id
@@ -87,7 +87,7 @@ public class FreelancerController extends BaseController {
 
         } catch (Exception e) {
             logger.error("FreelancerController.createFreelancer", e);
-            jsono = new JSONObject("{\"error\":\"" + e.getMessage() + "\",}");
+            jsono = new JSONObject("{\"error\":\"" + e + "\",}");
         }
 
         return jsono.toString();
@@ -151,7 +151,7 @@ public class FreelancerController extends BaseController {
         String key = null;
 
         try {
-
+            
             key = freelancer.getPerson().getName().substring(0, 2)
                     + freelancer.getPerson().getLastName().substring(0, 2)
                     + freelancer.getId();

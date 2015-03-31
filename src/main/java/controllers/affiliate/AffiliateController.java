@@ -41,7 +41,7 @@ public class AffiliateController extends BaseController {
     @RequestMapping(value = {"/v1/affiliate/create", "v1/affiliate/create"})    
     public @ResponseBody
     String createAffiliate(@ModelAttribute Affiliate affiliate, HttpServletResponse response, Locale locale) {
-
+        
         long id = 0;
         JSONObject jsono = null;
 
@@ -51,7 +51,8 @@ public class AffiliateController extends BaseController {
             jsono = new JSONObject();
 
             //get person type
-            affiliate.getPerson().setPersonType(personTypeComponent.getPersonType("affiliate"));
+            affiliate.getContact().getPerson().setPersonType(personTypeComponent.getPersonType("contact"));
+            affiliate.getPerson().setPersonType(personTypeComponent.getPersonType("affiliate"));            
             
             //create affiliate
             id = new AffiliateComponent().createAffiliate(affiliate);

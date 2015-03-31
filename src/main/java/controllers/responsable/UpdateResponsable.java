@@ -33,7 +33,7 @@ public class UpdateResponsable extends BaseController {
     @RequestMapping(value = {"/v1/responsable/update", "v1/responsable/update"})
     public @ResponseBody
     String updateResponsable(@ModelAttribute Responsable responsable, HttpServletResponse response, Locale locale) {
-
+        
         JSONObject jsono = null;
         Responsable r = null;
         PersonType personType = null;        

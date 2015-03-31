@@ -47,6 +47,12 @@ public class Establishment implements Serializable {
     @OneToOne
     @JoinColumn(name = "responsable_id")
     private Responsable responsable;
+    
+    @Column(name = "establishment_latitude", nullable = true)
+    private String latitude;
+    
+    @Column(name = "establishment_longitude", nullable = true)
+    private String longitude;
 
     @OneToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
@@ -149,6 +155,22 @@ public class Establishment implements Serializable {
 
     public void setSubcategory(String subcategory) {
         this.subcategory = subcategory;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
 }

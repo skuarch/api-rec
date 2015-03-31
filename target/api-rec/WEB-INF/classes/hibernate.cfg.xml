@@ -21,10 +21,13 @@
                 
         <!--<property name="hibernate.connection.datasource">jdbc/api-rec</property>-->
         <mapping class="model.beans.Address"/>    
-        <mapping class="model.beans.Affiliate"/>  
+        <mapping class="model.beans.Affiliate"/>          
         <mapping class="model.beans.AffiliateEstablishmet"/>
+        <mapping class="model.beans.AffiliateType"/>
         <mapping class="model.beans.Category"/>    
         <mapping class="model.beans.Cashier"/>    
+        <mapping class="model.beans.Contact"/>    
+        <mapping class="model.beans.Company"/>    
         <mapping class="model.beans.Configuration"/>            
         <mapping class="model.beans.Establishment"/>    
         <mapping class="model.beans.Freelancer"/> 

@@ -8,7 +8,6 @@ import model.beans.Affiliate;
 import model.beans.Freelancer;
 import model.components.AffiliateComponent;
 import org.apache.log4j.Logger;
-import static org.hibernate.criterion.Projections.id;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;

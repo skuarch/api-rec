@@ -35,8 +35,7 @@ public class GetAffiliate {
             
         } catch (Exception e) {
             logger.error("AffiliateController.createAffiliate", e);
-            jsono = new JSONObject("{\"error\":\"" + e + "\",}");
-            jsono.put("created", false);
+            jsono = new JSONObject("{\"error\":\"" + e + "\",}");                        
         }
         
         return jsono.toString();

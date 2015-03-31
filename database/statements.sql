@@ -23,6 +23,8 @@ INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('affiliat
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('freelancer');
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('cashier');
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('responsable');
+INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('contact');
+INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('contactCompany');
 
 #category
 INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('arte y cultura');
@@ -41,5 +43,10 @@ INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('restaurantes y
 INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('salud');
 INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('servicios');
 INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('viajes y hoteles');
+
+
+#affiliate type
+INSERT INTO `regaloenclave`.`affiliate_type` (`affiliate_type_name`) VALUES ('person');
+INSERT INTO `regaloenclave`.`affiliate_type` (`affiliate_type_name`) VALUES ('company');
 
 

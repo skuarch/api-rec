@@ -31,12 +31,15 @@ public class UpdateEstablishment extends BaseController {
         Establishment e = null;
         
         try {
-            System.out.println("cate  " + establishment.getCategory().size());
+            
             e = establishmentComponent.getEstablishment(establishment.getId());
             e.setName(establishment.getName());
             e.setCategory(establishment.getCategory());
             e.setSubcategory(establishment.getSubcategory());
             e.setAddress(establishment.getAddress());
+            e.setLatitude(establishment.getLatitude());
+            e.setLongitude(establishment.getLongitude());
+            
             establishmentComponent.updateEstablishment(e);
             
             jsono = new JSONObject();
