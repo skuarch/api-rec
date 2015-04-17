@@ -19,7 +19,6 @@ model/components/GenderComponent.class
 model/beans/AffiliateBasicInformation.class
 controllers/establishment/UpdateEstablishment.class
 model/beans/Gender.class
-model/net/Mail$1.class
 model/components/MailTemplateComponent.class
 controllers/company/CreateCompany.class
 controllers/affiliate/AffiliateController.class
@@ -30,6 +29,7 @@ model/logic/MailSender.class
 controllers/freelancer/FreelancerCreateAffiliate.class
 controllers/application/Test.class
 model/net/Mail.class
+controllers/subscribers/AddSubscriber.class
 model/beans/Cashier.class
 model/beans/Company.class
 controllers/company/GetCompany.class
@@ -45,6 +45,7 @@ model/beans/AffiliateType.class
 controllers/authentication/FreelancerAuthentication.class
 model/components/EstablishmentComponent.class
 controllers/freelancer/UpdateFreelancer.class
+model/beans/Subscriber.class
 controllers/cashier/UpdateCashier.class
 model/beans/AffiliateTaxInformation.class
 controllers/company/CompanyCreateEstablishment.class
@@ -54,6 +55,7 @@ model/components/CategoryComponent.class
 model/database/DAO.class
 controllers/affiliate/GetAffiliate.class
 model/beans/Person.class
+model/beans/Partner.class
 controllers/cashier/UpdatePasswordCashier.class
 model/beans/Address.class
 model/logic/Constants.class
@@ -67,6 +69,7 @@ model/beans/AffiliateEstablishmet.class
 controllers/freelancer/FreelancerGetAffiliates.class
 model/beans/UpdatePasswordBean.class
 model/util/HibernateUtil.class
+model/net/MailAuthentication$1.class
 controllers/company/GetCompanies.class
 model/beans/Establishment.class
 controllers/company/CompanyUpdateTaxInformation.class
@@ -80,6 +83,7 @@ controllers/affiliate/AffiliateUpdateBasicInformation.class
 controllers/freelancer/FreelancerCreateEstablishment.class
 model/beans/Contact.class
 model/components/AffiliateEstablishmentComponent.class
+model/net/MailAuthentication.class
 model/beans/AffiliateEstablishmentBasic.class
 model/components/PersonComponent.class
 controllers/cashier/CreateCashier.class

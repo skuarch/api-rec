@@ -1,6 +1,9 @@
 package controllers.affiliate;
 
+import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
 import model.beans.AffiliateBankInformation;
 import model.components.AffiliateComponent;
@@ -17,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author skuarch
  */
 @RestController
-public class AffiliateUpdateBankInformation {
+public class AffiliateUpdateBankInformation extends BaseController{
 
     @Autowired
     private AffiliateComponent affiliateComponent;    
@@ -25,12 +28,14 @@ public class AffiliateUpdateBankInformation {
     
     //==========================================================================
     @RequestMapping(value = {"/v1/affiliate/update/bank/information","v1/affiliate/update/bank/information"})
-    public @ResponseBody String affiliateUpdateBankInformation(@ModelAttribute AffiliateBankInformation affiliateBankInformation){
+    public @ResponseBody String affiliateUpdateBankInformation(@ModelAttribute AffiliateBankInformation affiliateBankInformation, HttpServletResponse response){
         
         JSONObject jsono = null;
         Affiliate affiliate = null;
         
         try {
+            
+            setContentType(response, MediaType.APPLICATION_JSON);
             
             affiliate = affiliateComponent.getAffiliate(affiliateBankInformation.getId());
             affiliate.setOwnerAccountBank(affiliateBankInformation.getOwnerAccountBank());

@@ -1,5 +1,8 @@
 #ALTER TABLE `regaloenclave`.`address` CHANGE COLUMN `address_all` `address_all` VARCHAR(4096) NOT NULL ;
 
+ALTER TABLE `regaloenclave`.`freelancer` 
+ADD COLUMN `freelancer_active` INT NULL DEFAULT 0 AFTER `person_id`;
+
 #mail template
 INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('English', 'regaloenclave@regaloenclave.com', '0', 'hola', 'affiliate', 'Welcome to regalo en clave');
 INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('English', 'regaloenclave@gmail.com', '0', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>\n    <span style=\'font-size: 12px; color: #cacaca; text-align: right; border-bottom: 1px solid #ccc;\'>regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a></span><br/>    \n    <h1>Bienvenid(@) a regalo en clave</h1>\n    Proximamente recibiras noticas de como poder ingresar al sistema de regalo en clave\n    para que puedas afiliar negocios<br><br>\n    con esta cuanta de correo podras entrar al sistema de regalo en clave<br><br>\n    usuario: <strong>:email</strong><br>\n    password: <strong>:password</strong><br>\n    clave: <strong>:key</strong><br><br>\n    La clave es importante, es como el sistema te identificara<br>\n    <span class=\"color: #caaaaa\">Conserva este correo en el futuro te sera de utilidad</span>\n    <br><br><br>\n</div>', 'new freelancer', 'bienvenido a regaloenclave.com');

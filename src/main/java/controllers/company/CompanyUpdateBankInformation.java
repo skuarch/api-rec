@@ -1,7 +1,10 @@
 package controllers.company;
 
 import controllers.affiliate.AffiliateUpdateBankInformation;
+import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Company;
 import model.beans.CompanyBankInformation;
 import model.components.CompanyComponent;
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author skuarch
  */
 @RestController
-public class CompanyUpdateBankInformation {
+public class CompanyUpdateBankInformation extends BaseController {
 
     @Autowired
     private CompanyComponent companyComponent;    
@@ -26,12 +29,14 @@ public class CompanyUpdateBankInformation {
     
     //==========================================================================
     @RequestMapping(value = {"/v1/company/update/bank/information","v1/company/update/bank/information"})
-    public @ResponseBody String companyUpdateBankInformation(@ModelAttribute CompanyBankInformation companyBankInformation){
+    public @ResponseBody String companyUpdateBankInformation(@ModelAttribute CompanyBankInformation companyBankInformation, HttpServletResponse response){
         
         JSONObject jsono = null;
         Company company = null;
         
         try {
+            
+            setContentType(response, MediaType.APPLICATION_JSON);
             
             company = companyComponent.getCompany(companyBankInformation.getId());
             company.setOwnerAccountBank(companyBankInformation.getOwnerAccountBank());

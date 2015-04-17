@@ -6,9 +6,10 @@ import model.beans.MailTemplate;
 import model.components.ConfigurationComponent;
 import model.components.MailTemplateComponent;
 import model.net.Mail;
+import model.net.MailAuthentication;
 
 /**
- * wrapper for Mail
+ * wrapper for MailAuthentication
  *
  * @author skuarch
  */
@@ -37,16 +38,9 @@ public class MailSender {
             
             mailTemplate = new MailTemplateComponent().getAffiliateTemplate(displayLanguage);
             configuration = new ConfigurationComponent().getConfiguration();
-            mail = new Mail(
-                    configuration.getSmtpHost(), 
-                    configuration.getSmtpPort(), 
-                    configuration.getSmtpUsername(), 
-                    configuration.getSmtpPassword(), 
-                    mailTemplate.getSubject(), 
-                    mailTemplate.getMessage(), 
-                    mailTemplate.getFrom(), 
-                    to);
-            mail.send();
+            
+            mail = new Mail(mailTemplate.getFrom(), configuration.getSmtpHost(), configuration.getSmtpPort(), to);
+            mail.send(mailTemplate.getSubject(), mailTemplate.getMessage());
 
         } catch (Exception e) {
             throw e;
@@ -69,7 +63,7 @@ public class MailSender {
             throw new IllegalArgumentException("password is null or empty");
         }                
         
-        Mail mail = null;
+        MailAuthentication mail = null;
         Configuration configuration = null;        
         MailTemplate mailTemplate = null;
 
@@ -84,7 +78,7 @@ public class MailSender {
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":email", freelancer.getPerson().getEmail()));            
             
             configuration = new ConfigurationComponent().getConfiguration();
-            mail = new Mail(
+            mail = new MailAuthentication(
                     configuration.getSmtpHost(), 
                     configuration.getSmtpPort(), 
                     configuration.getSmtpUsername(), 

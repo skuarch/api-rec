@@ -2,6 +2,8 @@ package controllers.company;
 
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Company;
 import model.components.CompanyComponent;
 import org.apache.log4j.Logger;
@@ -25,12 +27,14 @@ public class GetCompany extends BaseController {
     
     //==========================================================================
     @RequestMapping(value = {"/v1/company/get","v1/company/get"})
-    public @ResponseBody String getCompany(@ModelAttribute Company company){
+    public @ResponseBody String getCompany(@ModelAttribute Company company, HttpServletResponse response){
     
         JSONObject jsono = null;        
         Company c = null;
         
         try {
+            
+            setContentType(response, MediaType.APPLICATION_JSON);
             
             c = companyComponent.getCompany(company.getId());
             jsono = new JSONObject(c);

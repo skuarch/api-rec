@@ -29,7 +29,7 @@ public class BaseController {
 
     //==========================================================================
     public void setContentType(HttpServletResponse response, String contenType) {
-        response.setContentType(contenType);
+        response.setContentType(contenType + ";charset=UTF-8");
     }
 
     //==========================================================================

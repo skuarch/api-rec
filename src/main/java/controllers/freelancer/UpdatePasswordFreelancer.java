@@ -2,6 +2,8 @@ package controllers.freelancer;
 
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Freelancer;
 import model.beans.UpdatePasswordBean;
 import model.components.FreelancerComponent;
@@ -26,13 +28,15 @@ public class UpdatePasswordFreelancer extends BaseController {
 
     @RequestMapping(value = {"/v1/freelancer/update/password", "v1/freelancer/update/password"})
     public @ResponseBody
-    String updatePassword(@ModelAttribute UpdatePasswordBean upb) {
+    String updatePassword(@ModelAttribute UpdatePasswordBean upb, HttpServletResponse response) {
 
         JSONObject jsono = null;
         Freelancer freelancer = null;
 
         try {
 
+            setContentType(response, MediaType.APPLICATION_JSON);
+            
             //some validations
             if (upb == null) {
                 return getJson(false).toString();                

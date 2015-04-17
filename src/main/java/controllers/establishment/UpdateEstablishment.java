@@ -2,6 +2,8 @@ package controllers.establishment;
 
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Establishment;
 import model.components.EstablishmentComponent;
 import org.apache.log4j.Logger;
@@ -25,12 +27,14 @@ public class UpdateEstablishment extends BaseController {
     
     //==========================================================================
     @RequestMapping(value = {"/v1/establishment/update", "v1/establishment/update"})
-    public @ResponseBody String updateEstablishment(@ModelAttribute Establishment establishment) {
+    public @ResponseBody String updateEstablishment(@ModelAttribute Establishment establishment,HttpServletResponse response) {
         
         JSONObject jsono = null;
         Establishment e = null;
         
         try {
+            
+            setContentType(response, MediaType.APPLICATION_JSON);
             
             e = establishmentComponent.getEstablishment(establishment.getId());
             e.setName(establishment.getName());

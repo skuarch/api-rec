@@ -1,7 +1,10 @@
 package controllers.company;
 
 import controllers.affiliate.AffiliateUpdateBasicInformation;
+import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Company;
 import model.beans.CompanyBasicInformation;
 import model.components.CompanyComponent;
@@ -21,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author skuarch
  */
 @RestController
-public class CompanyUpdateBasicInformation {
+public class CompanyUpdateBasicInformation extends BaseController {
 
     @Autowired
     private CompanyComponent companyComponent;
@@ -34,12 +37,14 @@ public class CompanyUpdateBasicInformation {
     //==========================================================================
     @RequestMapping(value = {"/v1/company/update/basic/information", "v1/company/update/basic/information"})
     public @ResponseBody
-    String updateCompanyBasicInformation(@ModelAttribute CompanyBasicInformation companyBasicInformation) {
+    String updateCompanyBasicInformation(@ModelAttribute CompanyBasicInformation companyBasicInformation, HttpServletResponse response) {
 
         JSONObject jsono = null;
         Company company = null;        
 
         try {
+            
+            setContentType(response, MediaType.APPLICATION_JSON);
             
             companyBasicInformation
                     .getPerson()

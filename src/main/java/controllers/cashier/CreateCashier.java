@@ -1,8 +1,11 @@
 package controllers.cashier;
 
+import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import controllers.responsable.UpdateResponsable;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Cashier;
 import model.beans.Establishment;
 import model.beans.Person;
@@ -25,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author skuarch
  */
 @RestController
-public class CreateCashier {
+public class CreateCashier extends BaseController {
 
     private static final Logger logger = getLogger(UpdateResponsable.class);
     @Autowired
@@ -39,7 +42,7 @@ public class CreateCashier {
     
     //==========================================================================
     @RequestMapping(value = {"/v1/cashier/create","v1/cashier/create"})
-    public @ResponseBody String createCashier(@ModelAttribute Establishment establishment, @ModelAttribute Cashier cashier){
+    public @ResponseBody String createCashier(@ModelAttribute Establishment establishment, @ModelAttribute Cashier cashier, HttpServletResponse response){
 
         JSONObject jsono = null;
         Responsable r = null;
@@ -50,6 +53,8 @@ public class CreateCashier {
         long cashierId;
 
         try {
+            
+            setContentType(response, MediaType.APPLICATION_JSON);
             
             //create cashier
             personType = personTypeComponent.getPersonType("cashier");

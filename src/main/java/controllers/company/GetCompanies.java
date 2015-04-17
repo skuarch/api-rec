@@ -3,6 +3,8 @@ package controllers.company;
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.beans.Company;
 import model.components.CompanyComponent;
 import org.apache.log4j.Logger;
@@ -25,13 +27,14 @@ public class GetCompanies extends BaseController {
     
     //==========================================================================
     @RequestMapping(value = {"/v1/companies/get", "v1/companies/get"})
-    public @ResponseBody String getCompanies(){
+    public @ResponseBody String getCompanies(HttpServletResponse response){
     
         JSONObject jsono = null;
         List<Company> companies = null;
         
         try {
             
+            setContentType(response, MediaType.APPLICATION_JSON);
             companies = companyComponent.getCompanies();            
             
         } catch (Exception e) {

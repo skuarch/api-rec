@@ -2,119 +2,98 @@ package model.net;
 
 import java.util.Properties;
 import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * send email with SSL and authentication.
+ *
  * @author skuarch
  */
 public class Mail {
 
-    private String textMessage = null;
-    private String subject = null;
-    private String from = null;
-    private String[] to = null;
-    private String toEmails = null;
-    private String host = null;
-    private int port;
-    private Properties props = null;
-    private Session session = null;
-    private String username = null;
-    private String password = null;
-    private Message message = null;
+    private final String[] to;
+    private final String from;
+    private final String host;
+    private final int port;
 
     //==========================================================================
-    /**
-     * constructor.
-     * @param host String host
-     * @param port int port number
-     * @param username String username
-     * @param password String password
-     * @param subject String subject of email
-     * @param textMessage String message
-     * @param from String email address
-     * @param to String[] recipients
-     */
-    public Mail(String host, int port, String username, String password, String subject, String textMessage, String from, String... to) {
+    public Mail(String from, String host, int port, String... to) {
+        this.to = to;
+        this.from = from;
         this.host = host;
         this.port = port;
-        this.username = username;
-        this.password = password;
-        this.subject = subject;
-        this.textMessage = textMessage;
-        this.from = from;
-        this.to = to;
-        props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", this.host);
-        props.put("mail.smtp.port", this.port);
     }
 
     //==========================================================================
-    /**
-     * send email to recipients.
-     * @throws Exception if any exception occurs.
-     */
-    public void send() throws Exception {
-
-        if (from == null || from.length() < 1) {
-            throw new NullPointerException("from is null or empty");
-        }
+    public void send(String subject, String messageText) throws Exception {
 
         if (to == null || to.length < 1) {
-            throw new NullPointerException("to is null or empty");
+            throw new IllegalArgumentException("to is null or empty");
         }
 
-        toEmails = arrayToStringComma(to);
-        startSession();
-        createMessage();
-        Transport.send(message);
-
-    }
-
-    //==========================================================================
-    private void startSession() {
-
-        try {
-            session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                        @Override
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(username, password);
-                        }
-                    });
-        } catch (Exception e) {
-            throw e;
+        if (from == null || from.length() < 1) {
+            throw new IllegalArgumentException("from is null or empty");
         }
 
-    }
+        if (host == null || host.length() < 1) {
+            throw new IllegalArgumentException("host is null or empty");
+        }
 
-    //==========================================================================
-    /**
-     * create mime message
-     * @throws Exception exception
-     */
-    private void createMessage() throws Exception {
+        if (subject == null || subject.length() < 1) {
+            throw new IllegalArgumentException("subject is null or empty");
+        }
+
+        if (messageText == null || messageText.length() < 1) {
+            throw new IllegalArgumentException("messageText is null or empty");
+        }
+
+        Properties properties = null;
+        Session session = null;
+        MimeMessage message = null;
+        String emails = null;
 
         try {
 
+            //emails separed by ","
+            emails = arrayToStringComma(to);
+            
+            // Get system properties
+            properties = System.getProperties();
+
+            // Setup mail server
+            properties.setProperty("mail.smtp.host", host);
+            properties.setProperty("mail.smtp.port", String.valueOf(port));
+
+            // Get the default Session object.
+            session = Session.getDefaultInstance(properties);
+
+            // Create a default MimeMessage object.
             message = new MimeMessage(session);
-            message.setContent(textMessage, "text/html; charset=utf-8");
+
+            // Set From: header field of the header.
             message.setFrom(new InternetAddress(from));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmails));
+
+            // Set To: header field of the header.
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emails));
+
+            // Set Subject: header field
             message.setSubject(subject);
 
+            // Now set the actual message
+            message.setText(messageText, "text/html; charset=utf-8");
+            message.setContent(messageText, "text/html; charset=utf-8");
+
+            // Send message
+            Transport.send(message);
+
         } catch (Exception e) {
             throw e;
         }
 
     }
-
+    
     //==========================================================================
     /**
      * convert array in to string separated by commas.

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>         
-        <!--<property name="connection.url">jdbc:mysql://192.168.1.65:3306/regaloenclave?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true</property>                
+  <session-factory>
+    <!--<property name="connection.url">jdbc:mysql://192.168.1.65:3306/regaloenclave?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true</property>                
         <property name="hibernate.connection.characterEncoding">UTF-8</property> 
         <property name="hibernate.connection.useUnicode">true</property> 
         <property name="c3p0.min_size">1</property>
@@ -18,26 +18,28 @@
         <property name="hibernate.use_sql_comments">false</property>
         <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
         <property name="hibernate.current_session_context_class">thread</property>-->
-                
-        <!--<property name="hibernate.connection.datasource">jdbc/api-rec</property>-->
-        <mapping class="model.beans.Address"/>    
-        <mapping class="model.beans.Affiliate"/>          
-        <mapping class="model.beans.AffiliateEstablishmet"/>
-        <mapping class="model.beans.AffiliateType"/>
-        <mapping class="model.beans.Category"/>    
-        <mapping class="model.beans.Cashier"/>    
-        <mapping class="model.beans.Contact"/>    
-        <mapping class="model.beans.Company"/>    
-        <mapping class="model.beans.Configuration"/>            
-        <mapping class="model.beans.Establishment"/>    
-        <mapping class="model.beans.Freelancer"/> 
-        <mapping class="model.beans.Gender"/>          
-        <mapping class="model.beans.MailTemplate"/>    
-        <mapping class="model.beans.Person"/>    
-        <mapping class="model.beans.PersonType"/>    
-        <mapping class="model.beans.RequestBean"/>    
-        <mapping class="model.beans.Responsable"/>    
-        <mapping class="model.beans.Transaction"/>    
-        <mapping class="model.beans.TransactionType"/>                
-    </session-factory>
+    <!--<property name="hibernate.connection.datasource">jdbc/api-rec</property>-->
+    <mapping class="model.beans.Address"/>
+    <mapping class="model.beans.Affiliate"/>
+    <mapping class="model.beans.AffiliateEstablishmet"/>
+    <mapping class="model.beans.AffiliateType"/>
+    <mapping class="model.beans.Category"/>
+    <mapping class="model.beans.Cashier"/>
+    <mapping class="model.beans.Contact"/>
+    <mapping class="model.beans.Company"/>
+    <mapping class="model.beans.Configuration"/>
+    <mapping class="model.beans.Establishment"/>
+    <mapping class="model.beans.Freelancer"/>
+    <mapping class="model.beans.Gender"/>
+    <mapping class="model.beans.MailTemplate"/>
+    <mapping class="model.beans.Partner"/>
+    <mapping class="model.beans.Person"/>
+    <mapping class="model.beans.PersonType"/>
+    <mapping class="model.beans.RequestBean"/>
+    <mapping class="model.beans.Responsable"/>
+    <mapping class="model.beans.Subscriber"/>
+    <mapping class="model.beans.Transaction"/>
+    <mapping class="model.beans.TransactionType"/>
+    
+  </session-factory>
 </hibernate-configuration>

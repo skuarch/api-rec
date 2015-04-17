@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "freelancer")
 @NamedQueries({
-        @NamedQuery(name = "getFreelancer", query = "from Freelancer f where f.person.email = :email and f.password = :password and f.isSoftDeleted = 0")        
+        @NamedQuery(name = "getFreelancer", query = "from Freelancer f where f.person.email = :email and f.password = :password and active = 1 and f.isSoftDeleted = 0")        
 })
 public class Freelancer implements Serializable {
 
@@ -47,6 +47,9 @@ public class Freelancer implements Serializable {
     
     @Column(name = "freelance_key")
     private String key;
+    
+    @Column(name = "freelancer_active", columnDefinition = "int default 0")
+    private byte active = 0;
     
     @Column(name = "freelancer_last_login")
     private String lastLogin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());        
@@ -120,6 +123,14 @@ public class Freelancer implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public byte getActive() {
+        return active;
+    }
+
+    public void setActive(byte active) {
+        this.active = active;
     }
     
 }

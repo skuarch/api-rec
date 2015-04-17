@@ -56,7 +56,7 @@ public class FreelancerAuthentication extends BaseController {
             
             f = freelancerComponent.getFreelancer(login.getEmail(), login.getPassword());
             
-            if (f != null) {                
+            if (f != null && f.getActive() == 1) {                
                 jsono = createFreelancerJson(f);                
                 jsono.put("validate", true);
             } else {                

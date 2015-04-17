@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import model.components.CategoryComponent;
 import model.beans.Category;
 import org.apache.log4j.Logger;
@@ -28,7 +30,7 @@ public class GetCategories extends BaseController {
     //==========================================================================
     @RequestMapping(value = {"/v1/category/get", "v1/category/get"})
     public @ResponseBody
-    String getCategories() {
+    String getCategories(HttpServletResponse response) {
 
         JSONObject jsono = null;
         ArrayList<Category> categories = null;
@@ -36,6 +38,8 @@ public class GetCategories extends BaseController {
 
         try {
 
+            setContentType(response, MediaType.APPLICATION_JSON);
+            
             categories = categoryComponent.getCategories();
 
             if (categories == null || categories.size() < 1) {
