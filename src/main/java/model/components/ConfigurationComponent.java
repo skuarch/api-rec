@@ -1,6 +1,6 @@
 package model.components;
 
-import model.beans.Configuration;
+import model.beans.ConfigurationMailAuthentication;
 import model.database.DAO;
 
 /**
@@ -15,13 +15,13 @@ public class ConfigurationComponent {
     }
     
     //==========================================================================
-    public Configuration getConfiguration() throws Exception{
+    public ConfigurationMailAuthentication getConfiguration() throws Exception{
     
-        Configuration configuration = null;
+        ConfigurationMailAuthentication configuration = null;
         
         try {
             
-            configuration = new DAO().get(1, new Configuration());
+            configuration = new DAO().get(1, new ConfigurationMailAuthentication());
             
         } catch (Exception e) {
             throw e;

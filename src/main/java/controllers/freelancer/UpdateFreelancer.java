@@ -43,7 +43,8 @@ public class UpdateFreelancer extends BaseController {
             freelancer.getPerson().setId(f.getPerson().getId());
             freelancer.setPassword(f.getPassword());
             freelancer.getPerson().setPersonType(f.getPerson().getPersonType());
-            freelancer.getAddress().setId(f.getAddress().getId());            
+            freelancer.getAddress().setId(f.getAddress().getId()); 
+            freelancer.setActive((byte) 1);
             freelancerComponent.updateFreelancer(freelancer);
             jsono.put("updated", true);
             

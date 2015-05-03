@@ -13,34 +13,34 @@ import javax.persistence.Table;
  * @author skuarch
  */
 @Entity
-@Table(name = "configuration")
-public class Configuration implements Serializable {
+@Table(name = "configuration_mail_authentication")
+public class ConfigurationMailAuthentication implements Serializable {
 
     @Id    
-    @Column(name = "configuration_id")
+    @Column(name = "configuration_mail_authentication_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private long id;    
     
-    @Column(name = "configuration_smtp_host", nullable = false)
+    @Column(name = "configuration_mail_authentication_smtp_host", nullable = false)
     private String smtpHost;    
     
-    @Column(name = "configuration_smtp_port", nullable = false)
+    @Column(name = "configuration_mail_authentication_smtp_port", nullable = false)
     private int smtpPort;    
     
-    @Column(name = "configuration_smtp_username", nullable = false)
+    @Column(name = "configuration_mail_authentication_smtp_username", nullable = false)
     private String smtpUsername;    
     
-    @Column(name = "configuration_smtp_password", nullable = false)
+    @Column(name = "configuration_mail_authentication_smtp_password", nullable = false)
     private String smtpPassword;
     
-    @Column(name = "configuration_smtp_require_authentication", columnDefinition = "int default 0")
+    @Column(name = "configuration_mail_authentication_smtp_require_authentication", columnDefinition = "int default 0")
     private byte smtpRequireAuthentication = 0;
     
-    @Column(name = "configuration_is_soft_deleted", columnDefinition = "int default 0")
+    @Column(name = "configuration_mail_authentication_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
     
     //==========================================================================
-    public Configuration() {
+    public ConfigurationMailAuthentication() {
     }
 
     public long getId() {

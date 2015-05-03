@@ -20,8 +20,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -30,10 +32,10 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name = "affiliate")
 @NamedQueries({
-    @NamedQuery(name = "getAffiliateByFreelancer", query = "from Affiliate a where a.freelancer.id = :id and a.isSoftDeleted = 0")
+    @NamedQuery(name = "getAffiliateByFreelancer", query = "select new Affiliate(a.id, a.brand, a.person, a.description, a.address, a.bank, a.clabe, a.ownerAccountBank, a.emailNotifications, a.contact, a.taxCompanyName, a.taxId) from Affiliate a where a.freelancer.id = :id and a.isSoftDeleted = 0")
 })
-public class Affiliate implements Serializable {
-
+public class Affiliate implements Serializable {    
+    
     @Id
     @Column(name = "affiliate_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,32 +43,41 @@ public class Affiliate implements Serializable {
 
     @Column(name = "affiliate_password", nullable = false, columnDefinition = "varchar(32)")
     private String password;
-    
+
     @Column(name = "affiliate_brand", nullable = false, columnDefinition = "varchar(255)")
     private String brand;
-    
+
     @Column(name = "affiliate_tax_id", nullable = false)
     private String taxId;
-    
+
     @Column(name = "affiliate_tax_company_name", nullable = false)
     private String taxCompanyName;
-    
+
+    @Column(name = "affiliate_description", nullable = false, columnDefinition = "LONGTEXT")
+    private String description;
+
     @Column(name = "affiliate_owner_account_bank", nullable = false)
     private String ownerAccountBank;
-    
+
     @Column(name = "affiliate_bank", nullable = false)
     private String bank;
-    
+
     @Column(name = "affiliate_clabe", nullable = false)
     private String clabe;
-    
+
     @Column(name = "affiliate_email_notifications", nullable = false)
     private String emailNotifications;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = true)
     private Person person;
+
+    @Transient
+    private MultipartFile logoFile;    
     
+    @Column(name = "affiliate_logo_path_name", unique = false)
+    private String logoPathName;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", nullable = false)
     private Contact contact;
@@ -74,7 +85,7 @@ public class Affiliate implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
-    
+
     @OneToOne
     @JoinColumn(name = "freelancer_id", nullable = true)
     private Freelancer freelancer;
@@ -88,7 +99,7 @@ public class Affiliate implements Serializable {
                 @JoinColumn(name = "establishment_id", unique = false, nullable = false, updatable = false)}
     )
     private List<Establishment> establishment;
-    
+
     @OneToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "affiliate_category",
@@ -96,7 +107,7 @@ public class Affiliate implements Serializable {
                 @JoinColumn(name = "affiliate_id", referencedColumnName = "affiliate_id", unique = false, nullable = false, updatable = false)},
             inverseJoinColumns = {
                 @JoinColumn(name = "category_id", unique = false, nullable = false, updatable = false)})
-    private List<Category> category = new ArrayList<>();    
+    private List<Category> category = new ArrayList<>();
 
     @Column(name = "affiliate_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
@@ -104,9 +115,25 @@ public class Affiliate implements Serializable {
     @Column(name = "affiliate_registration_date", nullable = false, length = 19)
     private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
+    //==========================================================================
     public Affiliate() {
     }
-
+    
+    public Affiliate(long id, String brand, Person person, String description, Address address, String bank, String clabe, String ownerAccountBank, String emailNotifications, Contact contact, String taxCompanyName, String taxId) {
+        this.id = id;
+        this.brand = brand;
+        this.taxId = taxId;
+        this.taxCompanyName = taxCompanyName;
+        this.description = description;
+        this.ownerAccountBank = ownerAccountBank;
+        this.bank = bank;
+        this.clabe = clabe;
+        this.emailNotifications = emailNotifications;
+        this.person = person;
+        this.contact = contact;
+        this.address = address;
+    }
+    
     public long getId() {
         return id;
     }
@@ -183,7 +210,7 @@ public class Affiliate implements Serializable {
     public void setBrand(String brand) {
         this.brand = brand;
     }
-    
+
     public List<Category> getCategory() {
         return category;
     }
@@ -248,4 +275,28 @@ public class Affiliate implements Serializable {
         this.contact = contact;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public MultipartFile getLogoFile() {
+        return logoFile;
+    }
+
+    public void setLogoFile(MultipartFile logoFile) {
+        this.logoFile = logoFile;
+    }
+
+    public String getLogoPathName() {
+        return logoPathName;
+    }
+
+    public void setLogoPathName(String logoPathName) {
+        this.logoPathName = logoPathName;
+    }
+    
 }

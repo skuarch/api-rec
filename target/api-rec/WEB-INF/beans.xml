@@ -17,6 +17,9 @@
     <bean id="companyComponent" class="model.components.CompanyComponent"></bean>    
     <bean id="establishmentComponent" class="model.components.EstablishmentComponent"></bean>    
     <bean id="freelancerComponent" class="model.components.FreelancerComponent"></bean>    
+    <bean id="generalConfigurationComponent" class="model.components.GeneralConfigurationComponent"></bean>    
+    <bean id="mailTemplateComponent" class="model.components.MailTemplateComponent"></bean>    
+    <bean id="partnerComponent" class="model.components.PartnerComponent"></bean>    
     <bean id="personComponent" class="model.components.PersonComponent"></bean>    
     <bean id="personTypeComponent" class="model.components.PersonTypeComponent"></bean>    
     <bean id="responsableComponent" class="model.components.ResponsableComponent"></bean>    

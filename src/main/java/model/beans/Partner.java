@@ -32,14 +32,14 @@ public class Partner {
     @JoinColumn(name = "person_id", nullable = true)
     private Person person;
     
-    @Column(name = "partner_deleted", columnDefinition = "int default 0")
-    private byte isSoftDeleted = 0;
-    
     @Column(name = "partner_active", columnDefinition = "int default 0")
     private byte active = 0;
 
     @Column(name = "partner_registration_date", nullable = false, length = 19)
     private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    
+    @Column(name = "partner_is_soft_deleted", columnDefinition = "int default 0")
+    private byte isSoftDeleted = 0;
 
     public long getId() {
         return id;

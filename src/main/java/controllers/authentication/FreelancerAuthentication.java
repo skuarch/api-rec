@@ -63,6 +63,8 @@ public class FreelancerAuthentication extends BaseController {
                 jsono.put("validate", false);
             }
 
+            Thread.sleep(1000);
+            
         } catch (Exception e) {
             logger.error("FreelancerAuthentication.authentication", e);
             jsono = new JSONObject("{\"error\":\"" + e.getMessage() + "\",}");

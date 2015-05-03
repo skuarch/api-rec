@@ -45,5 +45,10 @@ public class UpdatePasswordBean {
     public void setNewPassword2(String newPassword2) {
         this.newPassword2 = newPassword2;
     }
+
+    @Override
+    public String toString() {
+        return "id= " + id + " newPassword=" + newPassword + " newPassword2=" + newPassword2;
+    } 
     
 }

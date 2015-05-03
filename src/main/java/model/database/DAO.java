@@ -560,7 +560,7 @@ public class DAO {
 
         try {
 
-            query = session.getNamedQuery(queryName);
+            query = session.getNamedQuery(queryName);            
             query.setProperties(type);
 
             for (Map.Entry<String, String> entry : parameters.entrySet()) {
@@ -570,7 +570,7 @@ public class DAO {
             }
 
             arrayList = (ArrayList<T>) query.list();
-
+            
         } catch (HibernateException he) {
             throw he;
         } finally {

@@ -1,15 +1,18 @@
 package model.logic;
 
-import model.beans.Configuration;
+import model.beans.ConfigurationMailAuthentication;
+import model.beans.ConfigurationMail;
 import model.beans.Freelancer;
 import model.beans.MailTemplate;
+import model.beans.Partner;
 import model.components.ConfigurationComponent;
+import model.components.ConfigurationMailComponent;
 import model.components.MailTemplateComponent;
 import model.net.Mail;
 import model.net.MailAuthentication;
 
 /**
- * wrapper for MailAuthentication
+ * wrapper for MailAuthentication and Mail
  *
  * @author skuarch
  */
@@ -31,7 +34,7 @@ public class MailSender {
         }                
         
         Mail mail = null;
-        Configuration configuration = null;        
+        ConfigurationMailAuthentication configuration = null;        
         MailTemplate mailTemplate = null;
 
         try {
@@ -64,7 +67,7 @@ public class MailSender {
         }                
         
         MailAuthentication mail = null;
-        Configuration configuration = null;        
+        ConfigurationMailAuthentication configuration = null;        
         MailTemplate mailTemplate = null;
 
         try {
@@ -89,6 +92,42 @@ public class MailSender {
                     freelancer.getPerson().getEmail());
             mail.send();
 
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+    
+    
+    //==========================================================================
+    public static void sendMailNewPartner(Partner partner, String displayLanguage) throws Exception {
+
+        if(partner == null){
+            throw new IllegalArgumentException("partner is null or empty");
+        }
+        
+        if(displayLanguage == null || displayLanguage.length() < 1){
+            throw new IllegalArgumentException("displayLanguage is null or empty");
+        }                
+        
+        Mail mail = null;
+        ConfigurationMail configurationMail = null;        
+        MailTemplate mailTemplate = null;
+
+        try {
+            
+            mailTemplate = new MailTemplateComponent().getTemplateNewPartner(displayLanguage);
+            
+            configurationMail = new ConfigurationMailComponent().getConfigurationMail();
+            mail = new Mail(
+                    mailTemplate.getFrom(), 
+                    configurationMail.getSmtpHost(), 
+                    configurationMail.getSmtpPort(), 
+                    partner.getPerson().getEmail()
+            );
+            
+            mail.send(mailTemplate.getSubject(), mailTemplate.getMessage());
+            
         } catch (Exception e) {
             throw e;
         }
