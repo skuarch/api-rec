@@ -2,6 +2,7 @@ package model.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -17,7 +18,8 @@ public class CompanyBasicInformation {
     private String brand;
     private Person person;
     private List<Category> category = new ArrayList<>();    
-    private String password;
+    private MultipartFile logoFile;    
+    private String description;
 
     public long getCompanyId() {
         return companyId;
@@ -59,12 +61,20 @@ public class CompanyBasicInformation {
         this.category = category;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDescription(String description) {
+        this.description = description;
+    }    
+
+    public MultipartFile getLogoFile() {
+        return logoFile;
+    }
+
+    public void setLogoFile(MultipartFile logoFile) {
+        this.logoFile = logoFile;
     }
     
 }

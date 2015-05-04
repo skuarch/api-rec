@@ -2,12 +2,14 @@ package controllers.company;
 
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
+import java.io.File;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Company;
 import model.components.CompanyComponent;
 import model.components.ContactComponent;
+import model.components.GeneralConfigurationComponent;
 import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
@@ -37,17 +39,20 @@ public class CreateCompany extends BaseController {
     private CompanyComponent companyComponent;    
     @Autowired
     private ContactComponent contactComponent;
+    @Autowired
+    private GeneralConfigurationComponent generalConfigurationComponent;
 
     //==========================================================================    
     @RequestMapping(value = {"/v1/company/create", "v1/company/create"})
     public @ResponseBody
     String createAffiliate(@ModelAttribute Company company, HttpServletResponse response, Locale locale) {
-
+        
         long id = 0;
         JSONObject jsono = null;
         long idPersonCompany = 0;
         long idContactTax = 0;
         long idContact = 0;
+        boolean updateCompany;
 
         try {
             
@@ -69,6 +74,15 @@ public class CreateCompany extends BaseController {
             //create affiliate
             id = companyComponent.createCompany(company);
             company.setId(id);
+            
+            //if any file exists, saved it
+            updateCompany = saveFiles(company);
+
+            //update affiliate because maybe he has a new file/path
+            if (updateCompany) {
+                companyComponent.updateCompany(company);
+            }
+            
             jsono.append("created", true);
             jsono.append("id", id);
 
@@ -87,4 +101,42 @@ public class CreateCompany extends BaseController {
         return jsono.toString();
         
     }
+    
+    
+    //==========================================================================
+    private boolean saveFiles(Company company) throws Exception {
+
+        boolean flag = false;
+        String originalName;
+        String extension = "";
+
+        try {
+
+            if (company.getLogoFile() != null) {
+
+                originalName = company.getLogoFile().getOriginalFilename();
+                int i = originalName.lastIndexOf('.');
+                int p = Math.max(originalName.lastIndexOf('/'), originalName.lastIndexOf('\\'));
+
+                if (i > p) {
+                    extension = ".";
+                    extension += originalName.substring(i + 1);
+                }
+
+                String path = generalConfigurationComponent.getGeneralConfiguration().getUploadPath();
+                String fileName = "company_" + company.getId() + "_logo_" + System.currentTimeMillis() + extension;                
+                File f = new File(path + fileName);
+                company.getLogoFile().transferTo(f);
+                company.setLogoPathName(path + fileName);
+                flag = true;
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return flag;
+
+    }
+    
 }

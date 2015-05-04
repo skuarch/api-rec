@@ -40,7 +40,6 @@ controllers/company/GetCompany.class
 controllers/category/GetCategories.class
 controllers/application/Index.class
 interceptors/RequestInterceptor.class
-controllers/freelancer/FreelancerUpdateAffiliatePassword.class
 model/beans/Freelancer.class
 controllers/establishment/GetEstablishment.class
 model/beans/ConfigurationMail.class
@@ -98,6 +97,8 @@ model/beans/AffiliateEstablishmentBasic.class
 model/components/PersonComponent.class
 controllers/cashier/CreateCashier.class
 model/beans/Category.class
+controllers/affiliate/UpdateAffiliatePassword.class
+controllers/company/UpdateCompanyPassword.class
 model/beans/Affiliate.class
 model/components/TransactionComponent.class
 model/components/CashierComponent.class

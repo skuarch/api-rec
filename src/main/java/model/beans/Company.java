@@ -20,8 +20,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -47,6 +49,15 @@ public class Company implements Serializable {
     
     @Column(name = "company_password", nullable = false, columnDefinition = "varchar(32)")
     private String password;
+    
+    @Column(name = "company_description", nullable = false, columnDefinition = "LONGTEXT")
+    private String description;
+    
+    @Transient
+    private MultipartFile logoFile;    
+    
+    @Column(name = "company_logo_path_name", unique = false)
+    private String logoPathName;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = true)
@@ -254,6 +265,30 @@ public class Company implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public MultipartFile getLogoFile() {
+        return logoFile;
+    }
+
+    public void setLogoFile(MultipartFile logoFile) {
+        this.logoFile = logoFile;
+    }
+
+    public String getLogoPathName() {
+        return logoPathName;
+    }
+
+    public void setLogoPathName(String logoPathName) {
+        this.logoPathName = logoPathName;
     }
     
 }

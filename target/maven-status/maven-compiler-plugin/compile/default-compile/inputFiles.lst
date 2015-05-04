@@ -14,6 +14,7 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/cashier/GetCashier.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateType.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Company.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/UpdateAffiliatePassword.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/PersonComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerCreateAffiliate.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/GeneralConfiguration.java
@@ -58,6 +59,7 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/MailTemplateComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Affiliate.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Contact.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/company/UpdateCompanyPassword.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateTaxInformation.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/GenderComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CreateCashier.java
@@ -93,7 +95,6 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/GeneralConfigurationComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Subcategory.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/CompanyTaxInformation.java
-/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerUpdateAffiliatePassword.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/CompanyEstablishmentBasic.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/ConfigurationComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/cashier/UpdateCashier.java
