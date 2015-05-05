@@ -2,7 +2,7 @@ package controllers.company;
 
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
-import controllers.freelancer.FreelancerCreateEstablishment;
+import controllers.affiliate.AffiliateCreateEstablishment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CompanyCreateEstablishment extends BaseController {
 
-    private static final Logger logger = getLogger(FreelancerCreateEstablishment.class);
+    private static final Logger logger = getLogger(CompanyCreateEstablishment.class);
 
     @Autowired
     private CompanyComponent companyComponent;

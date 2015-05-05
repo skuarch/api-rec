@@ -76,7 +76,7 @@ public class AffiliateUpdateTaxInformation extends BaseController {
             jsono.put("update", true);
             
         } catch (Exception e) {
-            logger.error("AffiliateUpdateBasicInformation.updateBasicInformation", e);
+            logger.error("AffiliateUpdateTaxInformation.updateTaxInformation", e);
             jsono = new JSONObject("{\"error\":\"" + e + "\",}");
             jsono.put("update", false);
         }

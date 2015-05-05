@@ -49,7 +49,7 @@ public class AffiliateUpdateBankInformation extends BaseController{
             jsono.put("update", true);
             
         } catch (Exception e) {
-            logger.error("AffiliateUpdateBasicInformation.updateBasicInformation", e);
+            logger.error("AffiliateUpdateBankInformation.affiliateUpdateBankInformation", e);
             jsono = new JSONObject("{\"error\":\"" + e + "\",}");
             jsono.put("update", false);
         }

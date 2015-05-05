@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import controllers.application.BaseController;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+import model.logic.Constants;
 
 /**
  *
@@ -99,6 +100,7 @@ public class FreelancerAuthentication extends BaseController {
             jsono.put("phone", f.getPerson().getPhone());            
             jsono.put("registrationDate", f.getPerson().getRegistrationDate());                        
             jsono.put("personId", f.getPerson().getId());                        
+            jsono.put("personType", Constants.PERSON_TYPE_FREELANCER);
             
         } catch (Exception e) {
             throw e;

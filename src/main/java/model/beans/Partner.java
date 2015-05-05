@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,6 +20,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "partner")
+@NamedQueries({
+        @NamedQuery(name = "getPartner", query = "from Partner p where p.person.email = :email and p.password = :password and p.isSoftDeleted = 0")        
+})
 public class Partner {
 
     @Id

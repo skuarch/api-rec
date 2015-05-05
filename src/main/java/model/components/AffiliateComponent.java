@@ -3,6 +3,7 @@ package model.components;
 import java.util.ArrayList;
 import java.util.HashMap;
 import model.beans.Affiliate;
+import model.beans.Freelancer;
 import model.database.DAO;
 import org.hibernate.HibernateException;
 
@@ -115,6 +116,38 @@ public class AffiliateComponent {
  
         return affiliates;
     
+    }
+    
+    //==========================================================================
+    public Affiliate getAffiliate(String email, String password) throws Exception {
+
+        if (email == null || email.length() < 1) {
+            throw new IllegalArgumentException("email is null or empty");
+        }
+
+        if (password == null || password.length() < 1) {
+            throw new IllegalArgumentException("password is null or empty");
+        }
+
+        HashMap parameters = new HashMap();
+        parameters.put("email", email);
+        parameters.put("password", password);
+        Affiliate a = null;
+        ArrayList<Affiliate> affiliateList = null;
+
+        try {
+
+            affiliateList = new DAO().query(parameters, "getAffiliate", new Affiliate());
+            if (affiliateList != null && affiliateList.size() > 0) {
+                a = affiliateList.get(0);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return a;
+
     }
 
 }

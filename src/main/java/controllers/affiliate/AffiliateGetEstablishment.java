@@ -25,33 +25,33 @@ import org.springframework.web.bind.annotation.RestController;
 public class AffiliateGetEstablishment extends BaseController {
 
     private static final Logger logger = getLogger(AffiliateGetEstablishment.class);
-    
+
     @Autowired
     private AffiliateComponent affiliateComponent;
-    
+
     //==========================================================================
     @RequestMapping(value = {"/v1/affiliate/get/establishment", "v1/affiliate/get/establishment"})
-    public @ResponseBody String getEstablishments(@ModelAttribute Affiliate affiliate,HttpServletResponse response,Locale locale){        
-        
-        JSONArray jsona = null;
-        List<Establishment> establishments = null;
-        
-        
+    public @ResponseBody
+    String getEstablishments(@ModelAttribute Affiliate affiliate, HttpServletResponse response, Locale locale) {
+
+        JSONArray jsona;
+        List<Establishment> establishments;
+
         try {
-            
+
             setContentType(response, MediaType.APPLICATION_JSON);
             affiliate = affiliateComponent.getAffiliate(affiliate.getId());
             establishments = affiliate.getEstablishment();
             jsona = new JSONArray(establishments);
-            
+
         } catch (Exception e) {
-            logger.error("FreelancerCreateEstablishment.createEstablishment", e);
+            logger.error("AffiliateGetEstablishment.getEstablishments", e);
             jsona = new JSONArray();
             jsona.put(0, "error");
-        }   
-        
+        }
+
         return jsona.toString();
-    
+
     }
-    
+
 }

@@ -32,7 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name = "affiliate")
 @NamedQueries({
-    @NamedQuery(name = "getAffiliateByFreelancer", query = "select new Affiliate(a.id, a.brand, a.person, a.description, a.address, a.bank, a.clabe, a.ownerAccountBank, a.emailNotifications, a.contact, a.taxCompanyName, a.taxId) from Affiliate a where a.freelancer.id = :id and a.isSoftDeleted = 0")
+    @NamedQuery(name = "getAffiliateByFreelancer", query = "select new Affiliate(a.id, a.brand, a.person, a.description, a.address, a.bank, a.clabe, a.ownerAccountBank, a.emailNotifications, a.contact, a.taxCompanyName, a.taxId) from Affiliate a where a.freelancer.id = :id and a.isSoftDeleted = 0"),
+    @NamedQuery(name = "getAffiliate", query = "from Affiliate a where a.person.email = :email and a.password = :password and a.isSoftDeleted = 0")   
 })
 public class Affiliate implements Serializable {    
     
