@@ -38,11 +38,11 @@ public class FreelancerGetCompanies extends BaseController {
         try {            
             
             setContentType(response, MediaType.APPLICATION_JSON);
-            companies = companyComponent.getCompaniesByFreelancer(freelancer.getId());
+            companies = companyComponent.getCompaniesByCreator(freelancer.getPerson().getId());
             jsona = new JSONArray(companies);
             
         } catch (Exception e) {
-            logger.error("FreelancerGetCompanies.getCompaniesByFreelancer", e);            
+            logger.error("FreelancerGetCompanies.getCompaniesByCreator", e);            
             jsona = new JSONArray();
             jsona.put("error");
         }

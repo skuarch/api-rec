@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Freelancer;
 import model.components.FreelancerComponent;
+import model.components.PersonComponent;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,9 @@ public class FreelancerUpdate extends BaseController {
     private static final Logger logger = getLogger(FreelancerUpdate.class);
     
     @Autowired
-    private FreelancerComponent freelancerComponent;    
+    private FreelancerComponent freelancerComponent;        
+    @Autowired
+    private PersonComponent personComponent;    
     
     //==========================================================================
     @RequestMapping(value = {"/v1/freelancer/update", "v1/freelancer/update"}, method = RequestMethod.POST)
@@ -35,18 +38,24 @@ public class FreelancerUpdate extends BaseController {
         JSONObject jsono;
         Freelancer f;
         
-        try {
+        try {            
             
             setContentType(response, MediaType.APPLICATION_JSON);
             
-            f = freelancerComponent.getFreelancer(freelancer.getId());
-            freelancer.setId(f.getId());
+            f = freelancerComponent.getFreelancer(freelancer.getId());            
+            freelancer.setId(f.getId());            
+            
+            //update freelancer person
             freelancer.getPerson().setId(f.getPerson().getId());
-            freelancer.setPassword(f.getPassword());
             freelancer.getPerson().setPersonType(f.getPerson().getPersonType());
+            personComponent.updatePerson(freelancer.getPerson());            
+            
+            //update freelancer
+            freelancer.setPassword(f.getPassword());            
             freelancer.getAddress().setId(f.getAddress().getId()); 
             freelancer.setActive((byte) 1);
             freelancerComponent.updateFreelancer(freelancer);
+            
             jsono = new JSONObject();
             jsono.put("updated", true);
             

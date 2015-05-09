@@ -23,7 +23,7 @@ public class Address implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private long id;    
     
-    @Column(name = "address_all", nullable = false)
+    @Column(name = "address_all", nullable = false, columnDefinition = "LONGTEXT")
     private String all;            
     
     @Column(name = "address_zip_code")

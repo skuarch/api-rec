@@ -35,9 +35,9 @@ public class FreelancerGetAffiliates extends BaseController {
         ArrayList<Affiliate> affiliates = null;
         
         try {            
-            
-            setContentType(response, MediaType.APPLICATION_JSON);
-            affiliates = affiliateComponent.getAffiliatesByFreelancer(freelancer.getId());            
+            System.out.println("entro aqui " + freelancer.getPerson().getId()); 
+            setContentType(response, MediaType.APPLICATION_JSON);            
+            affiliates = affiliateComponent.getAffiliatesByCreator(freelancer.getPerson().getId());
             jsona = new JSONArray(affiliates);
             
         } catch (Exception e) {

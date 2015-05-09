@@ -3,6 +3,7 @@ package model.components;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import model.beans.Affiliate;
 import model.beans.Company;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
@@ -97,10 +98,10 @@ public class CompanyComponent {
     }
     
     //==========================================================================
-    public ArrayList<Company> getCompaniesByFreelancer(long freelancerId) throws Exception{
+    public ArrayList<Company> getCompaniesByCreator(long creatorId) throws Exception{
         
-        if(freelancerId < 1){
-            throw new IllegalArgumentException("freelancerId is less than 0");
+        if(creatorId < 1){
+            throw new IllegalArgumentException("creatorId is less than 0");
         }
         
         ArrayList<Company> companies = null;
@@ -109,8 +110,26 @@ public class CompanyComponent {
         try {
             
             parameters = new HashMap<>();
-            parameters.put("id", freelancerId + "");            
-            companies = new DAO().query(parameters, "getCompaniesByFreelancer", new Company());
+            parameters.put("id", creatorId + "");            
+            companies = new DAO().query(parameters, "getCompaniesByCreator", new Company());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+ 
+        return companies;
+    
+    }
+    
+    
+    //==========================================================================
+    public List<Company> getCompanyList() throws Exception{
+        
+        List<Company> companies = null;        
+        
+        try {            
+            
+            companies = new DAO().query("getCompanyList", new Company());
             
         } catch (Exception e) {
             throw e;

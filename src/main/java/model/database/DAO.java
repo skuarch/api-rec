@@ -387,8 +387,7 @@ public class DAO {
 
             query = session.getNamedQuery(queryName);
             query.setProperties(type);
-            list = query.list();
-            session.getTransaction().commit();
+            list = query.list();            
 
         } catch (HibernateException he) {
             throw he;

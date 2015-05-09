@@ -53,8 +53,7 @@ public class PersonTypeComponent {
         
         if(person == null){
             throw new IllegalArgumentException("person is null");
-        }
-        
+        }        
 
         try {
             

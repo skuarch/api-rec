@@ -1,7 +1,6 @@
 package model.components;
 
 import model.beans.Address;
-import model.beans.Contact;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
 

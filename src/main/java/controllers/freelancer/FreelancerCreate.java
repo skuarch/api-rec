@@ -5,12 +5,15 @@ import static controllers.application.BaseController.getLogger;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+import model.beans.Address;
 import model.beans.Freelancer;
 import model.beans.Person;
 import model.beans.PersonType;
+import model.components.AddressComponent;
 import model.components.FreelancerComponent;
 import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
+import model.logic.Constants;
 import model.util.MD5Util;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -31,7 +34,13 @@ public class FreelancerCreate extends BaseController {
     private static final Logger logger = getLogger(FreelancerCreate.class);
     
     @Autowired
+    private AddressComponent addressComponent;
+    @Autowired
     private FreelancerComponent freelancerComponent;
+    @Autowired
+    private PersonComponent personComponent;
+    @Autowired
+    private PersonTypeComponent personTypeComponent;
 
     //==========================================================================
     @RequestMapping(value = {"/v1/freelancer/create", "v1/freelancer/create"}, method = RequestMethod.POST)
@@ -39,8 +48,10 @@ public class FreelancerCreate extends BaseController {
     String createFreelancer(@ModelAttribute Freelancer freelancer, HttpServletResponse response, Locale locale) {
 
         long id = 0;
+        long personId;
+        long addressId;
         JSONObject jsono = new JSONObject();
-        String password = freelancer.getPassword();
+        String password = freelancer.getPassword();        
 
         try {
 
@@ -69,7 +80,15 @@ public class FreelancerCreate extends BaseController {
                 //the email already exists
                 jsono.append("exists", true);
             } else {
-
+                
+                //create person
+                personId = createPerson(freelancer.getPerson());
+                freelancer.getPerson().setId(personId);
+                
+                //create address
+                addressId = createAddress(freelancer.getAddress());
+                freelancer.getAddress().setId(addressId);
+                
                 //create freelancer because I will use the id
                 id = createFreelancer(freelancer);
                 freelancer.setId(id);
@@ -183,6 +202,41 @@ public class FreelancerCreate extends BaseController {
             }
         }).start();
 
+    }
+    
+    //==========================================================================
+    private long createPerson(Person p) throws Exception{
+    
+        long id;
+        
+        try {
+            
+            p.setPersonType(personTypeComponent.getPersonType(Constants.FREELANCER));
+            id = personComponent.createPerson(p);
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return id;
+    
+    }
+    
+    //==========================================================================
+    private long createAddress(Address address) throws Exception{
+    
+        long id;
+        
+        try {
+            
+            id = addressComponent.createAddress(address);
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return id;
+        
     }
 
 }

@@ -1,7 +1,6 @@
 package model.beans;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +32,9 @@ public class Cashier implements Serializable {
 
     @Column(name = "chashier_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
+    
+    @Column(name = "cashier_active", columnDefinition = "int default 0")
+    private byte active = 0;
 
     public Cashier() {
     }
@@ -67,6 +69,14 @@ public class Cashier implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public byte getActive() {
+        return active;
+    }
+
+    public void setActive(byte active) {
+        this.active = active;
     }
 
 }

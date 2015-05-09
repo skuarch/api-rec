@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
+import model.components.AddressComponent;
 import model.components.AffiliateComponent;
 import model.components.ContactComponent;
 import model.components.GeneralConfigurationComponent;
@@ -33,6 +34,8 @@ public class AffiliateCreate extends BaseController {
     private static final Logger logger = getLogger(AffiliateCreate.class);
 
     @Autowired
+    private AddressComponent addressComponent;
+    @Autowired
     private AffiliateComponent affiliateComponent;
     @Autowired
     private PersonTypeComponent personTypeComponent;
@@ -54,12 +57,14 @@ public class AffiliateCreate extends BaseController {
      */
     @RequestMapping(value = {"/v1/affiliate/create", "v1/affiliate/create"})
     public @ResponseBody
-    String createAffiliate(@ModelAttribute Affiliate affiliate, HttpServletResponse response, HttpServletRequest request,Locale locale) {
-
+    String createAffiliate(@ModelAttribute Affiliate affiliate, HttpServletResponse response, Locale locale) {
+        
         long id = 0;
         JSONObject jsono = null;
         long contactId = 0;
         long personContacId = 0;
+        long addressId;
+        long personId;
         boolean updateAffiliate;
 
         try {
@@ -69,15 +74,26 @@ public class AffiliateCreate extends BaseController {
             setContentType(response, MediaType.APPLICATION_JSON);
 
             //get person type
-            affiliate.getContact().getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT));
+            affiliate.getContact().getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT_BILLING));
             affiliate.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.AFFILIATE));
 
+            //save person
+            personId = personComponent.createPerson(affiliate.getPerson());
+            affiliate.getPerson().setId(personId);
+            
             //save contact
             personContacId = personComponent.createPerson(affiliate.getContact().getPerson());
             affiliate.getContact().getPerson().setId(personContacId);
             contactId = contactComponent.createContact(affiliate.getContact());
             affiliate.getContact().setId(contactId);
 
+            //save address
+            addressId = addressComponent.createAddress(affiliate.getAddress());
+            affiliate.getAddress().setId(addressId);
+            
+            //activate affiliate
+            //affiliate.setActive((byte) 1);
+            
             //create affiliate
             id = affiliateComponent.createAffiliate(affiliate);
             affiliate.setId(id);

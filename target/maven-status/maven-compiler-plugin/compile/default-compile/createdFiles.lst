@@ -1,10 +1,12 @@
 model/beans/CompanyBasicInformation.class
 model/beans/Transaction.class
 controllers/affiliate/AffiliateCreate.class
+controllers/affiliate/AffiliateGeListByCreator.class
 model/beans/CompanyEstablishmentBasic.class
 model/components/ConfigurationComponent.class
 model/util/MD5Util.class
 model/components/PartnerComponent.class
+controllers/freelancer/FreelancerGetList.class
 model/util/TransactionUtil.class
 model/beans/TransactionType.class
 controllers/affiliate/AffiliateUpdateTaxInformation.class
@@ -16,6 +18,7 @@ controllers/freelancer/FreelancerUpdate.class
 model/beans/PersonType.class
 model/components/GenderComponent.class
 model/beans/AffiliateBasicInformation.class
+controllers/authentication/AdministratorAuthentication.class
 model/beans/Gender.class
 controllers/company/CompanyGet.class
 model/components/MailTemplateComponent.class
@@ -25,6 +28,7 @@ controllers/affiliate/AffiliateGetEstablishment.class
 model/logic/MailSender.class
 model/net/Mail.class
 controllers/application/Test.class
+controllers/partner/PartnerUpdatePassword.class
 model/beans/Cashier.class
 controllers/authentication/AffiliatePartnerAuthentication.class
 model/util/MailUtil.class
@@ -45,7 +49,9 @@ controllers/cashier/CashierCreate.class
 model/beans/Subscriber.class
 model/beans/TestBean.class
 controllers/partner/PartnerCreate.class
+controllers/affiliate/AffiliateGetList.class
 model/beans/AffiliateTaxInformation.class
+controllers/freelancer/FreelancerToggleActive.class
 controllers/cashier/CashierUpdatePassword.class
 controllers/company/CompanyCreateEstablishment.class
 model/components/ContactComponent.class
@@ -67,6 +73,7 @@ model/logic/Constants.class
 controllers/affiliate/AffiliateUpdateBankInformation.class
 controllers/affiliate/AffiliateGet.class
 model/beans/Responsable.class
+model/components/AdministratorComponent.class
 controllers/company/CompanyUpdateBasicInformation.class
 controllers/application/BaseController.class
 model/beans/AffiliateEstablishmet.class
@@ -85,8 +92,10 @@ controllers/freelancer/FreelancerUpdatePassword.class
 interceptors/Hibernate.class
 model/components/AffiliateComponent.class
 model/beans/GeneralConfiguration.class
+controllers/company/CompanyGetList.class
 servlets/GlobalContext.class
 model/beans/RequestBean.class
+model/beans/Administrator.class
 controllers/affiliate/AffiliateUpdateBasicInformation.class
 model/components/AffiliateEstablishmentComponent.class
 model/beans/Contact.class

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+import model.beans.Address;
 import model.beans.Affiliate;
 import model.beans.AffiliateEstablishmentBasic;
 import model.beans.Cashier;
@@ -14,6 +15,7 @@ import model.beans.Establishment;
 import model.beans.Person;
 import model.beans.PersonType;
 import model.beans.Responsable;
+import model.components.AddressComponent;
 import model.components.AffiliateComponent;
 import model.components.CashierComponent;
 import model.components.EstablishmentComponent;
@@ -40,6 +42,8 @@ public class AffiliateCreateEstablishment extends BaseController {
     private static final Logger logger = getLogger(AffiliateCreateEstablishment.class);
 
     @Autowired
+    private AddressComponent addressComponent;
+    @Autowired
     private AffiliateComponent affiliateComponent;
     @Autowired
     private PersonTypeComponent personTypeComponent;
@@ -63,6 +67,9 @@ public class AffiliateCreateEstablishment extends BaseController {
         JSONObject jsono = null;
 
         Affiliate affiliate = null;
+        
+        Address address;
+        long addressId;
 
         List<Establishment> establishmentSet = null;
         Establishment establishment = null;
@@ -131,6 +138,13 @@ public class AffiliateCreateEstablishment extends BaseController {
             establishment = affiliateEstablishmentBasic.getEstablishment();
             responsable = establishment.getResponsable();
             cashier = establishment.getCashier().get(0);
+            address = establishment.getAddress();
+            
+            //create address            
+            addressId = addressComponent.createAddress(address);            
+            address = establishment.getAddress();
+            address.setId(addressId);
+            establishment.setAddress(address);
 
             //get personType responsable----------------------------------------
             responsablePersonType = personTypeComponent.getPersonType("responsable");
@@ -161,7 +175,7 @@ public class AffiliateCreateEstablishment extends BaseController {
             cashier.setId(cashierId);
             cashierList = new ArrayList<>();
             cashierList.add(cashier);
-
+            
             //create establishment----------------------------------------------            
             establishment.setResponsable(responsable);
             establishment.setCashier(cashierList);

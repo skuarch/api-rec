@@ -22,7 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "freelancer")
 @NamedQueries({
-        @NamedQuery(name = "getFreelancer", query = "from Freelancer f where f.person.email = :email and f.password = :password and active = 1 and f.isSoftDeleted = 0")        
+        @NamedQuery(name = "getFreelancer", query = "from Freelancer f where f.person.email = :email and f.password = :password and active = 1 and f.isSoftDeleted = 0"),
+        @NamedQuery(name = "getFreelancerList", query = "from Freelancer f where f.isSoftDeleted = 0")        
 })
 public class Freelancer implements Serializable {
 
@@ -34,11 +35,11 @@ public class Freelancer implements Serializable {
     @Column(name = "freelancer_password", nullable = false, columnDefinition = "varchar(32)")
     private String password; 
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name ="person_id", nullable = false)
     private Person person;    
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name ="address_id", nullable = false)
     private Address address;  
     

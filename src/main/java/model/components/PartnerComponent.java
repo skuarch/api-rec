@@ -83,4 +83,23 @@ public class PartnerComponent {
 
     }
     
+    //==========================================================================
+    public void updatePartner(Partner partner) throws Exception{
+        
+        if(partner == null){
+            throw new IllegalArgumentException("partner is null");
+        }
+        
+        Partner p;
+        
+        try {
+            
+            new DAO().update(partner);
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+    }
+    
 }

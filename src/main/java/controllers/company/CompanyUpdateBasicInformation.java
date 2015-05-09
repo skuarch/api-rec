@@ -1,15 +1,14 @@
 package controllers.company;
 
-import controllers.affiliate.AffiliateUpdateBasicInformation;
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import java.io.File;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
-import model.beans.Affiliate;
 import model.beans.Company;
 import model.beans.CompanyBasicInformation;
 import model.components.CompanyComponent;
+import model.components.ContactComponent;
 import model.components.GeneralConfigurationComponent;
 import model.components.PersonTypeComponent;
 import model.components.PersonComponent;
@@ -33,7 +32,7 @@ public class CompanyUpdateBasicInformation extends BaseController {
     private static final Logger logger = getLogger(CompanyUpdateBasicInformation.class);
     
     @Autowired
-    private CompanyComponent companyComponent;
+    private CompanyComponent companyComponent;    
     @Autowired
     private PersonTypeComponent personTypeComponent;
     @Autowired
@@ -56,7 +55,7 @@ public class CompanyUpdateBasicInformation extends BaseController {
             companyBasicInformation
                     .getPerson()
                     .setPersonType(
-                            personTypeComponent.getPersonType(Constants.CONTACT_COMPANY)
+                            personTypeComponent.getPersonType(Constants.CONTACT)
                     );
             company = companyComponent.getCompany(companyBasicInformation.getCompanyId());            
             companyBasicInformation.setCompanyId(company.getId());

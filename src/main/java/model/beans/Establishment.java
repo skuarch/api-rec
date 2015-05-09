@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
@@ -34,7 +34,7 @@ public class Establishment implements Serializable {
     @Column(name = "establishment_id")
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
@@ -47,10 +47,10 @@ public class Establishment implements Serializable {
     @OneToOne
     @JoinColumn(name = "responsable_id")
     private Responsable responsable;
-    
+
     @Column(name = "establishment_latitude", nullable = true)
     private String latitude;
-    
+
     @Column(name = "establishment_longitude", nullable = true)
     private String longitude;
 
@@ -61,8 +61,7 @@ public class Establishment implements Serializable {
                 @JoinColumn(name = "establishment_id", unique = false, nullable = false, updatable = false)},
             inverseJoinColumns = {
                 @JoinColumn(name = "cashier_id", unique = false, nullable = false, updatable = false)})
-    private List<Cashier> cashier = new ArrayList<>();    
-    
+    private List<Cashier> cashier = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
@@ -72,7 +71,6 @@ public class Establishment implements Serializable {
             inverseJoinColumns = {
                 @JoinColumn(name = "category_id", unique = false, nullable = false, updatable = false)})
     private List<Category> category = new ArrayList<>();
-    
 
     @Column(name = "establishment_registration_date", nullable = false, length = 19)
     private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -137,7 +135,7 @@ public class Establishment implements Serializable {
         }
     }
 
-    public void setCashier(List<Cashier> cashier) {        
+    public void setCashier(List<Cashier> cashier) {
         this.cashier = cashier;
     }
 

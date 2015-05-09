@@ -6,7 +6,9 @@ import java.io.File;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+import model.beans.Address;
 import model.beans.Company;
+import model.components.AddressComponent;
 import model.components.CompanyComponent;
 import model.components.ContactComponent;
 import model.components.GeneralConfigurationComponent;
@@ -32,6 +34,8 @@ public class CompanyCreate extends BaseController {
     private static final Logger logger = getLogger(CompanyCreate.class);
 
     @Autowired
+    private AddressComponent addressComponent;    
+    @Autowired
     private PersonTypeComponent personTypeComponent;
     @Autowired
     private PersonComponent personComponent;
@@ -45,7 +49,7 @@ public class CompanyCreate extends BaseController {
     //==========================================================================    
     @RequestMapping(value = {"/v1/company/create", "v1/company/create"})
     public @ResponseBody
-    String createAffiliate(@ModelAttribute Company company, HttpServletResponse response, Locale locale) {
+    String createCompany(@ModelAttribute Company company, HttpServletResponse response, Locale locale) {
         
         long id = 0;
         JSONObject jsono = null;
@@ -53,6 +57,8 @@ public class CompanyCreate extends BaseController {
         long idContactTax = 0;
         long idContact = 0;
         boolean updateCompany;
+        Address a;
+        long addressId;
 
         try {
             
@@ -61,7 +67,7 @@ public class CompanyCreate extends BaseController {
 
             //get person type
             company.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT));
-            company.getContact().getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT));
+            company.getContact().getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT_BILLING));
             idPersonCompany = personComponent.createPerson(company.getPerson());
             idContactTax = personComponent.createPerson(company.getContact().getPerson());
             
@@ -71,6 +77,12 @@ public class CompanyCreate extends BaseController {
             idContact = contactComponent.createContact(company.getContact());            
             company.getContact().setId(idContact);            
 
+            //create address
+            a = company.getAddress();
+            addressId = addressComponent.createAddress(a);
+            a.setId(addressId);
+            company.setAddress(a);
+            
             //create affiliate
             id = companyComponent.createCompany(company);
             company.setId(id);

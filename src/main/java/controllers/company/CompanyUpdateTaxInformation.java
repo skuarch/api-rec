@@ -11,6 +11,7 @@ import model.beans.CompanyTaxInformation;
 import model.beans.Contact;
 import model.components.AddressComponent;
 import model.components.CompanyComponent;
+import model.components.ContactComponent;
 import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
@@ -29,15 +30,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CompanyUpdateTaxInformation extends BaseController{
 
+    private static final Logger logger = getLogger(CompanyUpdateTaxInformation.class);
+    
     @Autowired
     private CompanyComponent companyComponent;
+    @Autowired
+    private ContactComponent contactComponent;
     @Autowired
     private PersonTypeComponent personTypeComponent;
     @Autowired
     private PersonComponent personComponent;
     @Autowired
     private AddressComponent addressComponent;
-    private static final Logger logger = getLogger(AffiliateUpdateTaxInformation.class);
     
     //==========================================================================
         @RequestMapping(value = {"/v1/company/update/tax/information","v1/company/update/tax/information"})
@@ -57,15 +61,16 @@ public class CompanyUpdateTaxInformation extends BaseController{
             
             //update contact
             contact = companyTaxInformation.getContact();
-            contact.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT));
+            contact.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT_BILLING));
             contact.setId(company.getContact().getId());
             contact.getPerson().setId(company.getContact().getPerson().getId());              
             personComponent.updatePerson(contact.getPerson());
             
             //update address
-            address = companyTaxInformation.getAddress();
+            address = companyTaxInformation.getAddress();            
             address.setId(company.getAddress().getId());
             addressComponent.updateAddress(address);
+            companyTaxInformation.setAddress(address);
             
             company.setTaxId(companyTaxInformation.getTaxId());
             company.setTaxCompanyName(companyTaxInformation.getTaxCompanyName());

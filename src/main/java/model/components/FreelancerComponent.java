@@ -90,14 +90,14 @@ public class FreelancerComponent {
         } catch (Exception e) {
             throw e;
         }
-        
+
         return f;
 
     }
-    
+
     //==========================================================================
-    public Freelancer getFreelancer(long id) throws Exception {        
-        
+    public Freelancer getFreelancer(long id) throws Exception {
+
         Freelancer f = null;
         try {
 
@@ -106,8 +106,25 @@ public class FreelancerComponent {
         } catch (Exception e) {
             throw e;
         }
-        
+
         return f;
+
+    }
+
+    //==========================================================================
+    public ArrayList<Freelancer> getFreelancersList() throws Exception {
+
+        ArrayList<Freelancer> freelancers = new ArrayList<>();
+
+        try {
+
+            freelancers = new ArrayList<>(new DAO().query("getFreelancerList", new Freelancer()));
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return freelancers;
 
     }
 

@@ -19,6 +19,7 @@
         <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
         <property name="hibernate.current_session_context_class">thread</property>-->
         <!--<property name="hibernate.connection.datasource">jdbc/api-rec</property>-->
+        <mapping class="model.beans.Administrator"/>
         <mapping class="model.beans.Address"/>
         <mapping class="model.beans.Affiliate"/>    
         <mapping class="model.beans.AffiliateEstablishmet"/>

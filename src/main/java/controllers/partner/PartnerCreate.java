@@ -2,7 +2,9 @@ package controllers.partner;
 
 import java.util.Locale;
 import model.beans.Partner;
+import model.beans.Person;
 import model.components.PartnerComponent;
+import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
 import model.util.MailUtil;
@@ -27,13 +29,16 @@ public class PartnerCreate {
     @Autowired
     private PartnerComponent partnerComponent;
     @Autowired
+    private PersonComponent personComponent;
+    @Autowired
     private PersonTypeComponent personTypeComponent;
     
     //==========================================================================
     @RequestMapping(value ="/v1/partner/create")
     public @ResponseBody String createPartner(@ModelAttribute Partner partner,Locale locale){
     
-        long id = 0;
+        long id;
+        long personId;
         JSONObject jsono = null;
         
         try {
@@ -41,6 +46,11 @@ public class PartnerCreate {
            //set personType
            partner.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.PARTNER));
             
+           //create person
+           personId = createPerson(partner.getPerson());
+           partner.getPerson().setId(personId);
+           partner.setActive((byte) 1);
+           
            //save new partner into db
            id = partnerComponent.createPartner(partner);
            jsono = new JSONObject();
@@ -57,6 +67,24 @@ public class PartnerCreate {
         }
         
         return jsono.toString();
+    
+    }
+    
+    //==========================================================================
+    private long createPerson(Person p) throws Exception{
+    
+        long id;
+        
+        try {
+            
+            p.setPersonType(personTypeComponent.getPersonType(Constants.PARTNER));
+            id = personComponent.createPerson(p);
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return id;
     
     }
     

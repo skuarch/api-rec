@@ -56,7 +56,7 @@ public class AffiliateUpdateTaxInformation extends BaseController {
             
             //update contact
             contact = affiliateTaxInformation.getContact();
-            contact.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT));
+            contact.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT_BILLING));
             contact.setId(affiliate.getContact().getId());
             contact.getPerson().setId(affiliate.getContact().getPerson().getId());              
             personComponent.updatePerson(contact.getPerson());

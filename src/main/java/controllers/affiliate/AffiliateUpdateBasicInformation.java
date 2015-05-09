@@ -7,8 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
 import model.beans.AffiliateBasicInformation;
+import model.beans.Contact;
+import model.beans.Person;
+import model.components.AddressComponent;
 import model.components.AffiliateComponent;
+import model.components.ContactComponent;
 import model.components.GeneralConfigurationComponent;
+import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
 import model.util.FileUtil;
@@ -28,13 +33,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AffiliateUpdateBasicInformation extends BaseController {
 
+    private static final Logger logger = getLogger(AffiliateUpdateBasicInformation.class);
+    
+    @Autowired
+    private AddressComponent addressComponent;
     @Autowired
     private AffiliateComponent affiliateComponent;
+    @Autowired    
+    private ContactComponent contactComponent;
+    @Autowired
+    private PersonComponent personComponent;
     @Autowired
     private PersonTypeComponent personTypeComponent;
     @Autowired
     private GeneralConfigurationComponent generalConfigurationComponent;
-    private static final Logger logger = getLogger(AffiliateUpdateBasicInformation.class);
+    
 
     //==========================================================================
     @RequestMapping(value = {"/v1/affiliate/update/basic/information", "v1/affiliate/update/basic/information"})
@@ -43,17 +56,33 @@ public class AffiliateUpdateBasicInformation extends BaseController {
 
         JSONObject jsono = null;
         Affiliate affiliate = null;
+        Person person; 
+        Contact contact;
 
         try {
 
+            //basic configuration
             setContentType(response, MediaType.APPLICATION_JSON);
+            
             affiliateBasicInformation
                     .getPerson()
                     .setPersonType(
                             personTypeComponent.getPersonType(Constants.AFFILIATE)
                     );
             affiliate = affiliateComponent.getAffiliate(affiliateBasicInformation.getId());
-            affiliate.setPerson(affiliateBasicInformation.getPerson());
+            
+            //update person
+            person = affiliateBasicInformation.getPerson();
+            person.setId(affiliate.getPerson().getId());
+            personComponent.updatePerson(person);
+            affiliate.setPerson(person); 
+            
+            //update contact
+            contactComponent.updateContact(affiliate.getContact());
+            
+            //update address            
+            addressComponent.updateAddress(affiliate.getAddress());            
+            
             affiliate.setBrand(affiliateBasicInformation.getBrand());
             affiliate.setCategory(affiliateBasicInformation.getCategory());
             affiliate.setDescription(affiliateBasicInformation.getDescription());

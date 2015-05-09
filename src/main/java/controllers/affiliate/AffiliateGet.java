@@ -29,7 +29,7 @@ public class AffiliateGet extends BaseController{
     @RequestMapping(value = {"/v1/affiliate/get"})
     public @ResponseBody String getAffiliate(@ModelAttribute Affiliate affiliate, HttpServletResponse response){
         
-        JSONObject jsono = null;
+        JSONObject jsono;
         
         try {
             

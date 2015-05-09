@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,16 +31,20 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name = "affiliate")
 @NamedQueries({
-    @NamedQuery(name = "getAffiliateByFreelancer", query = "select new Affiliate(a.id, a.brand, a.person, a.description, a.address, a.bank, a.clabe, a.ownerAccountBank, a.emailNotifications, a.contact, a.taxCompanyName, a.taxId) from Affiliate a where a.freelancer.id = :id and a.isSoftDeleted = 0"),
-    @NamedQuery(name = "getAffiliate", query = "from Affiliate a where a.person.email = :email and a.password = :password and a.isSoftDeleted = 0")   
+    @NamedQuery(name = "getAffiliateByCreator", query = "select new Affiliate(a.id, a.brand, a.person, a.description, a.address, a.bank, a.clabe, a.ownerAccountBank, a.emailNotifications, a.contact, a.taxCompanyName, a.taxId) from Affiliate a where a.creatorId = :id and a.isSoftDeleted = 0"),
+    @NamedQuery(name = "getAffiliate", query = "from Affiliate a where a.person.email = :email and a.password = :password and a.isSoftDeleted = 0"),
+    @NamedQuery(name = "getAffiliatesList", query = "from Affiliate a where a.isSoftDeleted = 0")
 })
-public class Affiliate implements Serializable {    
-    
+public class Affiliate implements Serializable {
+
     @Id
     @Column(name = "affiliate_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "affiliate_active", columnDefinition = "int default 0")
+    private byte active = 0;
+    
     @Column(name = "affiliate_password", nullable = false, columnDefinition = "varchar(32)")
     private String password;
 
@@ -69,27 +72,26 @@ public class Affiliate implements Serializable {
     @Column(name = "affiliate_email_notifications", nullable = false)
     private String emailNotifications;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "person_id", nullable = true)
     private Person person;
 
     @Transient
-    private MultipartFile logoFile;    
-    
+    private MultipartFile logoFile;
+
     @Column(name = "affiliate_logo_path_name", unique = false)
     private String logoPathName;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "contact_id", nullable = false)
     private Contact contact;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @OneToOne
-    @JoinColumn(name = "freelancer_id", nullable = true)
-    private Freelancer freelancer;
+    @Column(name = "creator_person_id", nullable = true)
+    private long creatorId;
 
     @OneToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
@@ -115,11 +117,14 @@ public class Affiliate implements Serializable {
 
     @Column(name = "affiliate_registration_date", nullable = false, length = 19)
     private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    
+    @Column(name = "affiliate_last_login")
+    private String lastLogin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());        
 
     //==========================================================================
     public Affiliate() {
     }
-    
+
     public Affiliate(long id, String brand, Person person, String description, Address address, String bank, String clabe, String ownerAccountBank, String emailNotifications, Contact contact, String taxCompanyName, String taxId) {
         this.id = id;
         this.brand = brand;
@@ -134,7 +139,7 @@ public class Affiliate implements Serializable {
         this.contact = contact;
         this.address = address;
     }
-    
+
     public long getId() {
         return id;
     }
@@ -175,12 +180,12 @@ public class Affiliate implements Serializable {
         this.registrationDate = registrationDate;
     }
 
-    public Freelancer getFreelancer() {
-        return freelancer;
+    public long getCreatorId() {
+        return creatorId;
     }
 
-    public void setFreelancer(Freelancer freelancer) {
-        this.freelancer = freelancer;
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
     }
 
     public String getPassword() {
@@ -299,5 +304,21 @@ public class Affiliate implements Serializable {
     public void setLogoPathName(String logoPathName) {
         this.logoPathName = logoPathName;
     }
-    
+
+    public byte getActive() {
+        return active;
+    }
+
+    public void setActive(byte active) {
+        this.active = active;
+    }
+
+    public String getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
 }

@@ -33,7 +33,7 @@ public class Partner {
     @Column(name = "partner_password", nullable = false, columnDefinition = "varchar(32)")
     private String password;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "person_id", nullable = true)
     private Person person;
     
@@ -42,6 +42,9 @@ public class Partner {
 
     @Column(name = "partner_registration_date", nullable = false, length = 19)
     private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    
+    @Column(name = "partner_last_login")
+    private String lastLogin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());        
     
     @Column(name = "partner_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
@@ -92,6 +95,14 @@ public class Partner {
 
     public void setActive(byte active) {
         this.active = active;
+    }
+
+    public String getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
     }
     
 }

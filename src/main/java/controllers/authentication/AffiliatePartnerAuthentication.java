@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import controllers.application.BaseController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
@@ -35,7 +37,7 @@ public class AffiliatePartnerAuthentication extends BaseController {
     //==========================================================================
     @RequestMapping(value = {"v1/authentication/partner/affiliate", "/v1/authentication/partner/affiliate"})
     public @ResponseBody String authentication(@ModelAttribute Login login, HttpServletResponse response) {
-        
+        System.out.println("entro");
         JSONObject jsono = null;
         Partner p;
         Affiliate a;
@@ -62,15 +64,17 @@ public class AffiliatePartnerAuthentication extends BaseController {
 
             p = partnerComponent.getPartner(login.getEmail(), login.getPassword());
 
-            if (p != null) {
+            if (p != null && p.getActive() == 1) {
                 jsono = createPartnerJson(p);
                 jsono.put("validate", true);
+                lastLoginPartner(p);
             } else {
                 //check if is affiliate
                 a = affiliateComponent.getAffiliate(login.getEmail(), login.getPassword());
-                if (a != null) {
+                if (a != null && a.getActive() == 1) {
                     jsono = createAffiliateJson(a);
                     jsono.put("validate", true);
+                    lastLoginAffiliate(a);
                 } else {
                     jsono.put("validate", false);
                 }
@@ -135,13 +139,41 @@ public class AffiliatePartnerAuthentication extends BaseController {
             jsono.put("personId", a.getPerson().getId());
             jsono.put("isPartner", false);
             jsono.put("isAffiliate", true);
-            jsono.put("personType", Constants.PERSON_TYPE_PARTNER);
+            jsono.put("personType", Constants.PERSON_TYPE_AFFILIATE);
 
         } catch (Exception e) {
             throw e;
         }
 
         return jsono;
+
+    }
+    
+    //==========================================================================
+    private void lastLoginPartner(Partner partner) throws Exception {
+
+        new Thread(() -> {
+            try {
+                partner.setLastLogin(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                partnerComponent.updatePartner(partner);
+            } catch (Exception e) {
+                logger.error("AdministratorAuthentication.lastLogin", e);
+            }
+        }).start();
+
+    }
+    
+    //==========================================================================
+    private void lastLoginAffiliate(Affiliate affiliate) throws Exception {
+
+        new Thread(() -> {
+            try {
+                affiliate.setLastLogin(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                affiliateComponent.updateAffiliate(affiliate);
+            } catch (Exception e) {
+                logger.error("AdministratorAuthentication.lastLogin", e);
+            }
+        }).start();
 
     }
 

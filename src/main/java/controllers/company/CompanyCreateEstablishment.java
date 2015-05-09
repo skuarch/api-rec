@@ -2,12 +2,12 @@ package controllers.company;
 
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
-import controllers.affiliate.AffiliateCreateEstablishment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+import model.beans.Address;
 import model.beans.Cashier;
 import model.beans.Company;
 import model.beans.CompanyEstablishmentBasic;
@@ -15,6 +15,7 @@ import model.beans.Establishment;
 import model.beans.Person;
 import model.beans.PersonType;
 import model.beans.Responsable;
+import model.components.AddressComponent;
 import model.components.CashierComponent;
 import model.components.CompanyComponent;
 import model.components.EstablishmentComponent;
@@ -40,6 +41,8 @@ public class CompanyCreateEstablishment extends BaseController {
 
     private static final Logger logger = getLogger(CompanyCreateEstablishment.class);
 
+    @Autowired
+    private AddressComponent addressComponent;
     @Autowired
     private CompanyComponent companyComponent;
     @Autowired
@@ -80,6 +83,9 @@ public class CompanyCreateEstablishment extends BaseController {
         Cashier cashier = null;
         long cashierPersonId;
         long cashierId;
+        
+        Address address;
+        long addressId;
         
         try {
 
@@ -138,6 +144,7 @@ public class CompanyCreateEstablishment extends BaseController {
             establishment = companyEstablishmentBasic.getEstablishment();
             responsable = establishment.getResponsable();
             cashier = establishment.getCashier().get(0);
+            address = establishment.getAddress();
 
             //get personType responsable----------------------------------------
             responsablePersonType = personTypeComponent.getPersonType("responsable");
@@ -169,6 +176,10 @@ public class CompanyCreateEstablishment extends BaseController {
             cashierList = new ArrayList<>();
             cashierList.add(cashier);
 
+            //create address
+            addressId = addressComponent.createAddress(address);
+            establishment.getAddress().setId(addressId);
+            
             //create establishment----------------------------------------------            
             establishment.setResponsable(responsable);
             establishment.setCashier(cashierList);

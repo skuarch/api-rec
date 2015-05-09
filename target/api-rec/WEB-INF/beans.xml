@@ -8,6 +8,7 @@
     <bean id="login" class="model.beans.Login"></bean>    
     
     <!-- components -->
+    <bean id="administratorComponent" class="model.components.AdministratorComponent"></bean>    
     <bean id="addressComponent" class="model.components.AddressComponent"></bean>    
     <bean id="affiliateComponent" class="model.components.AffiliateComponent"></bean>    
     <bean id="affiliateEstablishmet" class="model.components.AffiliateEstablishmentComponent"></bean>    

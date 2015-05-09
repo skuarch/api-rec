@@ -32,7 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name = "company")
 @NamedQueries({
-    @NamedQuery(name = "getCompaniesByFreelancer", query = "from Company c where c.freelancer.id = :id and c.isSoftDeleted = 0")
+    @NamedQuery(name = "getCompaniesByCreator", query = "from Company c where c.creatorId = :id and c.isSoftDeleted = 0"),
+    @NamedQuery(name = "getCompanyList", query = "from Company c where c.isSoftDeleted = 0")
 })
 public class Company implements Serializable {
 
@@ -40,59 +41,58 @@ public class Company implements Serializable {
     @Column(name = "company_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Column(name = "company_name", nullable = false)
     private String name;
-    
+
     @Column(name = "company_brand", nullable = false)
     private String brand;
-    
+
     @Column(name = "company_password", nullable = false, columnDefinition = "varchar(32)")
     private String password;
-    
+
     @Column(name = "company_description", nullable = false, columnDefinition = "LONGTEXT")
     private String description;
-    
+
     @Transient
-    private MultipartFile logoFile;    
-    
+    private MultipartFile logoFile;
+
     @Column(name = "company_logo_path_name", unique = false)
     private String logoPathName;
-    
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @OneToOne
     @JoinColumn(name = "person_id", nullable = true)
     private Person person;
-    
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @OneToOne
     @JoinColumn(name = "tax_contact_id", nullable = true)
     private Contact contact;
-    
+
     @Column(name = "company_taxId")
     private String taxId;
-    
+
     @Column(name = "company_tax_company_name", nullable = false)
     private String taxCompanyName;
-    
+
     @Column(name = "company_owner_account_bank", nullable = false)
     private String ownerAccountBank;
-    
+
     @Column(name = "company_bank", nullable = false)
     private String bank;
-    
+
     @Column(name = "company_clabe", nullable = false)
     private String clabe;
-    
+
     @Column(name = "company_email_notifications", nullable = false)
     private String emailNotifications;
-    
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @OneToOne
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
-    
-    @OneToOne
-    @JoinColumn(name = "freelancer_id", nullable = true)
-    private Freelancer freelancer;
-    
+
+    @Column(name = "creator_person_id", nullable = true)
+    private long creatorId;
+
     @OneToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "company_establishment",
@@ -102,7 +102,7 @@ public class Company implements Serializable {
                 @JoinColumn(name = "establishment_id", unique = false, nullable = false, updatable = false)}
     )
     private List<Establishment> establishment;
-    
+
     @OneToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "company_category",
@@ -110,13 +110,16 @@ public class Company implements Serializable {
                 @JoinColumn(name = "company_id", referencedColumnName = "company_id", unique = false, nullable = false, updatable = false)},
             inverseJoinColumns = {
                 @JoinColumn(name = "category_id", unique = false, nullable = false, updatable = false)})
-    private List<Category> category = new ArrayList<>();    
-    
+    private List<Category> category = new ArrayList<>();
+
     @Column(name = "company_registration_date", nullable = false, length = 19)
-    private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());    
+    private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
     @Column(name = "company_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
+
+    @Column(name = "company_active", columnDefinition = "int default 0")
+    private byte active = 0;
 
     public long getId() {
         return id;
@@ -222,12 +225,12 @@ public class Company implements Serializable {
         this.address = address;
     }
 
-    public Freelancer getFreelancer() {
-        return freelancer;
+    public long getCreatorId() {
+        return creatorId;
     }
 
-    public void setFreelancer(Freelancer freelancer) {
-        this.freelancer = freelancer;
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
     }
 
     public List<Establishment> getEstablishment() {
@@ -290,5 +293,13 @@ public class Company implements Serializable {
     public void setLogoPathName(String logoPathName) {
         this.logoPathName = logoPathName;
     }
-    
+
+    public byte getActive() {
+        return active;
+    }
+
+    public void setActive(byte active) {
+        this.active = active;
+    }
+
 }

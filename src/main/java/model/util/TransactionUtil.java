@@ -24,8 +24,16 @@ public class TransactionUtil {
      * @param transactionNumber short
      * @param id long
      */
-    public static void createTransaction(short transactionNumber, long id) {
+    public synchronized static void createTransaction(short transactionNumber, long id) {
 
+        if(transactionNumber < 1){
+            throw new IllegalArgumentException("transactionNumber is less than 0");
+        }
+        
+        if(id < 1){
+            throw new IllegalArgumentException("id is less than 0");
+        }
+        
         new Thread(() -> {
             try {
                 new TransactionComponent()

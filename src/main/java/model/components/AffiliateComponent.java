@@ -2,8 +2,8 @@ package model.components;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import model.beans.Affiliate;
-import model.beans.Freelancer;
 import model.database.DAO;
 import org.hibernate.HibernateException;
 
@@ -95,30 +95,6 @@ public class AffiliateComponent {
     }
     
     //==========================================================================
-    public ArrayList<Affiliate> getAffiliatesByFreelancer(long freelancerId) throws Exception{
-        
-        if(freelancerId < 1){
-            throw new IllegalArgumentException("freelancerId is less than 0");
-        }
-        
-        ArrayList<Affiliate> affiliates = null;
-        HashMap parameters;
-        
-        try {
-            
-            parameters = new HashMap<>();
-            parameters.put("id", freelancerId + "");            
-            affiliates = new DAO().query(parameters, "getAffiliateByFreelancer", new Affiliate());
-            
-        } catch (Exception e) {
-            throw e;
-        }
- 
-        return affiliates;
-    
-    }
-    
-    //==========================================================================
     public Affiliate getAffiliate(String email, String password) throws Exception {
 
         if (email == null || email.length() < 1) {
@@ -148,6 +124,47 @@ public class AffiliateComponent {
         
         return a;
 
+    }
+    
+    //==========================================================================
+    public ArrayList<Affiliate> getAffiliatesByCreator(long creatorId) throws Exception{
+        
+        if(creatorId < 1){
+            throw new IllegalArgumentException("creatorId is less than 0");
+        }
+        
+        ArrayList<Affiliate> affiliates = null;
+        HashMap parameters;
+        
+        try {
+            
+            parameters = new HashMap<>();
+            parameters.put("id", creatorId + "");            
+            affiliates = new DAO().query(parameters, "getAffiliateByCreator", new Affiliate());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+ 
+        return affiliates;
+    
+    }
+    
+    //==========================================================================
+    public List<Affiliate> getAffiliatesList() throws Exception{
+        
+        List<Affiliate> affiliates = null;        
+        
+        try {            
+            
+            affiliates = new DAO().query("getAffiliatesList", new Affiliate());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+ 
+        return affiliates;
+    
     }
 
 }
