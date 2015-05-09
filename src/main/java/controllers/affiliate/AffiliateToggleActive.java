@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
 import model.components.AffiliateComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +49,10 @@ public class AffiliateToggleActive extends BaseController {
             } else {
                 if (affiliate.getActive() == 0) {
                     affiliate.setActive((byte) 1);
+                    TransactionUtil.createTransaction(Constants.TRANSACTION_ACTIVATE_AFFILIADO, affiliate.getId());
                 } else {
                     affiliate.setActive((byte) 0);
+                    TransactionUtil.createTransaction(Constants.TRANSACTION_DEACTIVATE_AFFILIADO, affiliate.getId());
                 }
                 affiliateComponent.updateAffiliate(affiliate);                
                 jsono.put("updated", true);

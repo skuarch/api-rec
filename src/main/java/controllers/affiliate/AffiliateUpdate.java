@@ -7,6 +7,8 @@ import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
 import model.components.AffiliateComponent;
 import model.components.PersonTypeComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,8 @@ public class AffiliateUpdate extends BaseController {
             
             jsono = new JSONObject();
             jsono.put("updated", true);
+            
+            //TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_BASIC_INFORMATION_AFFILIATE, affiliate.getId());
             
         } catch (Exception e) {
             logger.error("AffiliateUpdate.updateAffiliate", e);

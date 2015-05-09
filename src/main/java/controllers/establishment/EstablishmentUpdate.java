@@ -8,6 +8,8 @@ import model.beans.Address;
 import model.beans.Establishment;
 import model.components.AddressComponent;
 import model.components.EstablishmentComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,8 @@ public class EstablishmentUpdate extends BaseController {
             
             jsono = new JSONObject();
             jsono.put("updated", true);
+            
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_ESTABLISHMENT_BASIC_INFORMATION, e.getId());
             
         } catch (Exception ex) {
             logger.error("EstablishmentUpdate.updateEstablishment", ex);

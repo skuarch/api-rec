@@ -13,6 +13,7 @@ import model.components.AffiliateComponent;
 import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,8 @@ public class AffiliateUpdateTaxInformation extends BaseController {
             
             jsono = new JSONObject();
             jsono.put("update", true);
+            
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_TAX_INFORMATION_AFFILIATE, affiliate.getId());
             
         } catch (Exception e) {
             logger.error("AffiliateUpdateTaxInformation.updateTaxInformation", e);

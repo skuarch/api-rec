@@ -15,6 +15,7 @@ import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
 import model.util.MD5Util;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +103,8 @@ public class FreelancerCreate extends BaseController {
 
                 //send mail to user
                 sendMailNewFreelancer(freelancer, password, locale.getDisplayLanguage());
+                
+                TransactionUtil.createTransaction(Constants.TRANSACTION_NEW_FREELANCER, freelancer.getId());
 
             }
 

@@ -99,7 +99,7 @@ public class CompanyCreate extends BaseController {
             jsono.append("id", id);
 
             //create transaction            
-            TransactionUtil.createTransaction(Constants.TRANSACTION_NEW_AFFILIATE, company.getId());
+            TransactionUtil.createTransaction(Constants.TRANSACTION_NEW_COMPANY, company.getId());
 
             //send email to the affiliate
             //sendMailNewAffiliate(company, locale.getDisplayLanguage());

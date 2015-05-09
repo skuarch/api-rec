@@ -1,6 +1,5 @@
 package controllers.freelancer;
 
-import static com.mchange.v2.c3p0.impl.C3P0Defaults.password;
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import java.util.Locale;
@@ -8,7 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Freelancer;
 import model.components.FreelancerComponent;
-import static model.logic.MailSender.sendMailNewFreelancer;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +49,10 @@ public class FreelancerToggleActive extends BaseController {
             } else {
                 if (freelancer.getActive() == 0) {
                     freelancer.setActive((byte) 1);
+                    TransactionUtil.createTransaction(Constants.TRANSACTION_ACTIVATE_FREELANCER, freelancer.getId());
                 } else {
                     freelancer.setActive((byte) 0);
+                    TransactionUtil.createTransaction(Constants.TRANSACTION_DEACTIVATE_FREELANCER, freelancer.getId());
                 }
                 freelancerComponent.updateFreelancer(freelancer);
                 jsono.put("updated", true);

@@ -7,6 +7,8 @@ import javax.ws.rs.core.MediaType;
 import model.beans.Freelancer;
 import model.beans.UpdatePasswordBean;
 import model.components.FreelancerComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,8 @@ public class FreelancerUpdatePassword extends BaseController {
             freelancer.setPassword(upb.getNewPassword());
             freelancerComponent.updateFreelancer(freelancer);
             jsono = getJson(true);
+            
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_FREELANCER_PASSWORD, freelancer.getId());
 
         } catch (Exception e) {
             logger.error("FreelancerUpdatePassword.updatePassword", e);

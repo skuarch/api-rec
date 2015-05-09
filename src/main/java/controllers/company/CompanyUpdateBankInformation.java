@@ -8,6 +8,8 @@ import javax.ws.rs.core.MediaType;
 import model.beans.Company;
 import model.beans.CompanyBankInformation;
 import model.components.CompanyComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +51,10 @@ public class CompanyUpdateBankInformation extends BaseController {
             jsono = new JSONObject();
             jsono.put("updated", true);
             
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_BANK_INFORMATION_COMPANY, company.getId());
+            
         } catch (Exception e) {
-            logger.error("AffiliateUpdateBasicInformation.updateBasicInformation", e);
+            logger.error("CompanyUpdateBankInformation.companyUpdateBankInformation", e);
             jsono = new JSONObject("{\"error\":\"" + e + "\",}");
             jsono.put("updated", false);
         }

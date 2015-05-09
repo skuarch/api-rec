@@ -13,6 +13,8 @@ import model.beans.PersonType;
 import model.beans.Responsable;
 import model.components.PersonTypeComponent;
 import model.components.ResponsableComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -67,6 +69,8 @@ public class ResponsableUpdate extends BaseController {
             responsableComponent.updateResponsable(r);
             jsono = new JSONObject();            
             jsono.put("updated", true);
+            
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_RESPONSABLE_BASIC_INFORMATION, r.getId());
 
         } catch (Exception e) {
             logger.error("ResponsableUpdate.updateResponsable", e);

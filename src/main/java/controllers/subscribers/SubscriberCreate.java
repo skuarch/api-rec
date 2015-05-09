@@ -34,6 +34,7 @@ public class SubscriberCreate extends BaseController {
             setContentType(response, MediaType.APPLICATION_JSON);
             jsono = new JSONObject();
             
+            //TransactionUtil.createTransaction(Constants.TRANSACTION_NEW_SUSBCRIBER, r.getId());
             
         } catch (Exception e) {
             logger.error("SubscriberCreate.createSubscriber", e);

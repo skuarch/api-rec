@@ -7,6 +7,8 @@ import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
 import model.beans.UpdatePasswordBean;
 import model.components.AffiliateComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,8 @@ public class AffiliateUpdatePassword extends BaseController {
             affiliate.setPassword(upb.getNewPassword());
             affiliateComponent.updateAffiliate(affiliate);
             jsono = getJson(true);
+            
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_AFFILIATE_PASSWORD, affiliate.getId());
 
         } catch (Exception e) {
             logger.error("AffiliateUpdatePassword.updatePassword", e);

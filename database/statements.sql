@@ -36,19 +36,31 @@ INSERT INTO transaction_type (transaction_type_name) VALUES ('new partner');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('new subscriber');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('new administrator');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('new category');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('new company');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update basic information affiliate');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update affiliate password');
-INSERT INTO transaction_type (transaction_type_name) VALUES ('update biiling information affiliate');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('update tax information affiliate');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update electronic data transfer affiliate');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('update bank information affiliate');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update basic information company');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update company password');
-INSERT INTO transaction_type (transaction_type_name) VALUES ('update biiling information company');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('update tax information company');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update electronic data transfer company');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('update bank information company');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update establishment basic information');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update responsable basic information');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update responsable password');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('update freelancer');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('update freelancer password');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update cashier');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('update cashier password');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('update partner');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('update partner password');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('active frelancer');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate frelancer');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('active affiliate');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate affiliate');
+
 
 #gender
 INSERT INTO `regaloenclave`.`gender` (`gender_name`) VALUES ('male');

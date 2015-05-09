@@ -8,6 +8,8 @@ import model.beans.Responsable;
 import model.beans.UpdatePasswordBean;
 import model.components.AffiliateComponent;
 import model.components.ResponsableComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,8 @@ public class ResponsableUpdatePassword extends BaseController {
             responsable.setPassword(upb.getNewPassword());
             responsableComponent.updateResponsable(responsable);
             jsono = getJson(true);
+            
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_RESPONSABLE_PASSWORD, responsable.getId());
 
         } catch (Exception e) {
             logger.error("ResponsableUpdatePassword.updatePassword", e);

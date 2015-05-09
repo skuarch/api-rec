@@ -8,6 +8,7 @@ import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
 import model.util.MailUtil;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import static org.apache.log4j.Logger.getLogger;
 import org.json.JSONObject;
@@ -59,6 +60,8 @@ public class PartnerCreate {
            
            //send email to new partner
             MailUtil.sendMailNewPartner(partner, locale.getDisplayLanguage());
+            
+            TransactionUtil.createTransaction(Constants.TRANSACTION_NEW_PARTNER, partner.getId());
             
         } catch (Exception e) {
             logger.error("PartnerCreate.createPartner", e);

@@ -14,6 +14,7 @@ import model.components.PersonTypeComponent;
 import model.components.PersonComponent;
 import model.logic.Constants;
 import model.util.FileUtil;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,8 @@ public class CompanyUpdateBasicInformation extends BaseController {
 
             jsono = new JSONObject();
             jsono.put("updated", true);
+            
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_BASIC_INFORMATION_COMPANY, company.getId());
 
         } catch (Exception e) {
             logger.error("CompanyUpdateBasicInformation.updateCompanyBasicInformation", e);

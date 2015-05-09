@@ -7,6 +7,8 @@ import javax.ws.rs.core.MediaType;
 import model.beans.Freelancer;
 import model.components.FreelancerComponent;
 import model.components.PersonComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,8 @@ public class FreelancerUpdate extends BaseController {
             
             jsono = new JSONObject();
             jsono.put("updated", true);
+            
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_FREELANCER, freelancer.getId());
             
         } catch (Exception e) {
             logger.error("FreelancerUpdate.updateFreelancer", e);

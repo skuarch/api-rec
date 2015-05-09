@@ -7,6 +7,8 @@ import javax.ws.rs.core.MediaType;
 import model.beans.Company;
 import model.beans.UpdatePasswordBean;
 import model.components.CompanyComponent;
+import model.logic.Constants;
+import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,8 @@ public class CompanyUpdatePassword extends BaseController {
             company.setPassword(upb.getNewPassword());
             companyComponent.updateCompany(company);
             jsono = getJson(true);
+            TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_COMPANY_PASSWORD, company.getId());
+            
 
         } catch (Exception e) {
             logger.error("CompanyUpdatePassword.updatePassword", e);
