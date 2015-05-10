@@ -2,12 +2,14 @@ package controllers.affiliate;
 
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
+import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
 import model.beans.AffiliateBankInformation;
 import model.components.AffiliateComponent;
 import model.logic.Constants;
+import model.util.MailUtil;
 import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -30,7 +32,7 @@ public class AffiliateUpdateBankInformation extends BaseController{
     
     //==========================================================================
     @RequestMapping(value = {"/v1/affiliate/update/bank/information","v1/affiliate/update/bank/information"})
-    public @ResponseBody String affiliateUpdateBankInformation(@ModelAttribute AffiliateBankInformation affiliateBankInformation, HttpServletResponse response){
+    public @ResponseBody String affiliateUpdateBankInformation(@ModelAttribute AffiliateBankInformation affiliateBankInformation, HttpServletResponse response, Locale locale){
         
         JSONObject jsono = null;
         Affiliate affiliate = null;
@@ -51,6 +53,8 @@ public class AffiliateUpdateBankInformation extends BaseController{
             jsono.put("update", true);
             
             TransactionUtil.createTransaction(Constants.TRANSACTION_UPDATE_BANK_INFORMATION_AFFILIATE, affiliate.getId());
+            
+            MailUtil.sendMailUpdateInformation(affiliate.getPerson().getEmail(), locale.getDisplayLanguage());
             
         } catch (Exception e) {
             logger.error("AffiliateUpdateBankInformation.affiliateUpdateBankInformation", e);

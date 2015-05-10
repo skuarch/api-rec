@@ -15,6 +15,7 @@ import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
 import model.util.MD5Util;
+import model.util.MailUtil;
 import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -47,7 +48,7 @@ public class FreelancerCreate extends BaseController {
     @RequestMapping(value = {"/v1/freelancer/create", "v1/freelancer/create"}, method = RequestMethod.POST)
     public @ResponseBody
     String createFreelancer(@ModelAttribute Freelancer freelancer, HttpServletResponse response, Locale locale) {
-
+        System.out.println("mierdotas");
         long id = 0;
         long personId;
         long addressId;
@@ -102,7 +103,7 @@ public class FreelancerCreate extends BaseController {
                 jsono.put("key", freelancer.getKey());
 
                 //send mail to user
-                sendMailNewFreelancer(freelancer, password, locale.getDisplayLanguage());
+                MailUtil.sendMailNewFreelancer(freelancer, locale.getDisplayLanguage());                
                 
                 TransactionUtil.createTransaction(Constants.TRANSACTION_NEW_FREELANCER, freelancer.getId());
 
@@ -139,7 +140,7 @@ public class FreelancerCreate extends BaseController {
         } finally {
             person = null;
         }
-
+        System.out.println("mierda " + exists);
         return exists;
     }
 
@@ -184,27 +185,6 @@ public class FreelancerCreate extends BaseController {
         }
 
         return key;
-    }
-
-    //==========================================================================
-    private void sendMailNewFreelancer(Freelancer freelancer, String password, String displayLanguage) {
-
-        if (freelancer == null) {
-            return;
-        }
-
-        new Thread(() -> {
-            try {
-                model.logic.MailSender.sendMailNewFreelancer(
-                        freelancer,
-                        password,
-                        displayLanguage
-                );
-            } catch (Exception e) {
-                logger.error("FreelancerCreate.sendMailNewFreelancer", e);
-            }
-        }).start();
-
     }
     
     //==========================================================================

@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Company;
 import model.beans.CompanyBasicInformation;
+import model.beans.GeneralConfiguration;
 import model.components.CompanyComponent;
-import model.components.ContactComponent;
 import model.components.GeneralConfigurationComponent;
 import model.components.PersonTypeComponent;
 import model.components.PersonComponent;
@@ -101,6 +101,7 @@ public class CompanyUpdateBasicInformation extends BaseController {
         boolean flag = false;
         String originalName;
         String extension = "";
+        GeneralConfiguration gc;
 
         try {
 
@@ -115,11 +116,13 @@ public class CompanyUpdateBasicInformation extends BaseController {
                     extension += originalName.substring(i + 1);
                 }
 
+                gc = generalConfigurationComponent.getGeneralConfiguration();
                 String path = generalConfigurationComponent.getGeneralConfiguration().getUploadPath();
                 String fileName = "company_" + company.getId() + "_logo_" + System.currentTimeMillis() + extension;
                 File f = new File(path + fileName);
                 company.getLogoFile().transferTo(f);
                 company.setLogoPathName(path + fileName);
+                company.setUrlLogo(gc.getUrlStaticImages() + fileName);
                 flag = true;
             }
 

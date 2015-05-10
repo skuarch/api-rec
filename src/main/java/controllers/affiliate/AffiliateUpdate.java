@@ -7,8 +7,6 @@ import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
 import model.components.AffiliateComponent;
 import model.components.PersonTypeComponent;
-import model.logic.Constants;
-import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

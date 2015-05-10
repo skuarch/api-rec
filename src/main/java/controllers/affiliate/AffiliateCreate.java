@@ -5,9 +5,9 @@ import static controllers.application.BaseController.getLogger;
 import java.io.File;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
+import model.beans.GeneralConfiguration;
 import model.components.AddressComponent;
 import model.components.AffiliateComponent;
 import model.components.ContactComponent;
@@ -15,6 +15,7 @@ import model.components.GeneralConfigurationComponent;
 import model.components.PersonComponent;
 import model.components.PersonTypeComponent;
 import model.logic.Constants;
+import model.util.MailUtil;
 import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -115,7 +116,7 @@ public class AffiliateCreate extends BaseController {
             TransactionUtil.createTransaction(Constants.TRANSACTION_NEW_AFFILIATE, affiliate.getId());
 
             //send email to the affiliate
-            sendMailNewAffiliate(affiliate, locale.getDisplayLanguage());
+            MailUtil.sendMailNewAffiliate(affiliate, locale.getDisplayLanguage());
 
             //create notification
         } catch (Exception e) {
@@ -134,6 +135,7 @@ public class AffiliateCreate extends BaseController {
         boolean flag = false;
         String originalName;
         String extension = "";
+        GeneralConfiguration gc;
 
         try {
 
@@ -148,11 +150,13 @@ public class AffiliateCreate extends BaseController {
                     extension += originalName.substring(i + 1);
                 }
 
-                String path = generalConfigurationComponent.getGeneralConfiguration().getUploadPath();
+                gc = generalConfigurationComponent.getGeneralConfiguration();
+                String path = gc.getUploadPath();
                 String fileName = "affiliate_" + affiliate.getId() + "_logo_" + System.currentTimeMillis() + extension;                
                 File f = new File(path + fileName);
                 affiliate.getLogoFile().transferTo(f);
                 affiliate.setLogoPathName(path + fileName);
+                affiliate.setUrlLogo(gc.getUrlStaticImages() + fileName);
                 flag = true;
             }
 
@@ -163,25 +167,5 @@ public class AffiliateCreate extends BaseController {
         return flag;
 
     }
-
-    //==========================================================================
-    private void sendMailNewAffiliate(Affiliate affiliate, String displayLanguage) {
-
-        if (affiliate == null) {
-            return;
-        }
-
-        new Thread(() -> {
-            try {
-                model.logic.MailSender.sendMailNewAffiliate(
-                        affiliate.getPerson().getName(),
-                        affiliate.getPerson().getEmail(),
-                        displayLanguage
-                );
-            } catch (Exception e) {
-                logger.error("CreateAffiliate.sendMailNewAffiliate", e);
-            }
-        }).start();
-
-    }
+    
 }

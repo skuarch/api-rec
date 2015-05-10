@@ -85,6 +85,9 @@ public class Affiliate implements Serializable {
     @OneToOne
     @JoinColumn(name = "contact_id", nullable = false)
     private Contact contact;
+    
+    @Column(name = "affiliate_url_logo")
+    private String urlLogo;
 
     @OneToOne
     @JoinColumn(name = "address_id", nullable = false)
@@ -319,6 +322,14 @@ public class Affiliate implements Serializable {
 
     public void setLastLogin(String lastLogin) {
         this.lastLogin = lastLogin;
+    }
+
+    public String getUrlLogo() {
+        return urlLogo;
+    }
+
+    public void setUrlLogo(String urlLogo) {
+        this.urlLogo = urlLogo;
     }
 
 }

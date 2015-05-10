@@ -24,6 +24,9 @@ public class GeneralConfiguration implements Serializable {
     @Column(name = "general_configuration_upload_path")
     private String uploadPath;
     
+    @Column(name = "general_configuration_url_static_images")
+    private String urlStaticImages;
+    
     public GeneralConfiguration() {
     }
 
@@ -41,6 +44,14 @@ public class GeneralConfiguration implements Serializable {
 
     public void setUploadPath(String uploadPath) {
         this.uploadPath = uploadPath;
+    }
+
+    public String getUrlStaticImages() {
+        return urlStaticImages;
+    }
+
+    public void setUrlStaticImages(String urlStaticImages) {
+        this.urlStaticImages = urlStaticImages;
     }
     
 }

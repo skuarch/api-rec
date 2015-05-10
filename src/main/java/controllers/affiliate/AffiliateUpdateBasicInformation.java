@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
 import model.beans.AffiliateBasicInformation;
 import model.beans.Contact;
+import model.beans.GeneralConfiguration;
 import model.beans.Person;
 import model.components.AddressComponent;
 import model.components.AffiliateComponent;
@@ -118,6 +119,7 @@ public class AffiliateUpdateBasicInformation extends BaseController {
         boolean flag = false;
         String originalName;
         String extension = "";
+        GeneralConfiguration gc;
 
         try {
 
@@ -132,11 +134,13 @@ public class AffiliateUpdateBasicInformation extends BaseController {
                     extension += originalName.substring(i + 1);
                 }
 
-                String path = generalConfigurationComponent.getGeneralConfiguration().getUploadPath();
+                gc = generalConfigurationComponent.getGeneralConfiguration();
+                String path = gc.getUploadPath();
                 String fileName = "affiliate_" + affiliate.getId() + "_logo_" + System.currentTimeMillis() + extension;
                 File f = new File(path + fileName);
                 affiliate.getLogoFile().transferTo(f);
                 affiliate.setLogoPathName(path + fileName);
+                affiliate.setUrlLogo(gc.getUrlStaticImages() + fileName);
                 flag = true;
             }
 

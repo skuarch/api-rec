@@ -47,6 +47,9 @@ public class Company implements Serializable {
 
     @Column(name = "company_brand", nullable = false)
     private String brand;
+    
+    @Column(name = "company_url_logo")
+    private String urlLogo;
 
     @Column(name = "company_password", nullable = false, columnDefinition = "varchar(32)")
     private String password;
@@ -300,6 +303,14 @@ public class Company implements Serializable {
 
     public void setActive(byte active) {
         this.active = active;
+    }
+
+    public String getUrlLogo() {
+        return urlLogo;
+    }
+
+    public void setUrlLogo(String urlLogo) {
+        this.urlLogo = urlLogo;
     }
 
 }

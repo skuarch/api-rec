@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Address;
 import model.beans.Company;
+import model.beans.GeneralConfiguration;
 import model.components.AddressComponent;
 import model.components.CompanyComponent;
 import model.components.ContactComponent;
@@ -121,6 +122,7 @@ public class CompanyCreate extends BaseController {
         boolean flag = false;
         String originalName;
         String extension = "";
+        GeneralConfiguration gc;
 
         try {
 
@@ -135,11 +137,13 @@ public class CompanyCreate extends BaseController {
                     extension += originalName.substring(i + 1);
                 }
 
-                String path = generalConfigurationComponent.getGeneralConfiguration().getUploadPath();
+                gc = generalConfigurationComponent.getGeneralConfiguration();
+                String path = gc.getUploadPath();
                 String fileName = "company_" + company.getId() + "_logo_" + System.currentTimeMillis() + extension;                
                 File f = new File(path + fileName);
                 company.getLogoFile().transferTo(f);
                 company.setLogoPathName(path + fileName);
+                company.setUrlLogo(gc.getUrlStaticImages() + fileName);
                 flag = true;
             }
 

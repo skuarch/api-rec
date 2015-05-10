@@ -1,5 +1,6 @@
 package model.logic;
 
+import model.beans.Affiliate;
 import model.beans.ConfigurationMailAuthentication;
 import model.beans.ConfigurationMail;
 import model.beans.Freelancer;
@@ -16,17 +17,17 @@ import model.net.MailAuthentication;
  *
  * @author skuarch
  */
-public class MailSender {
+public class MailSender {    
 
     //==========================================================================
     private MailSender() {
     }
 
-    //==========================================================================
-    public static void sendMailNewAffiliate(String name, String to, String displayLanguage) throws Exception {
+    //==========================================================================z
+    public static void sendMailNewAffiliate(Affiliate affiliate, String displayLanguage) throws Exception {
 
-        if(name == null || name.length() < 1){
-            throw new IllegalArgumentException("name is null or empty");
+        if(affiliate == null){
+            throw new IllegalArgumentException("affiliate is null or empty");
         }
         
         if(displayLanguage == null || displayLanguage.length() < 1){
@@ -34,17 +35,24 @@ public class MailSender {
         }                
         
         Mail mail = null;
-        ConfigurationMailAuthentication configuration = null;        
+        ConfigurationMail configurationMail = null;        
         MailTemplate mailTemplate = null;
 
         try {
             
-            mailTemplate = new MailTemplateComponent().getAffiliateTemplate(displayLanguage);
-            configuration = new ConfigurationComponent().getConfiguration();
+            mailTemplate = new MailTemplateComponent().getTemplate("new affiliate", displayLanguage);
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":name", affiliate.getPerson().getName()));
             
-            mail = new Mail(mailTemplate.getFrom(), configuration.getSmtpHost(), configuration.getSmtpPort(), to);
+            configurationMail = new ConfigurationMailComponent().getConfigurationMail();
+            mail = new Mail(
+                    mailTemplate.getFrom(), 
+                    configurationMail.getSmtpHost(), 
+                    configurationMail.getSmtpPort(), 
+                    affiliate.getPerson().getEmail()
+            );
+            
             mail.send(mailTemplate.getSubject(), mailTemplate.getMessage());
-
+            
         } catch (Exception e) {
             throw e;
         }
@@ -52,7 +60,7 @@ public class MailSender {
     }
     
     //==========================================================================
-    public static void sendMailNewFreelancer(Freelancer freelancer,String password,String displayLanguage) throws Exception {
+    public static void sendMailNewFreelancer(Freelancer freelancer,String displayLanguage) throws Exception {
 
         if(freelancer == null){
             throw new IllegalArgumentException("freelancer is null or empty");
@@ -62,35 +70,25 @@ public class MailSender {
             throw new IllegalArgumentException("displayLanguage is null or empty");
         }                
         
-        if(password == null || password.length() < 1){
-            throw new IllegalArgumentException("password is null or empty");
-        }                
-        
-        MailAuthentication mail = null;
-        ConfigurationMailAuthentication configuration = null;        
+        Mail mail = null;
+        ConfigurationMail configurationMail = null;        
         MailTemplate mailTemplate = null;
 
         try {
             
-            mailTemplate = new MailTemplateComponent().getTemplateNewFreelancer(displayLanguage);
-           
-            //replaces
+            mailTemplate = new MailTemplateComponent().getTemplate("new freelancer", displayLanguage);
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":name", freelancer.getPerson().getName()));
-            mailTemplate.setMessage(mailTemplate.getMessage().replace(":password", password));
-            mailTemplate.setMessage(mailTemplate.getMessage().replace(":key", freelancer.getKey()));            
-            mailTemplate.setMessage(mailTemplate.getMessage().replace(":email", freelancer.getPerson().getEmail()));            
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":email", freelancer.getPerson().getEmail()));
             
-            configuration = new ConfigurationComponent().getConfiguration();
-            mail = new MailAuthentication(
-                    configuration.getSmtpHost(), 
-                    configuration.getSmtpPort(), 
-                    configuration.getSmtpUsername(), 
-                    configuration.getSmtpPassword(), 
-                    mailTemplate.getSubject(), 
-                    mailTemplate.getMessage(), 
+            configurationMail = new ConfigurationMailComponent().getConfigurationMail();
+            mail = new Mail(
                     mailTemplate.getFrom(), 
-                    freelancer.getPerson().getEmail());
-            mail.send();
+                    configurationMail.getSmtpHost(), 
+                    configurationMail.getSmtpPort(), 
+                    freelancer.getPerson().getEmail()
+            );
+            
+            mail.send(mailTemplate.getSubject(), mailTemplate.getMessage());
 
         } catch (Exception e) {
             throw e;
@@ -116,7 +114,7 @@ public class MailSender {
 
         try {
             
-            mailTemplate = new MailTemplateComponent().getTemplateNewPartner(displayLanguage);
+            mailTemplate = new MailTemplateComponent().getTemplate("new partner", displayLanguage);
             
             configurationMail = new ConfigurationMailComponent().getConfigurationMail();
             mail = new Mail(
@@ -132,6 +130,37 @@ public class MailSender {
             throw e;
         }
 
+    }
+    
+    //==========================================================================
+    public static void sendMailNewUpdateInformation(String email, String displayLanguage) throws Exception {
+        
+        if(displayLanguage == null || displayLanguage.length() < 1){
+            throw new IllegalArgumentException("displayLanguage is null or empty");
+        } 
+        
+        Mail mail = null;
+        ConfigurationMail configurationMail = null;        
+        MailTemplate mailTemplate = null;
+
+        try {
+            
+            mailTemplate = new MailTemplateComponent().getTemplate("update information", displayLanguage);
+            
+            configurationMail = new ConfigurationMailComponent().getConfigurationMail();
+            mail = new Mail(
+                    mailTemplate.getFrom(), 
+                    configurationMail.getSmtpHost(), 
+                    configurationMail.getSmtpPort(), 
+                    email
+            );
+            
+            mail.send(mailTemplate.getSubject(), mailTemplate.getMessage());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
     }
 
 }

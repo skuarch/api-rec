@@ -39,7 +39,7 @@ public class Person implements Serializable {
     @Column(name = "person_email", nullable = false,columnDefinition = "varchar(128)")
     private String email;       
     
-    @Column(name = "person_phone", nullable = false)
+    @Column(name = "person_phone", nullable = true)
     private String phone;    
     
     @OneToOne

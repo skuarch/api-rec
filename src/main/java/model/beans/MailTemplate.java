@@ -18,8 +18,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "mail_template")
-@NamedQueries({
-    @NamedQuery(name = "getTemplateAffiliate", query = "from MailTemplate mt where mt.name = :name and mt.displayLanguage = :displayLanguage and isSoftDeleted = 0"),
+@NamedQueries({    
     @NamedQuery(name = "getTemplate", query = "from MailTemplate mt where mt.name = :name and mt.displayLanguage = :displayLanguage and isSoftDeleted = 0")
 })
 public class MailTemplate implements Serializable {
