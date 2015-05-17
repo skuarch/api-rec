@@ -69,23 +69,23 @@ public class CompanyCreate extends BaseController {
             //get person type
             company.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT));
             company.getContact().getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT_BILLING));
-            idPersonCompany = personComponent.createPerson(company.getPerson());
-            idContactTax = personComponent.createPerson(company.getContact().getPerson());
+            idPersonCompany = personComponent.savePerson(company.getPerson());
+            idContactTax = personComponent.savePerson(company.getContact().getPerson());
             
             company.getPerson().setId(idPersonCompany);
             company.getContact().getPerson().setId(idContactTax);
             
-            idContact = contactComponent.createContact(company.getContact());            
+            idContact = contactComponent.saveContact(company.getContact());            
             company.getContact().setId(idContact);            
 
             //create address
             a = company.getAddress();
-            addressId = addressComponent.createAddress(a);
+            addressId = addressComponent.saveAddress(a);
             a.setId(addressId);
             company.setAddress(a);
             
             //create affiliate
-            id = companyComponent.createCompany(company);
+            id = companyComponent.saveCompany(company);
             company.setId(id);
             
             //if any file exists, saved it

@@ -15,7 +15,7 @@ public class ContactComponent {
     }
 
     //==========================================================================
-    public long createContact(Contact contact) throws Exception{    
+    public long saveContact(Contact contact) throws Exception{    
         
         if(contact == null){
             throw new IllegalArgumentException("company is null");

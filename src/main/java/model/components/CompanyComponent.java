@@ -20,7 +20,7 @@ public class CompanyComponent {
     }
     
     //==========================================================================
-    public long createCompany(Company company) throws Exception{
+    public long saveCompany(Company company) throws Exception{
     
         if(company == null){
             throw new IllegalArgumentException("company is null");

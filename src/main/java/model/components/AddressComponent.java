@@ -15,7 +15,7 @@ public class AddressComponent {
     }
 
     //==========================================================================
-    public long createAddress(Address address) throws Exception {
+    public long saveAddress(Address address) throws Exception {
 
         if (address == null) {
             throw new IllegalArgumentException("address is null");

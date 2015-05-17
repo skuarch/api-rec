@@ -60,8 +60,8 @@ public class CashierCreate extends BaseController {
             personType = personTypeComponent.getPersonType("cashier");
             cashier.getPerson().setPersonType(personType);
             person = cashier.getPerson();
-            personComponent.createPerson(person);            
-            cashierId = cashierComponent.createCashier(cashier);
+            personComponent.savePerson(person);            
+            cashierId = cashierComponent.saveCashier(cashier);
             cashier.setId(cashierId);            
             
             //get all the cashier

@@ -2,11 +2,13 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/logic/StaticContext.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/authentication/FreelancerAuthentication.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateBankInformation.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Recipient.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Login.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/TestBean.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Category.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateEstablishmentBasic.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerCreate.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/SecretStatus.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateEstablishmet.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/application/BaseController.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Transaction.java
@@ -15,6 +17,8 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/authentication/AffiliatePartnerAuthentication.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Company.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/PersonComponent.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/logic/KeyGenerator.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/DepositorComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Administrator.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/GeneralConfiguration.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/EstablishmentType.java
@@ -40,6 +44,7 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Partner.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/FreelancerComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/ResponsableComponent.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/transfer/TransferCreate.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/application/Test.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateCreateEstablishment.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/net/Mail.java
@@ -49,6 +54,7 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/subscribers/SubscriberCreate.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/ContactComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyUpdateBankInformation.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/SecretComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/AddressComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/MailTemplate.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/test/UploadFile.java
@@ -59,6 +65,7 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerGetList.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/responsable/ResponsableUpdatePassword.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CashierUpdate.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/TransferTypeComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/util/TransactionUtil.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/TransactionTypeComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyGetList.java
@@ -70,17 +77,21 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/GenderComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyUpdateTaxInformation.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/interceptors/Hibernate.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyToggleActive.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyCreateEstablishment.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/util/FileUtil.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerToggleActive.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateToggleActive.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/util/Validator.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/TransferType.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Cashier.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/RecipientComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/util/MailUtil.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/PersonType.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateGeListByCreator.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/AffiliateComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/responsable/ResponsableUpdate.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/TransferComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateBasicInformation.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/database/DAO.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/ConfigurationMail.java
@@ -90,6 +101,7 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Address.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Subscriber.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/authentication/AdministratorAuthentication.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Secret.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/establishment/EstablishmentGet.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerUpdatePassword.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/ConfigurationMailComponent.java
@@ -98,6 +110,8 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateUpdate.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/PartnerComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/CompanyComponent.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Depositor.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/SecretStatusComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/components/GeneralConfigurationComponent.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyCreate.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Subcategory.java
@@ -112,8 +126,10 @@
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerGetCompanies.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Gender.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/application/Error404.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/partner/PartnerGetList.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/logic/Constants.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/category/CategoriesGet.java
+/home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Transfer.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateGetEstablishment.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/TransactionType.java
 /home/skuarch-lap/NetBeansProjects/api-rec/src/main/java/model/beans/Establishment.java

@@ -10,7 +10,11 @@ public class Constants {
     public static final String FREELANCER = "freelancer";
     public static final String PARTNER = "partner";
     public static final String CONTACT = "contact";
-    public static final String CONTACT_BILLING = "contact billing";    
+    public static final String CONTACT_BILLING = "contact billing";   
+    
+    public static final short SECRET_STATUS_ACTIVE = 1;
+    
+    public static final short TRANSACTION_TYPE_CREDIT_CARD = 1;
     
     public static final short TRANSACTION_NEW_AFFILIATE = 1;
     public static final short TRANSACTION_NEW_FREELANCER = 2;
@@ -44,6 +48,8 @@ public class Constants {
     public static final short TRANSACTION_DEACTIVATE_FREELANCER = 30;    
     public static final short TRANSACTION_ACTIVATE_AFFILIADO = 31;    
     public static final short TRANSACTION_DEACTIVATE_AFFILIADO = 32;        
+    public static final short TRANSACTION_ACTIVATE_COMPANY = 33;    
+    public static final short TRANSACTION_DEACTIVATE_COMPANY = 34;        
     
     public static final short PERSON_TYPE_ADMINISTRATOR = 1;
     public static final short PERSON_TYPE_AFFILIATE = 2;

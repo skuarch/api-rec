@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class AffiliateEstablishmentComponent {
 
     //==========================================================================
-    public void createAffiliateEstablishment(AffiliateEstablishmet affiliateEstablishmet) throws Exception {
+    public void saveAffiliateEstablishment(AffiliateEstablishmet affiliateEstablishmet) throws Exception {
     
         if(affiliateEstablishmet == null){
             throw new IllegalArgumentException("affiliateEstablishmet is null");

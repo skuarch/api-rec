@@ -141,7 +141,7 @@ public class AffiliateCreateEstablishment extends BaseController {
             address = establishment.getAddress();
             
             //create address            
-            addressId = addressComponent.createAddress(address);            
+            addressId = addressComponent.saveAddress(address);            
             address = establishment.getAddress();
             address.setId(addressId);
             establishment.setAddress(address);
@@ -152,12 +152,12 @@ public class AffiliateCreateEstablishment extends BaseController {
             //create person responsable
             responsablePerson = responsable.getPerson();
             responsablePerson.setPersonType(responsablePersonType);
-            responsablePersonId = personComponent.createPerson(responsablePerson);
+            responsablePersonId = personComponent.savePerson(responsablePerson);
             responsablePerson.setId(responsablePersonId);
 
             //create responsable            
             responsable.setPerson(responsablePerson);
-            responsableId = responsableComponent.createResponsable(responsable);
+            responsableId = responsableComponent.saveResponsable(responsable);
             responsable.setId(responsableId);
 
             //get personType cashier--------------------------------------------
@@ -166,12 +166,12 @@ public class AffiliateCreateEstablishment extends BaseController {
             //create person cashier           
             cashierPerson = cashier.getPerson();
             cashierPerson.setPersonType(cashierPersonType);
-            cashierPersonId = personComponent.createPerson(cashierPerson);
+            cashierPersonId = personComponent.savePerson(cashierPerson);
             cashierPerson.setId(cashierPersonId);
 
             //create cashier            
             cashier.setPerson(cashierPerson);
-            cashierId = cashierComponent.createCashier(cashier);
+            cashierId = cashierComponent.saveCashier(cashier);
             cashier.setId(cashierId);
             cashierList = new ArrayList<>();
             cashierList.add(cashier);
@@ -179,7 +179,7 @@ public class AffiliateCreateEstablishment extends BaseController {
             //create establishment----------------------------------------------            
             establishment.setResponsable(responsable);
             establishment.setCashier(cashierList);
-            establishmentId = establishmentComponent.createEstablishment(establishment);
+            establishmentId = establishmentComponent.saveEstablishment(establishment);
             establishment.setId(establishmentId);
             establishmentSet = affiliate.getEstablishment();
             establishmentSet.add(establishment);

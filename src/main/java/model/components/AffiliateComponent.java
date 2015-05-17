@@ -21,7 +21,7 @@ public class AffiliateComponent {
      * @return long id
      * @throws Exception if the argument incorrect
      */
-    public long createAffiliate(Affiliate affiliate) throws Exception {
+    public long saveAffiliate(Affiliate affiliate) throws Exception {
 
         if(affiliate == null){
             throw new IllegalArgumentException("affiliate is null");

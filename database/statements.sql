@@ -133,6 +133,52 @@ VALUES
         </div>", 
 'new freelancer', 
 'bienvenido freelancer a regaloenclave.com');
+INSERT INTO 
+`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
+VALUES 
+('English', 
+'no-responder@regaloenclave.com', 
+'0', 
+"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>            
+            <div style='font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc'>
+                regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a>
+            </div>            
+            
+            Bienvenido a regaloenclave.com<br/>
+            Ahora puedes ingresar al sistema de regaloenclave.com en la siguiente direccion 
+            <a href='http://regaloenclave.com/affiliate'>http://regaloenclave.com/affiliate</a>
+            <br/>
+            Esta cuenta de correo sera tu usuario <strong>:usuario</strong> y el password es el que usaste en el registro <br/>
+            <br>
+            <br>
+            <br>
+            Gracias por formar parte de regaloenclave.com
+        </div>", 
+'new partner', 
+'bienvenido affiliado a regaloenclave.com');
+INSERT INTO 
+`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
+VALUES 
+('Spanish', 
+'no-responder@regaloenclave.com', 
+'0', 
+"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>            
+            <div style='font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc'>
+                regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a>
+            </div>            
+            
+            Bienvenido a regaloenclave.com<br/>
+            Ahora puedes ingresar al sistema de regaloenclave.com en la siguiente direccion 
+            <a href='http://regaloenclave.com/affiliate'>http://regaloenclave.com/affiliate</a>
+            <br/>
+            Esta cuenta de correo sera tu usuario <strong>:usuario</strong> y el password es el que usaste en el registro <br/>
+            <br>
+            <br>
+            <br>
+            Gracias por formar parte de regaloenclave.com
+        </div>", 
+'new partner', 
+'bienvenido affiliado a regaloenclave.com');
 
 
 
@@ -183,6 +229,8 @@ INSERT INTO transaction_type (transaction_type_name) VALUES ('active frelancer')
 INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate frelancer');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('active affiliate');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate affiliate');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('active company');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate company');
 
 
 

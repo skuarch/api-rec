@@ -18,7 +18,7 @@ public class PartnerComponent {
     }
     
     //==========================================================================
-    public long createPartner(Partner partner) throws Exception{
+    public long savePartner(Partner partner) throws Exception{
     
         long id;
         
@@ -100,6 +100,24 @@ public class PartnerComponent {
             throw e;
         }
         
+    }
+    
+    
+    //==========================================================================
+    public ArrayList<Partner> getPartnerList() throws Exception {
+
+        ArrayList<Partner> partners = new ArrayList<>();
+
+        try {
+
+            partners = new ArrayList<>(new DAO().query("getPartnerList", new Partner()));
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return partners;
+
     }
     
 }

@@ -37,7 +37,7 @@ public class TransactionUtil {
         new Thread(() -> {
             try {
                 new TransactionComponent()
-                        .createTransaction(
+                        .saveTransaction(
                                 transactionNumber,
                                 id
                         );

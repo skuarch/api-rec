@@ -119,7 +119,7 @@ public class PersonComponent {
     }
     
     //==========================================================================
-    public long createPerson(Person person) throws Exception{
+    public long savePerson(Person person) throws Exception{
     
         if(person == null){
             throw new IllegalArgumentException("person is null");

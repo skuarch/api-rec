@@ -159,7 +159,7 @@ public class FreelancerCreate extends BaseController {
                 freelancer.setPassword(MD5Util.getHash(freelancer.getPassword()));
             }     
             
-            id = new FreelancerComponent().createFreelancer(freelancer);
+            id = new FreelancerComponent().saveFreelancer(freelancer);
 
         } catch (Exception e) {
             throw e;
@@ -195,7 +195,7 @@ public class FreelancerCreate extends BaseController {
         try {
             
             p.setPersonType(personTypeComponent.getPersonType(Constants.FREELANCER));
-            id = personComponent.createPerson(p);
+            id = personComponent.savePerson(p);
             
         } catch (Exception e) {
             throw e;
@@ -212,7 +212,7 @@ public class FreelancerCreate extends BaseController {
         
         try {
             
-            id = addressComponent.createAddress(address);
+            id = addressComponent.saveAddress(address);
             
         } catch (Exception e) {
             throw e;

@@ -2,7 +2,6 @@ package model.beans;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +20,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "partner")
 @NamedQueries({
-        @NamedQuery(name = "getPartner", query = "from Partner p where p.person.email = :email and p.password = :password and p.isSoftDeleted = 0")        
+        @NamedQuery(name = "getPartner", query = "from Partner p where p.person.email = :email and p.password = :password and p.isSoftDeleted = 0"),
+        @NamedQuery(name = "getPartnerList", query = "from Partner p where p.isSoftDeleted = 0")        
 })
 public class Partner {
 

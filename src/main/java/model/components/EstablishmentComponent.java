@@ -16,7 +16,7 @@ public class EstablishmentComponent {
     }
 
     //==========================================================================
-    public long createEstablishment(Establishment establishment) throws Exception {
+    public long saveEstablishment(Establishment establishment) throws Exception {
 
         if (establishment == null) {
             throw new IllegalArgumentException("establishment is null");

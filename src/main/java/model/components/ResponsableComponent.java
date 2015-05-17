@@ -15,7 +15,7 @@ public class ResponsableComponent {
     }
 
     //==========================================================================
-    public long createResponsable(Responsable responsable) throws Exception {
+    public long saveResponsable(Responsable responsable) throws Exception {
 
         if (responsable == null) {
             throw new IllegalArgumentException("responsable is null");

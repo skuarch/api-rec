@@ -16,14 +16,20 @@
     <bean id="cashierComponent" class="model.components.CashierComponent"></bean>   
     <bean id="contactComponent" class="model.components.ContactComponent"></bean>    
     <bean id="companyComponent" class="model.components.CompanyComponent"></bean>    
+    <bean id="depositorComponent" class="model.components.DepositorComponent"></bean>    
     <bean id="establishmentComponent" class="model.components.EstablishmentComponent"></bean>    
     <bean id="freelancerComponent" class="model.components.FreelancerComponent"></bean>    
     <bean id="generalConfigurationComponent" class="model.components.GeneralConfigurationComponent"></bean>    
+    <bean id="secretComponent" class="model.components.SecretComponent"></bean>    
+    <bean id="secretStatusComponent" class="model.components.SecretStatusComponent"></bean>    
     <bean id="mailTemplateComponent" class="model.components.MailTemplateComponent"></bean>    
     <bean id="partnerComponent" class="model.components.PartnerComponent"></bean>    
     <bean id="personComponent" class="model.components.PersonComponent"></bean>    
     <bean id="personTypeComponent" class="model.components.PersonTypeComponent"></bean>    
+    <bean id="recipientComponent" class="model.components.RecipientComponent"></bean>    
     <bean id="responsableComponent" class="model.components.ResponsableComponent"></bean>    
     <bean id="transactionComponent" class="model.components.TransactionComponent"></bean>
+    <bean id="transferComponent" class="model.components.TransferComponent"></bean>
+    <bean id="transferTypeComponent" class="model.components.TransferTypeComponent"></bean>
     
 </beans>

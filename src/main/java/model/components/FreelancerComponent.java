@@ -28,7 +28,7 @@ public class FreelancerComponent {
      * @return long id
      * @throws Exception
      */
-    public long createFreelancer(Freelancer freelancer) throws Exception {
+    public long saveFreelancer(Freelancer freelancer) throws Exception {
 
         if (freelancer == null) {
             throw new NullPointerException("freelancer is null");

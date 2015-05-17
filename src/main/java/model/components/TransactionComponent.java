@@ -16,7 +16,7 @@ public class TransactionComponent {
     }
 
     //==========================================================================
-    public long createTransaction(short transactionNumber, long id) throws Exception {
+    public long saveTransaction(short transactionNumber, long id) throws Exception {
 
         long idTransaction;
         Transaction transaction = null;

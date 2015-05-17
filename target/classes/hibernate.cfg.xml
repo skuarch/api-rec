@@ -30,17 +30,23 @@
         <mapping class="model.beans.Company"/>    
         <mapping class="model.beans.ConfigurationMail"/>
         <mapping class="model.beans.ConfigurationMailAuthentication"/>
+        <mapping class="model.beans.Depositor"/>
         <mapping class="model.beans.Establishment"/>
         <mapping class="model.beans.Freelancer"/>
         <mapping class="model.beans.Gender"/>
         <mapping class="model.beans.GeneralConfiguration"/>
+        <mapping class="model.beans.Secret"/>
+        <mapping class="model.beans.SecretStatus"/>
         <mapping class="model.beans.MailTemplate"/>        
-        <mapping class="model.beans.Partner"/>
+        <mapping class="model.beans.Partner"/>        
         <mapping class="model.beans.Person"/>
         <mapping class="model.beans.PersonType"/>
         <mapping class="model.beans.RequestBean"/>
+        <mapping class="model.beans.Recipient"/>
         <mapping class="model.beans.Responsable"/>
         <mapping class="model.beans.Subscriber"/>
+        <mapping class="model.beans.Transfer"/>
+        <mapping class="model.beans.TransferType"/>
         <mapping class="model.beans.Transaction"/>
         <mapping class="model.beans.TransactionType"/>
     

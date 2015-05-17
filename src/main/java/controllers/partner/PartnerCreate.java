@@ -53,7 +53,7 @@ public class PartnerCreate {
            partner.setActive((byte) 1);
            
            //save new partner into db
-           id = partnerComponent.createPartner(partner);
+           id = partnerComponent.savePartner(partner);
            jsono = new JSONObject();
            jsono.put("created", true);
            jsono.put("id", id);
@@ -81,7 +81,7 @@ public class PartnerCreate {
         try {
             
             p.setPersonType(personTypeComponent.getPersonType(Constants.PARTNER));
-            id = personComponent.createPerson(p);
+            id = personComponent.savePerson(p);
             
         } catch (Exception e) {
             throw e;

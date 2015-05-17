@@ -79,24 +79,24 @@ public class AffiliateCreate extends BaseController {
             affiliate.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.AFFILIATE));
 
             //save person
-            personId = personComponent.createPerson(affiliate.getPerson());
+            personId = personComponent.savePerson(affiliate.getPerson());
             affiliate.getPerson().setId(personId);
             
             //save contact
-            personContacId = personComponent.createPerson(affiliate.getContact().getPerson());
+            personContacId = personComponent.savePerson(affiliate.getContact().getPerson());
             affiliate.getContact().getPerson().setId(personContacId);
-            contactId = contactComponent.createContact(affiliate.getContact());
+            contactId = contactComponent.saveContact(affiliate.getContact());
             affiliate.getContact().setId(contactId);
 
             //save address
-            addressId = addressComponent.createAddress(affiliate.getAddress());
+            addressId = addressComponent.saveAddress(affiliate.getAddress());
             affiliate.getAddress().setId(addressId);
             
             //activate affiliate
             //affiliate.setActive((byte) 1);
             
             //create affiliate
-            id = affiliateComponent.createAffiliate(affiliate);
+            id = affiliateComponent.saveAffiliate(affiliate);
             affiliate.setId(id);
 
             //if any file exists, saved it

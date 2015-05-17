@@ -15,7 +15,7 @@ public class CashierComponent {
     }
 
     //==========================================================================
-    public long createCashier(Cashier cashier) throws Exception {
+    public long saveCashier(Cashier cashier) throws Exception {
 
         if (cashier == null) {
             throw new IllegalArgumentException("cashier is null");
