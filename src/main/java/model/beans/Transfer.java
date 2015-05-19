@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,6 +21,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "transfer")
+@NamedQueries({
+        @NamedQuery(name = "getTransferList", query = "from Transfer t where t.isSoftDeleted = 0")        
+})
 public class Transfer implements Serializable {
 
     @Id
@@ -35,7 +40,7 @@ public class Transfer implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "depositor_id", nullable = true)
-    private Depositor depositor;
+    private Depositor depositor;    
     
     @OneToOne
     @JoinColumn(name = "recipient_id", nullable = true)
@@ -45,7 +50,10 @@ public class Transfer implements Serializable {
     private String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     
     @Column(name = "transfer_is_soft_deleted", columnDefinition = "int default 0")
-    private byte isSoftDeleted = 0;    
+    private byte isSoftDeleted = 0;        
+
+    @Column(name = "secret_alphanumeric", unique = true, nullable = false)
+    private String secretAlphanumeric;
 
     public Transfer() {
     }
@@ -104,6 +112,14 @@ public class Transfer implements Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getSecretAlphanumeric() {
+        return secretAlphanumeric;
+    }
+
+    public void setSecretAlphanumeric(String secretAlphanumeric) {
+        this.secretAlphanumeric = secretAlphanumeric;
     }
 
 }

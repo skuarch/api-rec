@@ -47,7 +47,7 @@ public class Recipient {
             inverseJoinColumns = {
                 @JoinColumn(name = "secret_id", unique = false, nullable = false, updatable = false)}
     )
-    private List<Secret> key;
+    private List<Secret> secret;
     
     @Column(name = "recipient_is_soft_deleted", columnDefinition = "int default 0")
     private byte isSoftDeleted = 0;
@@ -61,23 +61,7 @@ public class Recipient {
 
     public void setId(long id) {
         this.id = id;
-    }    
-
-    public List<Secret> getKey() {
-        return key;
     }
-
-    public void setKey(List<Secret> key) {
-        this.key = key;
-    }
-
-    public byte getIsSoftDeleted() {
-        return isSoftDeleted;
-    }
-
-    public void setIsSoftDeleted(byte isSoftDeleted) {
-        this.isSoftDeleted = isSoftDeleted;
-    }    
 
     public String getName() {
         return name;
@@ -109,6 +93,22 @@ public class Recipient {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Secret> getSecret() {
+        return secret;
+    }
+
+    public void setSecret(List<Secret> secret) {
+        this.secret = secret;
+    }
+
+    public byte getIsSoftDeleted() {
+        return isSoftDeleted;
+    }
+
+    public void setIsSoftDeleted(byte isSoftDeleted) {
+        this.isSoftDeleted = isSoftDeleted;
     }
     
 }

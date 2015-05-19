@@ -1,2 +1,6 @@
 mkdir /opt/logs/
 
+./asadmin create-jdbc-connection-pool --user admin --datasourceclassname com.mysql.jdbc.jdbc2.optional.MysqlDataSource --restype javax.sql.DataSource --property user=root:password=thePassword:DatabaseName=regaloenclave:ServerName=192.168.1.65:port=3306 rec
+
+./asadmin create-jdbc-resource --connectionpoolid test-pool jdbc/api-rec 
+

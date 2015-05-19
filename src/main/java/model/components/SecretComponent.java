@@ -1,5 +1,7 @@
 package model.components;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import model.beans.Secret;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
@@ -16,10 +18,10 @@ public class SecretComponent {
     }
     
     //==========================================================================
-    public long saveKey(Secret secret) throws Exception{
+    public long saveSecret(Secret secret) throws Exception{
         
         if(secret == null){
-            throw new IllegalArgumentException("key is null");
+            throw new IllegalArgumentException("secret is null");
         }
         
         long id;
@@ -52,17 +54,42 @@ public class SecretComponent {
     //==========================================================================
     public Secret getSecret(long id) throws Exception{
         
-        Secret key;
+        Secret secret;
         
         try {
     
-            key = new DAO().get(id, new Secret());
+            secret = new DAO().get(id, new Secret());
             
         } catch (Exception e) {
             throw e;
         }
         
-        return key;
+        return secret;
+    
+    }   
+    
+    //==========================================================================
+    public Secret getSecret(String secret) throws Exception{
+        
+        Secret s = null;
+        ArrayList<Secret> secrets;
+        HashMap parameters;
+        
+        try {
+    
+            parameters = new HashMap();
+            parameters.put("secret", secret);
+            secrets = new DAO().query(parameters, "getSecretBySecret", new Secret());
+            
+            if(secrets != null && secrets.size() > 0){
+                s = secrets.get(0);
+            }
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return s;
     
     }   
     

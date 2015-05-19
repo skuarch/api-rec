@@ -235,11 +235,6 @@ INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate company
 
 
 
-#gender------------------------------------------------------------------------------------------------------
-INSERT INTO `regaloenclave`.`gender` (`gender_name`) VALUES ('male');
-INSERT INTO `regaloenclave`.`gender` (`gender_name`) VALUES ('female');
-
-
 
 
 #category----------------------------------------------------------------------------------------------------
@@ -272,3 +267,15 @@ INSERT INTO `regaloenclave`.`affiliate_type` (`affiliate_type_name`) VALUES ('co
 
 #configuration_mail-------------------------------------------------------------------------------------------
 INSERT INTO configuration_mail (configuration_mail_smtp_host, configuration_mail_smtp_port) VALUES ('localhost',25);
+
+
+
+
+#secret_status
+INSERT INTO `regaloenclave`.`secret_status` (`secret_status_name`) VALUES ('active');
+INSERT INTO `regaloenclave`.`secret_status` (`secret_status_name`) VALUES ('deactivate');
+
+
+
+#transfer_type
+INSERT INTO `regaloenclave`.`transfer_type` (`transfer_type_name`) VALUES ('credit card');

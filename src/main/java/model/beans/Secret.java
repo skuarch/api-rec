@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,6 +23,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "secret")
+@NamedQueries({
+    @NamedQuery(name = "getSecretBySecret", query = "from Secret s where s.secretAlphanumeric = :secret and s.isSoftDeleted = 0")    
+})
 public class Secret implements Serializable {
 
     @Id
@@ -46,6 +51,9 @@ public class Secret implements Serializable {
     
     @Column(name = "secret_expiry_date", nullable = false, length = 19)
     private String expiryDate = LocalDateTime.now().plusDays(90).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    
+    @Column(name = "secret_is_soft_deleted", columnDefinition = "int default 0")
+    private byte isSoftDeleted = 0;
 
     public Secret() {         
         
@@ -107,6 +115,12 @@ public class Secret implements Serializable {
         this.expiryDate = expiryDate;
     }
 
-    
+    public byte getIsSoftDeleted() {
+        return isSoftDeleted;
+    }
+
+    public void setIsSoftDeleted(byte isSoftDeleted) {
+        this.isSoftDeleted = isSoftDeleted;
+    }
     
 }
