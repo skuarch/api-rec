@@ -1,5 +1,7 @@
 package model.components;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import model.beans.Cashier;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
@@ -70,6 +72,38 @@ public class CashierComponent {
         }
         
         return cashier;
+
+    }    
+    
+    //==========================================================================
+    public Cashier getCashier(String email, String password) throws Exception {
+
+        if (email == null || email.length() < 1) {
+            throw new IllegalArgumentException("email is null or empty");
+        }
+
+        if (password == null || password.length() < 1) {
+            throw new IllegalArgumentException("password is null or empty");
+        }
+
+        HashMap parameters = new HashMap();
+        parameters.put("email", email);
+        parameters.put("password", password);
+        Cashier c = null;
+        ArrayList<Cashier> cashierList = null;
+
+        try {
+
+            cashierList = new DAO().query(parameters, "getCashierByEmailPassword", new Cashier());
+            if (cashierList != null && cashierList.size() > 0) {
+                c = cashierList.get(0);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return c;
 
     }
 

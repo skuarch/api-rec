@@ -12,6 +12,7 @@
     <bean id="addressComponent" class="model.components.AddressComponent"></bean>    
     <bean id="affiliateComponent" class="model.components.AffiliateComponent"></bean>    
     <bean id="affiliateEstablishmet" class="model.components.AffiliateEstablishmentComponent"></bean>    
+    <bean id="bankResponseComponent" class="model.components.BankResponseComponent"></bean>    
     <bean id="categoryComponent" class="model.components.CategoryComponent"></bean>
     <bean id="cashierComponent" class="model.components.CashierComponent"></bean>   
     <bean id="contactComponent" class="model.components.ContactComponent"></bean>    
@@ -24,6 +25,8 @@
     <bean id="secretStatusComponent" class="model.components.SecretStatusComponent"></bean>    
     <bean id="mailTemplateComponent" class="model.components.MailTemplateComponent"></bean>    
     <bean id="partnerComponent" class="model.components.PartnerComponent"></bean>    
+    <bean id="paymentComponent" class="model.components.PaymentComponent"></bean>    
+    <bean id="paymentStatusComponent" class="model.components.PaymentStatusComponent"></bean>    
     <bean id="personComponent" class="model.components.PersonComponent"></bean>    
     <bean id="personTypeComponent" class="model.components.PersonTypeComponent"></bean>    
     <bean id="recipientComponent" class="model.components.RecipientComponent"></bean>    

@@ -1,23 +1,28 @@
 package controllers.transfer;
 
+import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
+import model.beans.BankResponse;
 import model.beans.Depositor;
-import model.beans.Secret;
 import model.beans.Recipient;
+import model.beans.Secret;
 import model.beans.Transfer;
+import model.components.BankResponseComponent;
 import model.components.DepositorComponent;
+import model.components.RecipientComponent;
 import model.components.SecretComponent;
 import model.components.SecretStatusComponent;
-import model.components.RecipientComponent;
 import model.components.TransferComponent;
 import model.components.TransferTypeComponent;
 import model.logic.BankClientRestful;
 import model.logic.Constants;
 import model.logic.KeyGenerator;
+import model.util.MailUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +37,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @author skuarch-lap
  */
 @RestController
-public class TransferCreate {
+public class TransferCreate extends BaseController {
 
     private static final Logger logger = getLogger(TransferCreate.class);
 
+    @Autowired
+    private BankResponseComponent bankResponseComponent;
     @Autowired
     private TransferComponent transferComponent;
     @Autowired
@@ -53,14 +60,15 @@ public class TransferCreate {
     @RequestMapping(value = {"/v1/transfer/create", "v1/transfer/create"})
     public @ResponseBody
     String createTransfer(
-            @ModelAttribute Transfer transfer, 
-            @RequestParam String number, 
-            @RequestParam String holder, 
-            @RequestParam String month, 
-            @RequestParam String year, 
-            @RequestParam String cvv,             
-            HttpServletResponse response, Locale locale) {
-        System.out.println("chanclas " + number);
+            @ModelAttribute Transfer transfer,
+            @RequestParam String number,
+            @RequestParam String holder,
+            @RequestParam String month,
+            @RequestParam String year,
+            @RequestParam String cvv,
+            HttpServletResponse response,
+            Locale locale) {
+
         JSONObject jsono = null;
         Depositor depositor;
         long depositorId;
@@ -70,14 +78,23 @@ public class TransferCreate {
         long secretId;
         List<Secret> secretList;
         String responseBank;
+        BankResponse bankResponse;
+        long transferId;
 
         try {
 
-            //send payment to the banck
+            //basic configuration
+            setContentType(response, MediaType.APPLICATION_JSON);
+
+            //send payment to the bank
             responseBank = BankClientRestful
                     .sendPayment(number, month + "/" + year, cvv, transfer.getAmount().toString());
-            
-            System.out.println("mocos " + responseBank);
+
+            //save bank response
+            bankResponse = new BankResponse();
+            bankResponse.setEmailDepositor(transfer.getDepositor().getEmail());
+            bankResponse.setResponse(responseBank);
+            bankResponseComponent.saveBankResponse(bankResponse);
 
             if (responseBank == null || !responseBank.contains("Approved")) {
                 jsono = new JSONObject();
@@ -85,18 +102,20 @@ public class TransferCreate {
                 return jsono.toString();
             }
 
-            if (responseBank != null || responseBank.contains("Approved")) {
-                //save responseBank
+            //check if depositor exists in db
+            depositor = depositorComponent.getDepositor(transfer.getDepositor().getEmail());
+            if (depositor == null) {
+                //create depositor
+                depositor = transfer.getDepositor();
+                depositorId = depositorComponent.createDepositor(depositor);
+                depositor.setId(depositorId);
             } else {
-                jsono = new JSONObject();
-                jsono.put("errorBank", true);
-                return jsono.toString();
+                //update depositor, maybe the depositor has a new phone
+                depositorId = depositor.getId();
+                transfer.getDepositor().setId(depositorId);
+                depositor = transfer.getDepositor();
+                depositorComponent.updateDepositor(depositor);
             }
-
-            //create depositor
-            depositor = transfer.getDepositor();
-            depositorId = depositorComponent.createDepositor(depositor);
-            depositor.setId(depositorId);
 
             //create secret
             secret = new Secret();
@@ -108,18 +127,39 @@ public class TransferCreate {
             secretList = new ArrayList<>();
             secretList.add(secret);
 
-            //create recipient
-            recipient = transfer.getRecipient();
-            recipient.setSecret(secretList);
-            recipientId = recipientComponent.createRecipient(recipient);
-            recipient.setId(recipientId);
+            //check if recipient exist in the database
+            recipient = recipientComponent.getRecipientByEmail(transfer.getRecipient().getEmail());
+            if (recipient == null) {
+                //create recipient
+                recipient = transfer.getRecipient();
+                recipient.setSecret(secretList);
+                recipientId = recipientComponent.createRecipient(recipient);
+                recipient.setId(recipientId);
+            } else {
+                //update recipient, maybe the recipient has a new phone
+                recipientId = recipient.getId();
+                transfer.getRecipient().setId(recipientId);
+                recipient = transfer.getRecipient();
+                recipientComponent.updateRecipient(recipient);
+            }
 
-            //crear la transferencia
+            //create transfer
             transfer.setDepositor(depositor);
             transfer.setRecipient(recipient);
             transfer.setSecretAlphanumeric(secret.getSecretAlphanumeric());
             transfer.setTransferType(transferTypeComponent.getTransferType(Constants.TRANSACTION_TYPE_CREDIT_CARD));
-            transferComponent.createTransfer(transfer);
+            transferId = transferComponent.createTransfer(transfer);
+            transfer.setId(transferId);
+
+            //send mail to recipiet
+            MailUtil.sendMailRecipientNewTransfer(transfer, locale.getDisplayLanguage());
+
+            //send mail to depositor
+            MailUtil.sendMailDepositorNewTransfer(transfer, locale.getDisplayLanguage());
+
+            //update bankReponse
+            bankResponse.setTransfer(transfer);
+            bankResponseComponent.updateBankResponse(bankResponse);
 
             jsono = new JSONObject();
             jsono.put("created", true);

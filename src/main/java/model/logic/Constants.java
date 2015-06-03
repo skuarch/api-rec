@@ -6,6 +6,8 @@ package model.logic;
  */
 public class Constants {
     
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    
     public static final String AFFILIATE = "affiliate";
     public static final String FREELANCER = "freelancer";
     public static final String PARTNER = "partner";
@@ -13,6 +15,11 @@ public class Constants {
     public static final String CONTACT_BILLING = "contact billing";   
     
     public static final short SECRET_STATUS_ACTIVE = 1;
+    public static final short SECRET_STATUS_DEACTIVE = 2;
+    public static final short SECRET_STATUS_CONSUMED = 3;
+    
+    public static final short PAYMENT_STATUS_PAID = 1;
+    public static final short PAYMENT_STATUS_UNPAID = 2;
     
     public static final short TRANSACTION_TYPE_CREDIT_CARD = 1;
     

@@ -10,13 +10,14 @@ import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 
 /**
  * Generic Data Access Object, please don't create an object only use a
- * instance. Only used new DAO().method();
+ * instance. example of use "new DAO().method();"
  *
  * @author skuarch
  */
@@ -804,4 +805,23 @@ public class DAO {
 
     } // end getTotalRows
 
+    //==========================================================================
+    public List sqlQuery(String sql)  throws HibernateException {
+    
+        List list = null;
+        
+        try {
+            
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            list = query.list();
+            
+        } catch (Exception e) {
+            throw e;
+        }        
+        
+        return list;
+    
+    }
+    
 } // end class

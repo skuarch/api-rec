@@ -23,8 +23,10 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/authentication/FreelancerAuthentication.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerGetList.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/test/UploadFile.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/PaymentComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/application/Test.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/transfer/TransferCreate.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/PaymentStatus.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateUpdateBankInformation.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Responsable.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/authentication/AffiliatePartnerAuthentication.java
@@ -41,6 +43,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Company.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateBasicInformation.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/FileUtil.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/BankResponse.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Transfer.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Person.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/MailTemplateComponent.java
@@ -61,11 +64,13 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerGetAffiliates.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/SecretStatus.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/servlets/GlobalContext.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/CashierConsumeSecret.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/AffiliateComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Login.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/MailTemplate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/TransactionUtil.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/ConfigurationComponent.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/PaymentStatusComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/application/BaseController.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/partner/PartnerGetList.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyUpdateBasicInformation.java
@@ -74,8 +79,10 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateUpdateTaxInformation.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CashierGet.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateTaxInformation.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/payment/PaymentGetList.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/EstablishmentType.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyGetList.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/TransferStatus.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/CompanyBankInformation.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/AffiliateEstablishmentComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/interceptors/Hibernate.java
@@ -85,6 +92,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Partner.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/AddressComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyGet.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/BankResponseComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Subcategory.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateGeListByCreator.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/MD5Util.java
@@ -98,6 +106,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/responsable/ResponsableUpdatePassword.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Contact.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/subscribers/SubscriberCreate.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/authentication/CashierAuthentication.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateCreate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateUpdate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Administrator.java
@@ -110,6 +119,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/logic/BankClientRestful.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/responsable/ResponsableUpdate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/ConfigurationMail.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Payment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Secret.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/ContactComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/net/MailAuthentication.java
@@ -137,3 +147,4 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CashierUpdate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/logic/MailSender.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateBankInformation.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/secret/CashierConsumeSecret.java

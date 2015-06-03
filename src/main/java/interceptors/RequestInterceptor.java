@@ -19,10 +19,8 @@ public class RequestInterceptor implements HandlerInterceptor {
 
     //==========================================================================
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {        
-        /*new Thread(() -> {
-            createRequestBean(request);
-        }).start();*/
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
+        createRequestBean(request);
         return true;
     }
 
@@ -37,8 +35,8 @@ public class RequestInterceptor implements HandlerInterceptor {
     }
 
     //==========================================================================
-    private void createRequestBean(HttpServletRequest request) {        
-        
+    private void createRequestBean(HttpServletRequest request) {
+
         try {
 
             RequestBean rb = new RequestBean();

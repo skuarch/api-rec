@@ -1,16 +1,14 @@
 package model.logic;
 
 import model.beans.Affiliate;
-import model.beans.ConfigurationMailAuthentication;
 import model.beans.ConfigurationMail;
 import model.beans.Freelancer;
 import model.beans.MailTemplate;
 import model.beans.Partner;
-import model.components.ConfigurationComponent;
+import model.beans.Transfer;
 import model.components.ConfigurationMailComponent;
 import model.components.MailTemplateComponent;
 import model.net.Mail;
-import model.net.MailAuthentication;
 
 /**
  * wrapper for MailAuthentication and Mail
@@ -145,7 +143,7 @@ public class MailSender {
 
         try {
             
-            mailTemplate = new MailTemplateComponent().getTemplate("update information", displayLanguage);
+            mailTemplate = new MailTemplateComponent().getTemplate("update information", displayLanguage);            
             
             configurationMail = new ConfigurationMailComponent().getConfigurationMail();
             mail = new Mail(
@@ -153,6 +151,73 @@ public class MailSender {
                     configurationMail.getSmtpHost(), 
                     configurationMail.getSmtpPort(), 
                     email
+            );
+            
+            mail.send(mailTemplate.getSubject(), mailTemplate.getMessage());
+            
+        } catch (Exception e) {
+            
+            throw e;
+        }
+        
+    }
+    
+    //==========================================================================
+    public static void sendMailDepositorNewTransfer(Transfer transfer, String displayLanguage) throws Exception {
+        
+        if(displayLanguage == null || displayLanguage.length() < 1){
+            throw new IllegalArgumentException("displayLanguage is null or empty");
+        } 
+        
+        Mail mail = null;
+        ConfigurationMail configurationMail = null;        
+        MailTemplate mailTemplate = null;
+
+        try {
+            
+            mailTemplate = new MailTemplateComponent().getTemplate("depositor new transfer", displayLanguage);
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":recipient", transfer.getRecipient().getEmail()));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":amount", transfer.getAmount() + ""));
+            
+            configurationMail = new ConfigurationMailComponent().getConfigurationMail();
+            mail = new Mail(
+                    mailTemplate.getFrom(), 
+                    configurationMail.getSmtpHost(), 
+                    configurationMail.getSmtpPort(), 
+                    transfer.getDepositor().getEmail()
+            );
+            
+            mail.send(mailTemplate.getSubject(), mailTemplate.getMessage());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+    }
+    
+    //==========================================================================
+    public static void sendMailRecipientNewTransfer(Transfer transfer, String displayLanguage) throws Exception {
+        
+        if(displayLanguage == null || displayLanguage.length() < 1){
+            throw new IllegalArgumentException("displayLanguage is null or empty");
+        } 
+        
+        Mail mail = null;
+        ConfigurationMail configurationMail = null;        
+        MailTemplate mailTemplate = null;
+
+        try {
+            
+            mailTemplate = new MailTemplateComponent().getTemplate("recipient new transfer", displayLanguage);
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":recipient", transfer.getRecipient().getEmail()));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":amount", transfer.getAmount() + ""));
+            
+            configurationMail = new ConfigurationMailComponent().getConfigurationMail();
+            mail = new Mail(
+                    mailTemplate.getFrom(), 
+                    configurationMail.getSmtpHost(), 
+                    configurationMail.getSmtpPort(), 
+                    transfer.getDepositor().getEmail()
             );
             
             mail.send(mailTemplate.getSubject(), mailTemplate.getMessage());

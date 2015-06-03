@@ -45,6 +45,9 @@ public class Affiliate implements Serializable {
     @Column(name = "affiliate_active", columnDefinition = "int default 0")
     private byte active = 0;
     
+    @Column(name = "affiliate_discount_percentage", columnDefinition = "int default 0", nullable = false)
+    private byte discountPercentage = 12;
+    
     @Column(name = "affiliate_password", nullable = false, columnDefinition = "varchar(32)")
     private String password;
 
@@ -330,6 +333,14 @@ public class Affiliate implements Serializable {
 
     public void setUrlLogo(String urlLogo) {
         this.urlLogo = urlLogo;
+    }
+
+    public byte getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(byte discountPercentage) {
+        this.discountPercentage = discountPercentage;
     }
 
 }

@@ -1,6 +1,16 @@
 package controllers.authentication;
 
+import controllers.application.BaseController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
+import model.beans.Affiliate;
 import model.beans.Login;
+import model.beans.Partner;
+import model.components.AffiliateComponent;
+import model.components.PartnerComponent;
+import model.logic.Constants;
 import model.util.Validator;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -9,16 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import controllers.application.BaseController;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.MediaType;
-import model.beans.Affiliate;
-import model.beans.Partner;
-import model.components.AffiliateComponent;
-import model.components.PartnerComponent;
-import model.logic.Constants;
 
 /**
  *
@@ -37,7 +37,7 @@ public class AffiliatePartnerAuthentication extends BaseController {
     //==========================================================================
     @RequestMapping(value = {"v1/authentication/partner/affiliate", "/v1/authentication/partner/affiliate"})
     public @ResponseBody String authentication(@ModelAttribute Login login, HttpServletResponse response) {
-        System.out.println("entro");
+        
         JSONObject jsono = null;
         Partner p;
         Affiliate a;

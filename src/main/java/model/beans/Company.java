@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,6 +46,9 @@ public class Company implements Serializable {
 
     @Column(name = "company_brand", nullable = false)
     private String brand;
+    
+    @Column(name = "company_discount_percentage", columnDefinition = "int default 0", nullable = false)
+    private byte discountPercentage = 12;
     
     @Column(name = "company_url_logo")
     private String urlLogo;
@@ -311,6 +313,14 @@ public class Company implements Serializable {
 
     public void setUrlLogo(String urlLogo) {
         this.urlLogo = urlLogo;
+    }
+
+    public byte getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(byte discountPercentage) {
+        this.discountPercentage = discountPercentage;
     }
 
 }

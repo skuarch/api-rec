@@ -91,6 +91,31 @@ public class SecretComponent {
         
         return s;
     
-    }   
+    }
+    
+    //==========================================================================
+    public Secret getActiveSecret(String secret) throws Exception{
+        
+        Secret s = null;
+        ArrayList<Secret> secrets;
+        HashMap parameters;
+        
+        try {
+    
+            parameters = new HashMap();
+            parameters.put("secret", secret);
+            secrets = new DAO().query(parameters, "getSecretActived", new Secret());
+            
+            if(secrets != null && secrets.size() > 0){
+                s = secrets.get(0);
+            }
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        return s;
+    
+    }
     
 }

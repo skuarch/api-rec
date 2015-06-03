@@ -24,7 +24,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "secret")
 @NamedQueries({
-    @NamedQuery(name = "getSecretBySecret", query = "from Secret s where s.secretAlphanumeric = :secret and s.isSoftDeleted = 0")    
+    @NamedQuery(name = "getSecretBySecret", query = "from Secret s where s.secretAlphanumeric = :secret and s.isSoftDeleted = 0"),    
+    @NamedQuery(name = "getSecretActived", query = "from Secret s where s.secretAlphanumeric = :secret and s.secretStatus.name = 'active' and s.isSoftDeleted = 0")    
 })
 public class Secret implements Serializable {
 

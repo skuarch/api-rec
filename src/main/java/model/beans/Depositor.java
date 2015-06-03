@@ -1,11 +1,14 @@
 
 package model.beans;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -14,7 +17,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "depositor")
-public class Depositor {
+@NamedQueries({
+    @NamedQuery(name = "getDepositorByEmail", query = "from Depositor d where d.email = :email and d.isSoftDeleted = 0")        
+})
+public class Depositor implements Serializable {
     
     @Id
     @Column(name = "depositor_id")
@@ -30,7 +36,7 @@ public class Depositor {
     @Column(name = "depositor_phone", nullable = false)
     private String phone;
 
-    @Column(name = "depositor_email", nullable = false)
+    @Column(name = "depositor_email", nullable = false, unique = true)
     private String email;
     
     @Column(name = "depositor_is_soft_deleted", columnDefinition = "int default 0")

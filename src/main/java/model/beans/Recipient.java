@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
@@ -20,6 +22,9 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(name = "recipient")
+@NamedQueries({
+    @NamedQuery(name = "getRecipientByEmail", query = "from Recipient r where r.email = :email and r.isSoftDeleted = 0")        
+})
 public class Recipient {
     
     @Id
@@ -36,7 +41,7 @@ public class Recipient {
     @Column(name = "recipient_phone", nullable = false)
     private String phone;
 
-    @Column(name = "recipient_email", nullable = false)
+    @Column(name = "recipient_email", nullable = false, unique = true)
     private String email;
     
     @OneToMany(fetch = FetchType.LAZY)
@@ -109,6 +114,6 @@ public class Recipient {
 
     public void setIsSoftDeleted(byte isSoftDeleted) {
         this.isSoftDeleted = isSoftDeleted;
-    }
+    }    
     
 }

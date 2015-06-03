@@ -27,6 +27,7 @@ model/beans/Gender.class
 controllers/company/CompanyGet.class
 model/components/MailTemplateComponent.class
 model/beans/MailTemplate.class
+model/beans/CashierConsumeSecret.class
 model/components/AddressComponent.class
 controllers/affiliate/AffiliateGetEstablishment.class
 controllers/transfer/TransferGetList.class
@@ -76,6 +77,7 @@ controllers/responsable/ResponsableUpdatePassword.class
 controllers/freelancer/FreelancerCreate.class
 model/beans/Partner.class
 model/beans/TransferType.class
+model/components/PaymentStatusComponent.class
 model/beans/Address.class
 model/beans/CompanyBankInformation.class
 model/logic/Constants.class
@@ -87,13 +89,16 @@ model/components/AdministratorComponent.class
 controllers/company/CompanyUpdateBasicInformation.class
 model/logic/BankClientRestful.class
 controllers/application/BaseController.class
+model/components/BankResponseComponent.class
 controllers/partner/PartnerGetList.class
 model/beans/AffiliateEstablishmet.class
 model/util/FileUtil.class
+controllers/payment/PaymentGetList.class
 controllers/freelancer/FreelancerGetAffiliates.class
 model/beans/UpdatePasswordBean.class
 model/net/MailAuthentication$1.class
 model/util/HibernateUtil.class
+model/beans/Payment.class
 controllers/affiliate/AffiliateUpdate.class
 model/components/RecipientComponent.class
 model/beans/Establishment.class
@@ -109,6 +114,7 @@ interceptors/Hibernate.class
 controllers/company/CompanyGetList.class
 servlets/GlobalContext.class
 model/beans/RequestBean.class
+model/beans/BankResponse.class
 model/beans/Administrator.class
 controllers/affiliate/AffiliateUpdateBasicInformation.class
 controllers/affiliate/AffiliateToggleActive.class
@@ -116,11 +122,13 @@ model/beans/Depositor.class
 model/beans/Contact.class
 model/net/MailAuthentication.class
 model/components/AffiliateEstablishmentComponent.class
+model/components/PaymentComponent.class
 model/beans/AffiliateEstablishmentBasic.class
 model/net/RestClient.class
 controllers/cashier/CashierUpdate.class
 controllers/establishment/EstablishmentGet.class
 model/components/PersonComponent.class
+controllers/authentication/CashierAuthentication.class
 model/beans/Category.class
 model/beans/SecretStatus.class
 model/beans/Affiliate.class
@@ -129,7 +137,9 @@ model/beans/Subcategory.class
 model/components/CashierComponent.class
 model/components/TransferTypeComponent.class
 controllers/freelancer/FreelancerGetCompanies.class
+model/beans/PaymentStatus.class
 model/components/DepositorComponent.class
+controllers/secret/CashierConsumeSecret.class
 model/beans/CompanyTaxInformation.class
 model/components/PersonTypeComponent.class
 controllers/company/CompanyUpdateBankInformation.class
@@ -138,3 +148,4 @@ controllers/company/CompanyCreate.class
 controllers/affiliate/AffiliateCreateEstablishment.class
 model/beans/ConfigurationMailAuthentication.class
 controllers/subscribers/SubscriberCreate.class
+model/beans/TransferStatus.class

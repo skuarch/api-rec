@@ -1,8 +1,10 @@
 package model.util;
 
 import model.beans.Affiliate;
+import model.beans.Depositor;
 import model.beans.Freelancer;
 import model.beans.Partner;
+import model.beans.Transfer;
 import model.logic.MailSender;
 import org.apache.log4j.Logger;
 
@@ -74,6 +76,40 @@ public class MailUtil {
             } catch (Exception e) {
                 logger.error("MailUtil.sendMailNewAffiliatePerson", e);
             }
+        }).start();
+        
+    }
+    
+    //==========================================================================
+    public static void sendMailDepositorNewTransfer(Transfer transfer, String displayLanguage){
+    
+        new Thread(()->{
+            
+            try {
+                
+                MailSender.sendMailDepositorNewTransfer(transfer, displayLanguage);                       
+                
+            } catch (Exception e) {
+                logger.error("MailUtil.sendMailDepositorNewTransfer", e);
+            }
+            
+        }).start();
+        
+    }
+    
+    //==========================================================================
+    public static void sendMailRecipientNewTransfer(Transfer transfer, String displayLanguage){
+    
+        new Thread(()->{
+            
+            try {
+                
+                MailSender.sendMailDepositorNewTransfer(transfer, displayLanguage);                       
+                
+            } catch (Exception e) {
+                logger.error("MailUtil.sendMailRecipientNewTransfer", e);
+            }
+            
         }).start();
         
     }

@@ -11,10 +11,10 @@ public class BankClientRestful {
 
     private static final HashMap parameters = new HashMap();
     private static final String url = "https://eps.banorte.com/recibo";
-    private static final String Name = "user_test";
-    private static final String Password = "user01";
-    private static final String ClientId = "19";
-    private static final String Mode = "Y";
+    private static final String Name = "7048870";
+    private static final String Password = "eas870p";
+    private static final String ClientId = "19955";
+    private static final String Mode = "Y"; // P 
     private static final String TransType = "Auth";
     private static final String ResponsePath = "https://eps.banorte.com/RespuestaCC.jsp";
     private static final String OrderId = "";
@@ -57,8 +57,8 @@ public class BankClientRestful {
 
             if (responseString != null || responseString.length() > 0) {
                 response = responseString.replaceAll("\\<.*?>", "");
-                response = response.replaceAll("&oacute;", "");
-                response = response.replaceAll("&eacute;", "");
+                response = response.replaceAll("&oacute;", "o");
+                response = response.replaceAll("&eacute;", "e");
                 response = response.replaceAll("Untitled Document", "");
                 response = response.replaceAll("           ", " ");
                 response = response.replaceAll("          ", " ");
@@ -70,7 +70,7 @@ public class BankClientRestful {
                 response = response.replaceAll("   ", " ");
                 response = response.replaceAll("  ", " ");
                 response = response.replaceAll("&nbsp;", "");                 
-                response = response.replaceAll("Datos de Respuesta de Pago por Tarjeta de Crdito ", "");
+                response = response.replaceAll("Datos de Respuesta de Pago por Tarjeta de Credito ", "");
                 
             }
 

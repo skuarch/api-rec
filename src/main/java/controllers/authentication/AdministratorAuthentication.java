@@ -33,7 +33,7 @@ public class AdministratorAuthentication extends BaseController {
     //==========================================================================
     @RequestMapping(value = {"/v1/authentication/administrator"})
     public @ResponseBody String authentication(@ModelAttribute Login login, HttpServletResponse response){
-    
+        
         JSONObject jsono = null;
         Administrator a = null;
 

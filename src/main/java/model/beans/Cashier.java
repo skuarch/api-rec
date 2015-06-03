@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,11 +18,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "cashier")
+@NamedQueries({
+    @NamedQuery(name = "getCashierByEmailPassword", query = "from Cashier c where c.person.email = :email and c.password = :password and c.active = 1 and c.isSoftDeleted = 0")
+})
 public class Cashier implements Serializable {
 
     @Id
     @Column(name = "cashier_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "cashier_password", nullable = false, columnDefinition = "varchar(32)")
@@ -34,7 +39,10 @@ public class Cashier implements Serializable {
     private byte isSoftDeleted = 0;
     
     @Column(name = "cashier_active", columnDefinition = "int default 0")
-    private byte active = 0;
+    private byte active = 1;
+    
+    @Column(name = "administrator_last_login")
+    private String lastLogin;
 
     public Cashier() {
     }
@@ -77,6 +85,14 @@ public class Cashier implements Serializable {
 
     public void setActive(byte active) {
         this.active = active;
+    }
+
+    public String getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
 }
