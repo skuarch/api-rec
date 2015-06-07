@@ -24,6 +24,7 @@ model/components/GenderComponent.class
 model/beans/AffiliateBasicInformation.class
 controllers/authentication/AdministratorAuthentication.class
 model/beans/Gender.class
+controllers/cashier/CashierToggleActive.class
 controllers/company/CompanyGet.class
 model/components/MailTemplateComponent.class
 model/beans/MailTemplate.class
@@ -65,6 +66,7 @@ controllers/cashier/CashierUpdatePassword.class
 controllers/company/CompanyCreateEstablishment.class
 model/components/ContactComponent.class
 model/beans/Login.class
+controllers/cashier/CashierGetList.class
 model/components/ConfigurationMailComponent.class
 model/components/CategoryComponent.class
 model/database/DAO.class
@@ -118,6 +120,7 @@ model/beans/BankResponse.class
 model/beans/Administrator.class
 controllers/affiliate/AffiliateUpdateBasicInformation.class
 controllers/affiliate/AffiliateToggleActive.class
+model/util/SecretUtil.class
 model/beans/Depositor.class
 model/beans/Contact.class
 model/net/MailAuthentication.class

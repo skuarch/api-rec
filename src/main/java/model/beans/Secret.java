@@ -25,7 +25,8 @@ import javax.persistence.Table;
 @Table(name = "secret")
 @NamedQueries({
     @NamedQuery(name = "getSecretBySecret", query = "from Secret s where s.secretAlphanumeric = :secret and s.isSoftDeleted = 0"),    
-    @NamedQuery(name = "getSecretActived", query = "from Secret s where s.secretAlphanumeric = :secret and s.secretStatus.name = 'active' and s.isSoftDeleted = 0")    
+    @NamedQuery(name = "getSecretActived", query = "from Secret s where s.secretAlphanumeric = :secret and s.secretStatus.name = 'active' and s.isSoftDeleted = 0"),
+    @NamedQuery(name = "getSecretList", query = "from Secret s where s.isSoftDeleted = 0")    
 })
 public class Secret implements Serializable {
 
@@ -41,7 +42,7 @@ public class Secret implements Serializable {
     @JoinColumn(name = "secret_status_id", nullable = false)
     private SecretStatus secretStatus;
     
-    @Column(name = "secret_value", columnDefinition = "numeric(5,2)")
+    @Column(name = "secret_value", columnDefinition = "numeric(7,2)")
     private BigDecimal value;
     
     @Column(name = "secret_generation_date", nullable = false, length = 19)

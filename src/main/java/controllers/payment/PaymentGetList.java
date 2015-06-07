@@ -35,6 +35,7 @@ public class PaymentGetList extends BaseController {
         
         try {            
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             payments = paymentComponent.getPaymentList();
             jsona = new JSONArray(payments);

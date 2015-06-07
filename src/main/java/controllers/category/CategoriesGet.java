@@ -1,19 +1,19 @@
 package controllers.category;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
-import model.components.CategoryComponent;
 import model.beans.Category;
+import model.components.CategoryComponent;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -38,6 +38,7 @@ public class CategoriesGet extends BaseController {
 
         try {
 
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             categories = categoryComponent.getCategories();

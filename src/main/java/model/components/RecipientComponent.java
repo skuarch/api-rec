@@ -69,10 +69,27 @@ public class RecipientComponent {
         Recipient recipient = null;
         List recipientList;
         HashMap hm = null;
+        String sql;
 
         try {
 
-            recipientList = new DAO().sqlQuery("SELECT r.* FROM recipient r, secret s, recipient_secret rs WHERE (s.secret_alphanumeric = '" + secret + "') AND (s.secret_id = rs.secret_id) AND (r.recipient_id = rs.recipient_id);");
+            //recipientList = new DAO().sqlQuery("SELECT r.* FROM recipient r, secret s, recipient_secret rs WHERE (s.secret_alphanumeric = '" + secret + "') AND (s.secret_id = rs.secret_id) AND (r.recipient_id = rs.recipient_id);");
+            
+            sql = "SELECT "
+                    + "(r.recipient_id)id,"
+                    + "(r.recipient_email)email, "
+                    + "(r.recipient_last_name)lastName,"
+                    + "(r.recipient_name)name,"
+                    + "(r.recipient_phone)phone "
+                    + "FROM "
+                    + "recipient r, "
+                    + "secret s, "
+                    + "recipient_secret rs "
+                    + "WHERE "
+                    + "(s.secret_alphanumeric = '" + secret + "') "
+                    + "AND (s.secret_id = rs.secret_id) "
+                    + "AND (r.recipient_id = rs.recipient_id);";
+            recipientList = new DAO().sqlQuery(sql);
 
             if (recipientList.size() > 0) {
                 hm = (HashMap) recipientList.get(0);

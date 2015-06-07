@@ -813,7 +813,7 @@ public class DAO {
         try {
             
             SQLQuery query = session.createSQLQuery(sql);
-            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);            
             list = query.list();
             
         } catch (Exception e) {
@@ -823,5 +823,35 @@ public class DAO {
         return list;
     
     }
+    
+    //==========================================================================
+    /*public <T> List<T> sqlQuery(String sql, T type)  throws HibernateException {
+    
+        if (type == null) {
+            throw new IllegalArgumentException("the parameter type is null");
+        }
+
+        if (sql == null || sql.length() < 1) {
+            throw new IllegalArgumentException("the parameter sql is null or empty");
+        }
+        
+        List<T> list = null;
+
+        try {
+
+            SQLQuery query = session.createSQLQuery(sql);            
+            query.setResultTransformer(Transformers.aliasToBean(type.getClass()));
+            list = query.list();
+            
+        } catch (HibernateException he) {
+            throw he;
+        } finally {
+            HibernateUtil.closeSession(session);
+            type = null;
+        }
+
+        return list;
+        
+    }*/
     
 } // end class

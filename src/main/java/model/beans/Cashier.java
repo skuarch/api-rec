@@ -19,6 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cashier")
 @NamedQueries({
+    @NamedQuery(name = "getCashierList", query = "from Cashier c where c.isSoftDeleted = 0"),
     @NamedQuery(name = "getCashierByEmailPassword", query = "from Cashier c where c.person.email = :email and c.password = :password and c.active = 1 and c.isSoftDeleted = 0")
 })
 public class Cashier implements Serializable {
@@ -41,7 +42,7 @@ public class Cashier implements Serializable {
     @Column(name = "cashier_active", columnDefinition = "int default 0")
     private byte active = 1;
     
-    @Column(name = "administrator_last_login")
+    @Column(name = "cashier_last_login")
     private String lastLogin;
 
     public Cashier() {

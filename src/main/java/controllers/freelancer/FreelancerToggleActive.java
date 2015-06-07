@@ -14,7 +14,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,15 +30,16 @@ public class FreelancerToggleActive extends BaseController {
     private FreelancerComponent freelancerComponent;
 
     //==========================================================================
-    @RequestMapping(value = {"/v1/freelancer/toggle/active", "v1/freelancer/toggle/active"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/v1/freelancer/toggle/active", "v1/freelancer/toggle/active"})
     public @ResponseBody
     String toggleFreelancerActive(@ModelAttribute Freelancer f, HttpServletResponse response, Locale locale) {
-        System.out.println("--------------------entro-------------------------");
+        
         JSONObject jsono;
         Freelancer freelancer;
 
         try {
 
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             freelancer = freelancerComponent.getFreelancer(f.getId());
 
@@ -59,7 +59,7 @@ public class FreelancerToggleActive extends BaseController {
             }
 
         } catch (Exception e) {
-            logger.error("ToggleFreelancerActive.toggleFreelancerActive", e);
+            logger.error("FreelancerToggleActive.toggleFreelancerActive", e);
             jsono = new JSONObject("{\"error\":\"" + e + "\",}");
         }
 

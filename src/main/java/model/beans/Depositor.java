@@ -36,7 +36,7 @@ public class Depositor implements Serializable {
     @Column(name = "depositor_phone", nullable = false)
     private String phone;
 
-    @Column(name = "depositor_email", nullable = false, unique = true)
+    @Column(name = "depositor_email", nullable = false)
     private String email;
     
     @Column(name = "depositor_is_soft_deleted", columnDefinition = "int default 0")

@@ -39,6 +39,7 @@ public class AffiliateGetEstablishment extends BaseController {
 
         try {
 
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             affiliate = affiliateComponent.getAffiliate(affiliate.getId());
             establishments = affiliate.getEstablishment();

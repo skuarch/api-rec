@@ -34,6 +34,7 @@ public class CompanyGetList extends BaseController {
         
         try {            
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             companies = (ArrayList<Company>) companyComponent.getCompanyList();
             jsona = new JSONArray(companies);

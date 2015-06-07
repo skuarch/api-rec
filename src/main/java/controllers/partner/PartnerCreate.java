@@ -1,6 +1,8 @@
 package controllers.partner;
 
+import controllers.application.BaseController;
 import java.util.Locale;
+import javax.servlet.http.HttpServletResponse;
 import model.beans.Partner;
 import model.beans.Person;
 import model.components.PartnerComponent;
@@ -10,7 +12,6 @@ import model.logic.Constants;
 import model.util.MailUtil;
 import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
-import static org.apache.log4j.Logger.getLogger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author skuarch-lap
  */
 @RestController
-public class PartnerCreate {
+public class PartnerCreate extends BaseController {
     
     private static final Logger logger = getLogger(PartnerCreate.class);    
     
@@ -36,7 +37,7 @@ public class PartnerCreate {
     
     //==========================================================================
     @RequestMapping(value ="/v1/partner/create")
-    public @ResponseBody String createPartner(@ModelAttribute Partner partner,Locale locale){
+    public @ResponseBody String createPartner(@ModelAttribute Partner partner,Locale locale, HttpServletResponse response){
     
         long id;
         long personId;
@@ -44,6 +45,8 @@ public class PartnerCreate {
         
         try {
            
+            setHeaderNoChache(response);
+            
            //set personType
            partner.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.PARTNER));
             

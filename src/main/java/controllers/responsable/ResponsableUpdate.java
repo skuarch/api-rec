@@ -1,9 +1,5 @@
 package controllers.responsable;
 
-import org.json.JSONObject;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import java.util.Locale;
@@ -16,8 +12,12 @@ import model.components.ResponsableComponent;
 import model.logic.Constants;
 import model.util.TransactionUtil;
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -44,6 +44,7 @@ public class ResponsableUpdate extends BaseController {
 
         try {
 
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             //some validations            

@@ -1,4 +1,6 @@
 mkdir /opt/logs/
+mkdir /opt/glassfish4/glassfish/domains/domain1/docroot/uploads
+mkdir /opt/glassfish4/glassfish/domains/domain1/docroot/uploads/images/
 
 ./asadmin create-jdbc-connection-pool --user admin --datasourceclassname com.mysql.jdbc.jdbc2.optional.MysqlDataSource --restype javax.sql.DataSource --property user=root:password=thePassword:DatabaseName=regaloenclave:ServerName=192.168.1.65:port=3306 rec
 

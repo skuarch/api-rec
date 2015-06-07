@@ -35,6 +35,7 @@ public class AffiliateGeListByCreator extends BaseController {
         
         try {            
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             affiliates = affiliateComponent.getAffiliatesByCreator(creatorId);
             jsona = new JSONArray(affiliates);

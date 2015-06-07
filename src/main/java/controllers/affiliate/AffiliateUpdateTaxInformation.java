@@ -50,6 +50,7 @@ public class AffiliateUpdateTaxInformation extends BaseController {
         
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);    
 
             //get affiliate from database

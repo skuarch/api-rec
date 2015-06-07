@@ -38,6 +38,7 @@ public class AffiliateUpdatePassword extends BaseController {
         try {
             
             setContentType(response, MediaType.APPLICATION_JSON);
+            setHeaderNoChache(response);
             
             //some validations
             if (upb == null) {

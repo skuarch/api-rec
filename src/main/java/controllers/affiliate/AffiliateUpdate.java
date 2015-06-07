@@ -36,6 +36,7 @@ public class AffiliateUpdate extends BaseController {
 
         try {
 
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);            
             
             a = affiliateComponent.getAffiliate(affiliate.getId());

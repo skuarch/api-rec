@@ -14,7 +14,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +30,7 @@ public class AffiliateToggleActive extends BaseController {
     private AffiliateComponent affiliateComponent;
 
     //==========================================================================
-    @RequestMapping(value = {"/v1/affiliate/toggle/active", "v1/affiliate/toggle/active"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/v1/affiliate/toggle/active", "v1/affiliate/toggle/active"})
     public @ResponseBody
     String toggleAffiliateActive(@ModelAttribute Affiliate a, HttpServletResponse response, Locale locale) {
         
@@ -40,6 +39,7 @@ public class AffiliateToggleActive extends BaseController {
 
         try {
 
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             affiliate = affiliateComponent.getAffiliate(a.getId());
 

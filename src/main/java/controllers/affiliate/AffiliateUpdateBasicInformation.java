@@ -64,6 +64,7 @@ public class AffiliateUpdateBasicInformation extends BaseController {
 
             //basic configuration
             setContentType(response, MediaType.APPLICATION_JSON);
+            setHeaderNoChache(response);
             
             affiliateBasicInformation
                     .getPerson()

@@ -38,7 +38,7 @@ public class Partner {
     private Person person;
     
     @Column(name = "partner_active", columnDefinition = "int default 0")
-    private byte active = 0;
+    private byte active = 1;
 
     @Column(name = "partner_registration_date", nullable = false, length = 19)
     private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());

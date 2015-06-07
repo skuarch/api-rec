@@ -35,6 +35,7 @@ public class PartnerGetList extends BaseController {
         
         try {            
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             partners = partnerComponent.getPartnerList();
             jsona = new JSONArray(partners);

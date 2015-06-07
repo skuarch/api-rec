@@ -39,6 +39,7 @@ public class CashierUpdate extends BaseController{
         
         try {
 
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             personType = personTypeComponent.getPersonType("cashier");

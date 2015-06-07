@@ -66,7 +66,7 @@ public class TransferCreate extends BaseController {
             @RequestParam String month,
             @RequestParam String year,
             @RequestParam String cvv,
-            HttpServletResponse response,
+            HttpServletResponse response, 
             Locale locale) {
 
         JSONObject jsono = null;
@@ -84,6 +84,7 @@ public class TransferCreate extends BaseController {
         try {
 
             //basic configuration
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
 
             //send payment to the bank
@@ -101,21 +102,12 @@ public class TransferCreate extends BaseController {
                 jsono.put("errorBank", true);
                 return jsono.toString();
             }
+            
 
-            //check if depositor exists in db
-            depositor = depositorComponent.getDepositor(transfer.getDepositor().getEmail());
-            if (depositor == null) {
-                //create depositor
-                depositor = transfer.getDepositor();
-                depositorId = depositorComponent.createDepositor(depositor);
-                depositor.setId(depositorId);
-            } else {
-                //update depositor, maybe the depositor has a new phone
-                depositorId = depositor.getId();
-                transfer.getDepositor().setId(depositorId);
-                depositor = transfer.getDepositor();
-                depositorComponent.updateDepositor(depositor);
-            }
+            //create depositor
+            depositor = transfer.getDepositor();
+            depositorId = depositorComponent.createDepositor(depositor);
+            depositor.setId(depositorId);
 
             //create secret
             secret = new Secret();
@@ -127,36 +119,26 @@ public class TransferCreate extends BaseController {
             secretList = new ArrayList<>();
             secretList.add(secret);
 
-            //check if recipient exist in the database
-            recipient = recipientComponent.getRecipientByEmail(transfer.getRecipient().getEmail());
-            if (recipient == null) {
-                //create recipient
-                recipient = transfer.getRecipient();
-                recipient.setSecret(secretList);
-                recipientId = recipientComponent.createRecipient(recipient);
-                recipient.setId(recipientId);
-            } else {
-                //update recipient, maybe the recipient has a new phone
-                recipientId = recipient.getId();
-                transfer.getRecipient().setId(recipientId);
-                recipient = transfer.getRecipient();
-                recipientComponent.updateRecipient(recipient);
-            }
+            //create recipient
+            recipient = transfer.getRecipient();
+            recipient.setSecret(secretList);
+            recipientId = recipientComponent.createRecipient(recipient);
+            recipient.setId(recipientId);
 
-            //create transfer
+            //crear la transferencia
             transfer.setDepositor(depositor);
             transfer.setRecipient(recipient);
             transfer.setSecretAlphanumeric(secret.getSecretAlphanumeric());
             transfer.setTransferType(transferTypeComponent.getTransferType(Constants.TRANSACTION_TYPE_CREDIT_CARD));
             transferId = transferComponent.createTransfer(transfer);
             transfer.setId(transferId);
-
+            
             //send mail to recipiet
             MailUtil.sendMailRecipientNewTransfer(transfer, locale.getDisplayLanguage());
-
+            
             //send mail to depositor
             MailUtil.sendMailDepositorNewTransfer(transfer, locale.getDisplayLanguage());
-
+            
             //update bankReponse
             bankResponse.setTransfer(transfer);
             bankResponseComponent.updateBankResponse(bankResponse);

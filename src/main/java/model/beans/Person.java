@@ -13,19 +13,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author skuarch
  */
 @Entity
-@Table(
-        name ="person",
-        uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"person_type_id"})
-        }
-)
+@Table(name ="person")
 @NamedQueries({    
     @NamedQuery(name = "getPersonByEmail", query = "from Person p where p.email = :email and isSoftDeleted = 0")        
 })

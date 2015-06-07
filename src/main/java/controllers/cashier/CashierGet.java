@@ -1,6 +1,5 @@
 package controllers.cashier;
 
-import controllers.affiliate.AffiliateUpdate;
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +34,9 @@ public class CashierGet extends BaseController {
 
         try {
 
+            setHeaderNoChache(response);
+            setContentType(response, MediaType.APPLICATION_JSON);
+            
             if (cashier.getId() < 1) {
                 logger.error("GetCashier.getCashier", new Exception("cashier id is less than 1"));
                 jsono = new JSONObject("{\"error\":\"error\",}");

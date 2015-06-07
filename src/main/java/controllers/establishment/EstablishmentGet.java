@@ -42,6 +42,7 @@ public class EstablishmentGet extends BaseController {
         
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             e = establishmentComponent.getEstablishment(establishment.getId());

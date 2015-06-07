@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Transfer;
-import model.components.PartnerComponent;
 import model.components.TransferComponent;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -36,6 +35,7 @@ public class TransferGetList extends BaseController {
         
         try {            
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             transfers = transferComponent.getTransferList();
             jsona = new JSONArray(transfers);

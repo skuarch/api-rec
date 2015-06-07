@@ -10,8 +10,8 @@ import model.beans.CompanyBasicInformation;
 import model.beans.GeneralConfiguration;
 import model.components.CompanyComponent;
 import model.components.GeneralConfigurationComponent;
-import model.components.PersonTypeComponent;
 import model.components.PersonComponent;
+import model.components.PersonTypeComponent;
 import model.logic.Constants;
 import model.util.FileUtil;
 import model.util.TransactionUtil;
@@ -51,6 +51,7 @@ public class CompanyUpdateBasicInformation extends BaseController {
         
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             companyBasicInformation

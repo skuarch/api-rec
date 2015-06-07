@@ -39,6 +39,7 @@ public class PartnerUpdatePassword extends BaseController {
 
         try {
 
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             //some validations

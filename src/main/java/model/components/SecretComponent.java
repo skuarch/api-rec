@@ -118,4 +118,22 @@ public class SecretComponent {
     
     }
     
+    
+    //==========================================================================
+    public ArrayList<Secret> getSecretList() throws Exception {
+
+        ArrayList<Secret> secrets = new ArrayList<>();
+
+        try {
+
+            secrets = new ArrayList<>(new DAO().query("getSecretList", new Secret()));
+            
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return secrets;
+
+    }
+    
 }

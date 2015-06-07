@@ -5,9 +5,7 @@ import static controllers.application.BaseController.getLogger;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Cashier;
-import model.beans.PersonType;
 import model.components.CashierComponent;
-import model.components.PersonTypeComponent;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +36,7 @@ public class CashierUpdatePassword extends BaseController {
 
         try {
 
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             jsono = new JSONObject();
 

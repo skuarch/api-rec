@@ -2,6 +2,7 @@ package model.components;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import model.beans.Cashier;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
@@ -105,6 +106,23 @@ public class CashierComponent {
         
         return c;
 
+    }
+    
+    //==========================================================================
+    public List<Cashier> getCashierList() throws Exception{
+        
+        List<Cashier> cashiers = null;        
+        
+        try {            
+            
+            cashiers = new DAO().query("getCashierList", new Cashier());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+ 
+        return cashiers;
+    
     }
 
 }

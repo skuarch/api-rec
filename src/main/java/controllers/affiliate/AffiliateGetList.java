@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +34,7 @@ public class AffiliateGetList extends BaseController {
         
         try {            
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             affiliates = (ArrayList<Affiliate>) affiliateComponent.getAffiliatesList();
             jsona = new JSONArray(affiliates);

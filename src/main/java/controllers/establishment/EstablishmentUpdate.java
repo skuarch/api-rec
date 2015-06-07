@@ -36,13 +36,14 @@ public class EstablishmentUpdate extends BaseController {
     //==========================================================================
     @RequestMapping(value = {"/v1/establishment/update", "v1/establishment/update"})
     public @ResponseBody String updateEstablishment(@ModelAttribute Establishment establishment,HttpServletResponse response) {
-        System.out.println("address puto: " + establishment.getAddress().getAll()); 
+        
         JSONObject jsono;
         Establishment e;
         Address a;
         
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             e = establishmentComponent.getEstablishment(establishment.getId());

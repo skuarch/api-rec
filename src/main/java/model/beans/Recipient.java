@@ -41,7 +41,7 @@ public class Recipient {
     @Column(name = "recipient_phone", nullable = false)
     private String phone;
 
-    @Column(name = "recipient_email", nullable = false, unique = true)
+    @Column(name = "recipient_email", nullable = false)
     private String email;
     
     @OneToMany(fetch = FetchType.LAZY)

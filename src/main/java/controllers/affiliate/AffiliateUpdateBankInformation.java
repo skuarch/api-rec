@@ -39,6 +39,7 @@ public class AffiliateUpdateBankInformation extends BaseController{
         
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             affiliate = affiliateComponent.getAffiliate(affiliateBankInformation.getId());

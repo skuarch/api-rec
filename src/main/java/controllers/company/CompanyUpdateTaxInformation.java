@@ -1,6 +1,5 @@
 package controllers.company;
 
-import controllers.affiliate.AffiliateUpdateTaxInformation;
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
 import javax.servlet.http.HttpServletResponse;
@@ -55,6 +54,7 @@ public class CompanyUpdateTaxInformation extends BaseController{
         
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);    
 
             //get company from database

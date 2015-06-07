@@ -14,7 +14,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +32,7 @@ public class FreelancerUpdate extends BaseController {
     private PersonComponent personComponent;    
     
     //==========================================================================
-    @RequestMapping(value = {"/v1/freelancer/update", "v1/freelancer/update"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/v1/freelancer/update", "v1/freelancer/update"})
     public @ResponseBody
     String updateFreelancer(@ModelAttribute Freelancer freelancer, HttpServletResponse response, Locale locale) {
         
@@ -42,6 +41,7 @@ public class FreelancerUpdate extends BaseController {
         
         try {            
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             f = freelancerComponent.getFreelancer(freelancer.getId());            

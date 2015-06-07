@@ -22,7 +22,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,10 +44,10 @@ public class FreelancerCreate extends BaseController {
     private PersonTypeComponent personTypeComponent;
 
     //==========================================================================
-    @RequestMapping(value = {"/v1/freelancer/create", "v1/freelancer/create"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/v1/freelancer/create", "v1/freelancer/create"})
     public @ResponseBody
     String createFreelancer(@ModelAttribute Freelancer freelancer, HttpServletResponse response, Locale locale) {
-        System.out.println("mierdotas");
+        
         long id = 0;
         long personId;
         long addressId;
@@ -57,7 +56,9 @@ public class FreelancerCreate extends BaseController {
 
         try {
 
+            //basic configuration
             setContentType(response, MediaType.APPLICATION_JSON);
+            setHeaderNoChache(response);
 
             //some validations            
             if (freelancer.getPerson() == null) {
@@ -140,7 +141,7 @@ public class FreelancerCreate extends BaseController {
         } finally {
             person = null;
         }
-        System.out.println("mierda " + exists);
+        
         return exists;
     }
 

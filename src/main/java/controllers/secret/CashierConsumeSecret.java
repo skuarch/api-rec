@@ -1,10 +1,12 @@
 package controllers.secret;
 
 import controllers.application.BaseController;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
@@ -20,12 +22,13 @@ import model.components.RecipientComponent;
 import model.components.SecretComponent;
 import model.components.SecretStatusComponent;
 import model.logic.Constants;
+import model.util.MailUtil;
+import model.util.SecretUtil;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,7 +54,7 @@ public class CashierConsumeSecret extends BaseController {
     @Autowired
     private CashierComponent cashierComponent;
 
-    @RequestMapping(value = {"v1/cashier/consume/secret/"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"v1/cashier/consume/secret/"})
     public @ResponseBody
     String consumeSecret(
             @ModelAttribute model.beans.CashierConsumeSecret ccs,
@@ -67,7 +70,11 @@ public class CashierConsumeSecret extends BaseController {
         SecretStatus secretStatus;
         int result;
         Payment payment;
-        Cashier cashier;
+        Cashier cashier; 
+        BigDecimal newAmount;
+        long newSecretId;
+        Secret newSecret;
+        List<Secret> secretList;
 
         try {
 
@@ -100,12 +107,7 @@ public class CashierConsumeSecret extends BaseController {
                 jsono.append("consumed", false);
                 return jsono.toString();
             }
-
-            //create new secret if is the case
-            if (result == -1) {
-                //Create new secret with new amount and send mail of new secret
-
-            }
+            
 
             //consumed secret and update secret table
             secretStatus = secretStatusComponent.getStatus(Constants.SECRET_STATUS_CONSUMED);
@@ -116,10 +118,24 @@ public class CashierConsumeSecret extends BaseController {
             //get the owner of the secret
             recipientHashMap = recipientComponent.getRecipientBySecret(ccs.getSecret());
 
-            //send mail to recipient
-            recipientHashMap.get("recipient_email");
-            recipientIdBigInteger = (BigInteger) recipientHashMap.get("recipient_id");
+            //send mail to recipient            
+            recipientHashMap.get("email");
+            recipientIdBigInteger = (BigInteger) recipientHashMap.get("id");
             recipient = recipientComponent.getRecipient(recipientIdBigInteger.longValue());
+            
+            //create new secret if is the case
+            if (result == -1) {
+                //Create new secret with new amount and send mail about this new secret
+                newAmount = secret.getValue().subtract(ccs.getAmount());
+                newSecret = SecretUtil.getSecret(newAmount);
+                newSecretId = secretComponent.saveSecret(newSecret);
+                newSecret.setId(newSecretId);
+                secretList = recipient.getSecret();
+                secretList.add(newSecret);
+                recipient.setSecret(secretList);
+                recipientComponent.updateRecipient(recipient);
+                MailUtil.sendMailRecipientNewSecret(recipient,newAmount,newSecret,locale.getDisplayLanguage());
+            }
 
             //get cashier
             cashier = cashierComponent.getCashier(ccs.getCashierId());

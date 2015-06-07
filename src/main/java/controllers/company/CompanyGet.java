@@ -34,6 +34,7 @@ public class CompanyGet extends BaseController {
         
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             c = companyComponent.getCompany(company.getId());

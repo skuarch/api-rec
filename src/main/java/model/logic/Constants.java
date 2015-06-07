@@ -57,6 +57,8 @@ public class Constants {
     public static final short TRANSACTION_DEACTIVATE_AFFILIADO = 32;        
     public static final short TRANSACTION_ACTIVATE_COMPANY = 33;    
     public static final short TRANSACTION_DEACTIVATE_COMPANY = 34;        
+    public static final short TRANSACTION_ACTIVATE_CASHIER = 35;    
+    public static final short TRANSACTION_DEACTIVATE_CASHIER = 36;        
     
     public static final short PERSON_TYPE_ADMINISTRATOR = 1;
     public static final short PERSON_TYPE_AFFILIATE = 2;

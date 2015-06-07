@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Responsable;
 import model.beans.UpdatePasswordBean;
-import model.components.AffiliateComponent;
 import model.components.ResponsableComponent;
 import model.logic.Constants;
 import model.util.TransactionUtil;
@@ -38,6 +37,7 @@ public class ResponsableUpdatePassword extends BaseController {
 
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             //some validations

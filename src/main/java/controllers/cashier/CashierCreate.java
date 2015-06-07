@@ -2,7 +2,6 @@ package controllers.cashier;
 
 import controllers.application.BaseController;
 import static controllers.application.BaseController.getLogger;
-import controllers.responsable.ResponsableUpdate;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
@@ -54,6 +53,7 @@ public class CashierCreate extends BaseController {
 
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             //create cashier

@@ -37,6 +37,7 @@ public class FreelancerGetCompanies extends BaseController {
         
         try {            
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             companies = companyComponent.getCompaniesByCreator(freelancer.getPerson().getId());
             jsona = new JSONArray(companies);

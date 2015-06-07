@@ -35,6 +35,7 @@ public class FreelancerGetList extends BaseController {
         
         try {            
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             freelancers = freelancerComponent.getFreelancersList();
             jsona = new JSONArray(freelancers);

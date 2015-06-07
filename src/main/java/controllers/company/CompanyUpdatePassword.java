@@ -37,6 +37,7 @@ public class CompanyUpdatePassword extends BaseController {
 
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             //some validations

@@ -38,6 +38,7 @@ public class CompanyUpdateBankInformation extends BaseController {
         
         try {
             
+            setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
             company = companyComponent.getCompany(companyBankInformation.getId());

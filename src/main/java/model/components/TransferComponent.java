@@ -1,7 +1,6 @@
 package model.components;
 
 import java.util.ArrayList;
-import model.beans.Partner;
 import model.beans.Transfer;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
@@ -47,7 +46,7 @@ public class TransferComponent {
         try {
 
             transfers = new ArrayList<>(new DAO().query("getTransferList", new Transfer()));
-
+            
         } catch (Exception e) {
             throw e;
         }

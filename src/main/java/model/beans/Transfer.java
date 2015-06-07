@@ -35,7 +35,7 @@ public class Transfer implements Serializable {
     @JoinColumn(name = "transfer_type_id", nullable = true)
     private TransferType transferType;
     
-    @Column(name = "transfer_amount", columnDefinition = "numeric(5,2)")
+    @Column(name = "transfer_amount", columnDefinition = "numeric(7,2)")
     private BigDecimal amount;
 
     @OneToOne
