@@ -212,8 +212,11 @@ public class MailSender {
         try {
             
             mailTemplate = new MailTemplateComponent().getTemplate("recipient new transfer", displayLanguage);
-            mailTemplate.setMessage(mailTemplate.getMessage().replace(":recipient", transfer.getRecipient().getEmail()));
-            mailTemplate.setMessage(mailTemplate.getMessage().replace(":amount", transfer.getAmount() + ""));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":card", transfer.getCard() + ""));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":name1", transfer.getDepositor().getName()));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":name2", transfer.getRecipient().getName()));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":secret", transfer.getSecretAlphanumeric()));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":value", transfer.getAmount() + ""));
             
             configurationMail = new ConfigurationMailComponent().getConfigurationMail();
             mail = new Mail(
@@ -291,6 +294,34 @@ public class MailSender {
             );
             
             mail.send(mailTemplate.getSubject(), mailTemplate.getMessage());
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+    }
+    
+    //==========================================================================
+    public static void sendMailReportGift(String email, String html, String from, String subject,String displayLanguage) throws Exception {
+        
+        if(displayLanguage == null || displayLanguage.length() < 1){
+            throw new IllegalArgumentException("displayLanguage is null or empty");
+        } 
+        
+        Mail mail = null;
+        ConfigurationMail configurationMail = null;                
+
+        try {
+            
+            configurationMail = new ConfigurationMailComponent().getConfigurationMail();
+            mail = new Mail(
+                    from, 
+                    configurationMail.getSmtpHost(), 
+                    configurationMail.getSmtpPort(), 
+                    email
+            );
+            
+            mail.send(subject, html);
             
         } catch (Exception e) {
             throw e;

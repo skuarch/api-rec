@@ -3,16 +3,16 @@ package model.beans;
 import java.math.BigDecimal;
 
 /**
- *
+ * this bean is used as @ModelAttribute
  * @author skuarch
  */
-public class CashierConsumeSecret {
+public class SecretConsumed {
 
     private long cashierId;
     private String secret;
     private BigDecimal amount;
     
-    public CashierConsumeSecret() {
+    public SecretConsumed() {
     }
 
     public long getCashierId() {

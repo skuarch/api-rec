@@ -3,6 +3,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/logic/Constants.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CashierUpdatePassword.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/ConfigurationMailAuthentication.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/CashierSecretConsumed.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerGetCompanies.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/partner/PartnerUpdatePassword.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/GenderComponent.java
@@ -29,6 +30,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/transfer/TransferCreate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/PaymentStatus.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateUpdateBankInformation.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/administrator/AdmistratorUpdatePassword.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Responsable.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CashierToggleActive.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/authentication/AffiliatePartnerAuthentication.java
@@ -50,7 +52,9 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Transfer.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Person.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/MailTemplateComponent.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/secret/SecretGetList.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyCreateEstablishment.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/payment/UpdateStatusPayment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateCreateEstablishment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/CompanyComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/TestBean.java
@@ -67,10 +71,12 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerGetAffiliates.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/SecretStatus.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/servlets/GlobalContext.java
-/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/CashierConsumeSecret.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/AffiliateComponent.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateBasicGet.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateCompanyBasic.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Login.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/MailTemplate.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CashierGetConsumedSecrets.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/util/TransactionUtil.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/ConfigurationComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/PaymentStatusComponent.java
@@ -80,6 +86,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/RequestBean.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/GeneralConfigurationComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateUpdateTaxInformation.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/CashierSecretConsumedComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CashierGet.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateTaxInformation.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/payment/PaymentGetList.java
@@ -104,6 +111,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/TransferType.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/net/Mail.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Cashier.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/affiliate/AffiliateBasicList.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateType.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/PersonComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/responsable/ResponsableUpdatePassword.java
@@ -119,6 +127,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerCreate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/CategoryComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyToggleActive.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/SecretConsumed.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/logic/BankClientRestful.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/responsable/ResponsableUpdate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/ConfigurationMail.java
@@ -132,6 +141,7 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/UpdatePasswordBean.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/CashierComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateEstablishmet.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/reports/ReportGiftEmail.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Subscriber.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/GeneralConfiguration.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/freelancer/FreelancerUpdatePassword.java
@@ -144,10 +154,13 @@
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/FreelancerComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Establishment.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/RecipientComponent.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/logic/ReportGiftProcessor.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/Transaction.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/company/CompanyUpdatePassword.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateBasic.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/components/SecretStatusComponent.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/cashier/CashierUpdate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/logic/MailSender.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/model/beans/AffiliateBankInformation.java
+/home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/person/PersonUpdate.java
 /home/skuarch/NetBeansProjects/api-rec/src/main/java/controllers/secret/CashierConsumeSecret.java

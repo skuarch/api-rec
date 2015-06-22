@@ -11,11 +11,14 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Cashier;
+import model.beans.CashierSecretConsumed;
 import model.beans.Payment;
 import model.beans.Recipient;
 import model.beans.Secret;
+import model.beans.SecretConsumed;
 import model.beans.SecretStatus;
 import model.components.CashierComponent;
+import model.components.CashierSecretConsumedComponent;
 import model.components.PaymentComponent;
 import model.components.PaymentStatusComponent;
 import model.components.RecipientComponent;
@@ -52,16 +55,18 @@ public class CashierConsumeSecret extends BaseController {
     @Autowired
     private PaymentStatusComponent paymentStatusComponent;
     @Autowired
-    private CashierComponent cashierComponent;
+    private CashierComponent cashierComponent;    
+    @Autowired
+    private CashierSecretConsumedComponent cashierSecretConsumedComponent;
 
-    @RequestMapping(value = {"v1/cashier/consume/secret/"})
+    @RequestMapping(value = {"v1/cashier/consume/secret"})
     public @ResponseBody
     String consumeSecret(
-            @ModelAttribute model.beans.CashierConsumeSecret ccs,
+            @ModelAttribute SecretConsumed sc,
             HttpServletResponse response,
             Locale locale
     ) {
-
+        
         Secret secret;
         HashMap recipientHashMap;
         Recipient recipient;
@@ -75,6 +80,10 @@ public class CashierConsumeSecret extends BaseController {
         long newSecretId;
         Secret newSecret;
         List<Secret> secretList;
+        String dateOperation = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
+        CashierSecretConsumed cashierSecretConsumed;
+        long establishmentId;
+                
 
         try {
 
@@ -83,40 +92,39 @@ public class CashierConsumeSecret extends BaseController {
             setContentType(response, MediaType.APPLICATION_JSON);
 
             //get secret
-            secret = secretComponent.getActiveSecret(ccs.getSecret());
+            secret = secretComponent.getActiveSecret(sc.getSecret());
 
             //secret exists
-            if (secret == null || !secret.getSecretAlphanumeric().equals(ccs.getSecret())) {
-                jsono = new JSONObject("{\"error\":\"key doesn't exists or is invalid\"}");
+            if (secret == null || !secret.getSecretAlphanumeric().equals(sc.getSecret())) {
+                jsono = new JSONObject("{\"error\":\"la clave no existe o es invalida\"}");
                 jsono.append("consumed", false);
                 return jsono.toString();
             }
 
             //secret is active "!= consumed"
             if (secret.getSecretStatus().getId() == Constants.SECRET_STATUS_CONSUMED) {
-                jsono = new JSONObject("{\"error\":\"the key has already been used\"}");
+                jsono = new JSONObject("{\"error\":\"la clave ya fue usada\"}");
                 jsono.append("consumed", false);
                 return jsono.toString();
             }
 
             //amount is equals or less than the value of the secret?
-            result = ccs.getAmount().compareTo(secret.getValue());
+            result = sc.getAmount().compareTo(secret.getValue());
             // 0 equals 1, the first is biggest -1, the second is biggest            
             if (result == 1) {
-                jsono = new JSONObject("{\"error\":\"insufficient resources\"}");
+                jsono = new JSONObject("{\"error\":\"resursos insuficientes, el valor de la clave es de: $" +secret.getValue()+ " \"}");
                 jsono.append("consumed", false);
                 return jsono.toString();
-            }
-            
+            }            
 
             //consumed secret and update secret table
             secretStatus = secretStatusComponent.getStatus(Constants.SECRET_STATUS_CONSUMED);
             secret.setSecretStatus(secretStatus);
-            secret.setConsumedDate(new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date()));
+            secret.setConsumedDate(dateOperation);
             secretComponent.updateSecret(secret);
 
             //get the owner of the secret
-            recipientHashMap = recipientComponent.getRecipientBySecret(ccs.getSecret());
+            recipientHashMap = recipientComponent.getRecipientBySecret(sc.getSecret());
 
             //send mail to recipient            
             recipientHashMap.get("email");
@@ -126,7 +134,7 @@ public class CashierConsumeSecret extends BaseController {
             //create new secret if is the case
             if (result == -1) {
                 //Create new secret with new amount and send mail about this new secret
-                newAmount = secret.getValue().subtract(ccs.getAmount());
+                newAmount = secret.getValue().subtract(sc.getAmount());
                 newSecret = SecretUtil.getSecret(newAmount);
                 newSecretId = secretComponent.saveSecret(newSecret);
                 newSecret.setId(newSecretId);
@@ -138,16 +146,26 @@ public class CashierConsumeSecret extends BaseController {
             }
 
             //get cashier
-            cashier = cashierComponent.getCashier(ccs.getCashierId());
+            cashier = cashierComponent.getCashier(sc.getCashierId());
 
             //create payment
             payment = new Payment();
             payment.setCashier(cashier);
             payment.setRecipient(recipient);
             payment.setSecret(secret);
-            payment.setAmount(ccs.getAmount());
+            payment.setAmount(sc.getAmount());
             payment.setPaymentStatus(paymentStatusComponent.getStatus(Constants.PAYMENT_STATUS_UNPAID));
-            paymentComponent.savePayment(payment);
+            payment.setCreationDate(dateOperation);
+            paymentComponent.savePayment(payment);            
+            
+            // create cashier consumed secret
+            cashierSecretConsumed = new CashierSecretConsumed();
+            cashierSecretConsumed.setCashier(cashier);
+            cashierSecretConsumed.setRecipient(recipient);
+            cashierSecretConsumed.setSecret(secret);
+            cashierSecretConsumed.setConsumedDate(dateOperation);    
+            cashierSecretConsumed.setAmount(sc.getAmount());
+            cashierSecretConsumedComponent.saveCashierSecretConsumed(cashierSecretConsumed);
             
             //everything is ok
             jsono = new JSONObject();
@@ -155,7 +173,7 @@ public class CashierConsumeSecret extends BaseController {
 
         } catch (Exception e) {
             logger.error("CashierConsumeSecret.consumeSecret", e);
-            jsono = new JSONObject("{\"error\":\"" + e + "\"}");
+            jsono = new JSONObject("{\"error\":\"tuvimos un error interno, intentalo mas tarde\"}");
             jsono.append("consumed", false);
         }
 

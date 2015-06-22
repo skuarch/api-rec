@@ -35,13 +35,13 @@ public class CompanyCreate extends BaseController {
     private static final Logger logger = getLogger(CompanyCreate.class);
 
     @Autowired
-    private AddressComponent addressComponent;    
+    private AddressComponent addressComponent;
     @Autowired
     private PersonTypeComponent personTypeComponent;
     @Autowired
     private PersonComponent personComponent;
     @Autowired
-    private CompanyComponent companyComponent;    
+    private CompanyComponent companyComponent;
     @Autowired
     private ContactComponent contactComponent;
     @Autowired
@@ -51,7 +51,7 @@ public class CompanyCreate extends BaseController {
     @RequestMapping(value = {"/v1/company/create", "v1/company/create"})
     public @ResponseBody
     String createCompany(@ModelAttribute Company company, HttpServletResponse response, Locale locale) {
-        
+
         long id = 0;
         JSONObject jsono = null;
         long idPersonCompany = 0;
@@ -62,33 +62,47 @@ public class CompanyCreate extends BaseController {
         long addressId;
 
         try {
-            
+
             setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
-            jsono = new JSONObject();
+
+            //validations
+            if (company == null || company.getCreatorId() < 1) {
+                Exception e = new Exception("company is null or company creatorId is less than 0");
+                logger.error("CompanyCreate.createCompany", e);
+                jsono = new JSONObject("{\"error\":\"" + e + "\",}");
+                jsono.append("created", false);
+            }
+            
+            if (company.getPerson() == null) {
+                Exception e = new Exception("company.getPerson() is null");
+                logger.error("CompanyCreate.createCompany", e);
+                jsono = new JSONObject("{\"error\":\"" + e + "\",}");
+                jsono.append("created", false);
+            }
 
             //get person type
             company.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT));
             company.getContact().getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT_BILLING));
             idPersonCompany = personComponent.savePerson(company.getPerson());
             idContactTax = personComponent.savePerson(company.getContact().getPerson());
-            
+
             company.getPerson().setId(idPersonCompany);
             company.getContact().getPerson().setId(idContactTax);
-            
-            idContact = contactComponent.saveContact(company.getContact());            
-            company.getContact().setId(idContact);            
+
+            idContact = contactComponent.saveContact(company.getContact());
+            company.getContact().setId(idContact);
 
             //create address
             a = company.getAddress();
             addressId = addressComponent.saveAddress(a);
             a.setId(addressId);
             company.setAddress(a);
-            
+
             //create affiliate
             id = companyComponent.saveCompany(company);
             company.setId(id);
-            
+
             //if any file exists, saved it
             updateCompany = saveFiles(company);
 
@@ -96,7 +110,8 @@ public class CompanyCreate extends BaseController {
             if (updateCompany) {
                 companyComponent.updateCompany(company);
             }
-            
+
+            jsono = new JSONObject();
             jsono.append("created", true);
             jsono.append("id", id);
 
@@ -113,10 +128,9 @@ public class CompanyCreate extends BaseController {
         }
 
         return jsono.toString();
-        
+
     }
-    
-    
+
     //==========================================================================
     private boolean saveFiles(Company company) throws Exception {
 
@@ -140,7 +154,7 @@ public class CompanyCreate extends BaseController {
 
                 gc = generalConfigurationComponent.getGeneralConfiguration();
                 String path = gc.getUploadPath();
-                String fileName = "company_" + company.getId() + "_logo_" + System.currentTimeMillis() + extension;                
+                String fileName = "company_" + company.getId() + "_logo_" + System.currentTimeMillis() + extension;
                 File f = new File(path + fileName);
                 company.getLogoFile().transferTo(f);
                 company.setLogoPathName(path + fileName);
@@ -155,5 +169,5 @@ public class CompanyCreate extends BaseController {
         return flag;
 
     }
-    
+
 }

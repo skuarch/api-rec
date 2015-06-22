@@ -1,6 +1,7 @@
 package model.util;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import model.beans.Affiliate;
 import model.beans.Freelancer;
 import model.beans.Partner;
@@ -8,6 +9,7 @@ import model.beans.Recipient;
 import model.beans.Secret;
 import model.beans.Transfer;
 import model.logic.MailSender;
+import model.logic.ReportGiftProcessor;
 import org.apache.log4j.Logger;
 
 /**
@@ -142,6 +144,23 @@ public class MailUtil {
             try {
 
                 MailSender.sendMailRecipientNewSecret(recipient, amount, secret,displayLanguage);
+
+            } catch (Exception e) {
+                logger.error("MailUtil.sendMailRecipientNewTransfer", e);
+            }
+
+        }).start();
+
+    }
+    
+    //==========================================================================
+    public static void sendReportGiftByEmail(ArrayList<Transfer> transferlistDepositor,ArrayList<Transfer> transferlistRecipient,String email, String displayLanguage) {
+
+        new Thread(() -> {
+
+            try {
+
+                new ReportGiftProcessor().sendReportGiftByEmail(transferlistDepositor, transferlistRecipient, email);
 
             } catch (Exception e) {
                 logger.error("MailUtil.sendMailRecipientNewTransfer", e);

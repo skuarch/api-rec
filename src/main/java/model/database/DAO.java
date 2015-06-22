@@ -818,7 +818,9 @@ public class DAO {
             
         } catch (Exception e) {
             throw e;
-        }        
+        } finally {
+            HibernateUtil.closeSession(session);
+        }       
         
         return list;
     

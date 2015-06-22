@@ -1,5 +1,6 @@
 package model.beans;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,9 +22,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "payment")
 @NamedQueries({        
-        @NamedQuery(name = "getPaymentList", query = "from Payment p where p.isSoftDeleted = 0")        
+        @NamedQuery(name = "getPaymentList", query = "from Payment p where p.isSoftDeleted = 0 order by p.creationDate desc")        
 })
-public class Payment {
+public class Payment implements Serializable {
 
     @Id
     @Column(name = "payment_id")

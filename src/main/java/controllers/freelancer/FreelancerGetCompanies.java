@@ -22,34 +22,41 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class FreelancerGetCompanies extends BaseController {
-    
+
     private static final Logger logger = getLogger(FreelancerGetCompanies.class);
-    
+
     @Autowired
     private CompanyComponent companyComponent;
-    
+
     //==========================================================================
     @RequestMapping(value = {"/v1/freelancer/get/companies", "v1/freelancer/get/companies"})
-    public @ResponseBody String getCompaniesByFreelancer(@ModelAttribute Freelancer freelancer, HttpServletResponse response){    
-        
+    public @ResponseBody
+    String getCompaniesByFreelancer(@ModelAttribute Freelancer freelancer, HttpServletResponse response) {
+
         JSONArray jsona = null;
         ArrayList<Company> companies = null;
-        
-        try {            
-            
+
+        try {
+
+            if (freelancer == null || freelancer.getPerson().getId() < 0) {
+                jsona = new JSONArray();
+                jsona.put("error");
+                return jsona.toString();
+            }
+
             setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             companies = companyComponent.getCompaniesByCreator(freelancer.getPerson().getId());
             jsona = new JSONArray(companies);
-            
+
         } catch (Exception e) {
-            logger.error("FreelancerGetCompanies.getCompaniesByCreator", e);            
+            logger.error("FreelancerGetCompanies.getCompaniesByFreelancer", e);
             jsona = new JSONArray();
             jsona.put("error");
         }
-        
+
         return jsona.toString();
-    
+
     }
-    
+
 }

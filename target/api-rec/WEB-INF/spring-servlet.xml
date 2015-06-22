@@ -25,7 +25,7 @@
     
     <context:component-scan base-package="controllers" />
     
-    <jee:jndi-lookup id="datasource" jndi-name="jdbc/api-rec" lookup-on-startup="true" expected-type="javax.sql.DataSource" />
+    <!--<jee:jndi-lookup id="datasource" jndi-name="jdbc/api-rec" lookup-on-startup="true" expected-type="javax.sql.DataSource" />-->
          
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

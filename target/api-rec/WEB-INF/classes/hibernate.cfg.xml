@@ -27,6 +27,7 @@
         <mapping class="model.beans.BankResponse"/>
         <mapping class="model.beans.Category"/>
         <mapping class="model.beans.Cashier"/>
+        <mapping class="model.beans.CashierSecretConsumed"/>
         <mapping class="model.beans.Contact"/>
         <mapping class="model.beans.Company"/>    
         <mapping class="model.beans.ConfigurationMail"/>

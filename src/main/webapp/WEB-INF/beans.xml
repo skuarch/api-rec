@@ -15,6 +15,7 @@
     <bean id="bankResponseComponent" class="model.components.BankResponseComponent"></bean>    
     <bean id="categoryComponent" class="model.components.CategoryComponent"></bean>
     <bean id="cashierComponent" class="model.components.CashierComponent"></bean>   
+    <bean id="cashierSecretConsumedComponent" class="model.components.CashierSecretConsumedComponent"></bean>   
     <bean id="contactComponent" class="model.components.ContactComponent"></bean>    
     <bean id="companyComponent" class="model.components.CompanyComponent"></bean>    
     <bean id="depositorComponent" class="model.components.DepositorComponent"></bean>    

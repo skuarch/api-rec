@@ -91,4 +91,11 @@ public class EstablishmentComponent {
         
     }
 
+    //==========================================================================
+    public Establishment getEstablishmentByCashier(long cashierId){
+    
+        return null;
+    
+    }
+    
 }

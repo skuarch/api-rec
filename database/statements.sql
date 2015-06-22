@@ -190,10 +190,54 @@ VALUES
 'bienvenido affiliado a regaloenclave.com');
 INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('Spanish', 'no-responder@regaloenclave.com', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \r\n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\r\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\r\n            </div>            \r\n            \r\n            <h2>Tu regalo se realizo con exito</h2><br/>\r\n            tu regalo fue enviado a :recipient por la cantidad :amount\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n        </div>', 'depositor new transfer', 'tu regalo se realizo con exito');
 INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('English', 'no-responder@regaloenclave.com', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \r\n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\r\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\r\n            </div>            \r\n            \r\n            <h2>Tu regalo se realizo con exito</h2><br/>\r\n            tu regalo fue enviado a :recipient por la cantidad :amount\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n        </div>', 'depositor new transfer', 'tu regalo se realizo con exito');
-INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('English', 'no-responder@regaloenclave.com', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>            \n            \n            <h2>:name1 te ha enviado un regalo en clave</h2><br/>\n            hola :name2 la clave de tu regalo es :secret\n            <br/>\n            por un valor de :value\n            <br/>\n            estos son los sitios donde puedes cambiar tu clave \n            <a href=\"http://regaloenclave.com/affiliateDirectory\">sitios afiliados a regaloenclave.com</a>\n            <br/>\n            <br/>\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\n        </div>        ', 'recipient new transfer', 'haz recibido un regalo en clave');
-INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('Spanish', 'no-responder@regaloenclave.com', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>            \n            \n            <h2>:name1 te ha enviado un regalo en clave</h2><br/>\n            hola :name2 la clave de tu regalo es :secret\n            <br/>\n            por un valor de :value\n            <br/>\n            estos son los sitios donde puedes cambiar tu clave \n            <a href=\"http://regaloenclave.com/affiliateDirectory\">sitios afiliados a regaloenclave.com</a>\n            <br/>\n            <br/>\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\n        </div>        ', 'recipient new transfer', 'haz recibido un regalo en clave');
 INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('Spanish', 'no-responder@regaloenclave.com', '0', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>                        \n            \n            hola :name la clave de tu regalo es :secret\n            <br/>\n            por un valor de :value\n            <br/>\n            estos son los sitios donde puedes cambiar tu clave \n            <a href=\"http://regaloenclave.com/affiliateDirectory\">sitios afiliados a regaloenclave.com</a>\n            <br/>\n            <br/>\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\n        </div>', 'recipient new secret', 'tienes una nueva clave en regaloenclave.com');
 INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('English', 'no-responder@regaloenclave.com', '0', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>                        \n            \n            hola :name la clave de tu regalo es :secret\n            <br/>\n            por un valor de :value\n            <br/>\n            estos son los sitios donde puedes cambiar tu clave \n            <a href=\"http://regaloenclave.com/affiliateDirectory\">sitios afiliados a regaloenclave.com</a>\n            <br/>\n            <br/>\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\n        </div>', 'recipient new secret', 'tienes una nueva clave en regaloenclave.com');
+
+
+
+
+
+INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('English', 'no-responder@regaloenclave.com', '<div style="margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center">            
+            <div style="font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc">
+                regala lo que quieras en <a href="http://regaloenclave.com">regaloenclave.com</a>
+            </div>            
+            
+            <img src="http://static.regaloenclave.com/images/tarjeta_:card.jpg" style="text-align: center" />
+            <br/>
+            <br/>
+            
+            <h2>:name1 te ha enviado un regalo en clave</h2><br/>
+            hola :name2 la clave de tu regalo es :secret
+            <br/>
+            por un valor de :value
+            <br/>
+            estos son los sitios donde puedes cambiar tu clave 
+            <a href="http://regaloenclave.com/affiliateDirectory">sitios afiliados a regaloenclave.com</a>
+            <br/>
+            <br/>
+            Gracias por usar <a href="http://regaloenclave.com">regaloenclave.com</a>
+        </div>        ', 'recipient new transfer', 'haz recibido un regalo en clave');
+INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('Spanish', 'no-responder@regaloenclave.com', '<div style="margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center">            
+            <div style="font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc">
+                regala lo que quieras en <a href="http://regaloenclave.com">regaloenclave.com</a>
+            </div>            
+            
+            <img src="http://static.regaloenclave.com/images/tarjeta_:card.jpg" style="text-align: center" />
+            <br/>
+            <br/>
+            
+            <h2>:name1 te ha enviado un regalo en clave</h2><br/>
+            hola :name2 la clave de tu regalo es :secret
+            <br/>
+            por un valor de :value
+            <br/>
+            estos son los sitios donde puedes cambiar tu clave 
+            <a href="http://regaloenclave.com/affiliateDirectory">sitios afiliados a regaloenclave.com</a>
+            <br/>
+            <br/>
+            Gracias por usar <a href="http://regaloenclave.com">regaloenclave.com</a>
+        </div>        ', 'recipient new transfer', 'haz recibido un regalo en clave');
+
 
 
 

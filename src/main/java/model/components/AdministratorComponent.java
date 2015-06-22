@@ -15,9 +15,8 @@ public class AdministratorComponent {
 
     //==========================================================================
     public AdministratorComponent() {
-    }        
-    
-    
+    }
+
     //==========================================================================
     public Administrator getAdministrator(String email, String password) throws Exception {
 
@@ -45,27 +44,47 @@ public class AdministratorComponent {
         } catch (Exception e) {
             throw e;
         }
-        
+
         return a;
 
     }
 
     //==========================================================================
     public void updateAdministrator(Administrator administrator) throws Exception {
-        
-        if(administrator == null){
+
+        if (administrator == null) {
             throw new IllegalArgumentException("administrator is null");
         }
-        
+
         try {
-            
+
             new DAO().update(administrator);
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    //==========================================================================
+    public Administrator getAdministrator(long id) throws Exception {
+
+        if (id < 1) {
+            throw new IllegalArgumentException("id is null or empty");
+        }
+
+        Administrator a = null;
+
+        try {
+
+            a = new DAO().get(id, new Administrator());
             
         } catch (Exception e) {
             throw e;
-        }        
-        
+        }
+
+        return a;
+
     }
-    
-    
+
 }

@@ -14,6 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -22,7 +23,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "transfer")
 @NamedQueries({
-        @NamedQuery(name = "getTransferList", query = "from Transfer t where t.isSoftDeleted = 0")        
+        @NamedQuery(name = "getTransferList", query = "from Transfer t where t.isSoftDeleted = 0"),
+        @NamedQuery(name = "getTransferListByDepositorEmail", query = "from Transfer t where t.depositor.email = :email and t.isSoftDeleted = 0 order by t.date desc"),
+        @NamedQuery(name = "getTransferListByRecipientEmail", query = "from Transfer t where t.recipient.email = :email and t.isSoftDeleted = 0 order by t.date desc")        
 })
 public class Transfer implements Serializable {
 
@@ -53,7 +56,10 @@ public class Transfer implements Serializable {
     private byte isSoftDeleted = 0;        
 
     @Column(name = "secret_alphanumeric", unique = true, nullable = false)
-    private String secretAlphanumeric;
+    private String secretAlphanumeric;    
+    
+    @Transient
+    private byte card;
 
     public Transfer() {
     }
@@ -120,6 +126,14 @@ public class Transfer implements Serializable {
 
     public void setSecretAlphanumeric(String secretAlphanumeric) {
         this.secretAlphanumeric = secretAlphanumeric;
+    }
+
+    public byte getCard() {
+        return card;
+    }
+
+    public void setCard(byte card) {
+        this.card = card;
     }
 
 }
