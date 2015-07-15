@@ -26,7 +26,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "getSecretBySecret", query = "from Secret s where s.secretAlphanumeric = :secret and s.isSoftDeleted = 0"),    
     @NamedQuery(name = "getSecretActived", query = "from Secret s where s.secretAlphanumeric = :secret and s.secretStatus.name = 'active' and s.isSoftDeleted = 0"),
-    @NamedQuery(name = "getSecretList", query = "from Secret s where s.isSoftDeleted = 0")    
+    @NamedQuery(name = "getSecretList", query = "from Secret s where s.isSoftDeleted = 0 order by s.id desc")    
 })
 public class Secret implements Serializable {
 
@@ -90,6 +90,9 @@ public class Secret implements Serializable {
     }
 
     public void setValue(BigDecimal value) {
+        if(value.intValue() < 1){
+            throw new IllegalArgumentException("value is less than 1");
+        }
         this.value = value;
     }
 

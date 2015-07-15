@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cashier")
 @NamedQueries({
-    @NamedQuery(name = "getCashierList", query = "from Cashier c where c.isSoftDeleted = 0"),
+    @NamedQuery(name = "getCashierList", query = "from Cashier c where c.isSoftDeleted = 0 order by c.id desc"),
     @NamedQuery(name = "getCashierByEmailPassword", query = "from Cashier c where c.person.email = :email and c.password = :password and c.active = 1 and c.isSoftDeleted = 0")
 })
 public class Cashier implements Serializable {

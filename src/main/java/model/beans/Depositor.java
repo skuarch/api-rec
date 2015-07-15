@@ -31,8 +31,8 @@ public class Depositor implements Serializable {
     private String name;
 
     @Column(name = "depositor_last_name", nullable = false)
-    private String lastName;
-
+    private String lastName;    
+    
     @Column(name = "depositor_phone", nullable = false)
     private String phone;
 

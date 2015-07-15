@@ -66,7 +66,8 @@ public class TransferCreate extends BaseController {
             @RequestParam String month,
             @RequestParam String year,
             @RequestParam String cvv,
-            HttpServletResponse response, 
+            @RequestParam String message,
+            HttpServletResponse response,
             Locale locale) {
 
         JSONObject jsono = null;
@@ -102,12 +103,11 @@ public class TransferCreate extends BaseController {
                 jsono.put("errorBank", true);
                 return jsono.toString();
             }
-            
 
             //create depositor
             depositor = transfer.getDepositor();
             depositorId = depositorComponent.createDepositor(depositor);
-            depositor.setId(depositorId);
+            depositor.setId(depositorId);            
 
             //create secret
             secret = new Secret();
@@ -125,20 +125,21 @@ public class TransferCreate extends BaseController {
             recipientId = recipientComponent.createRecipient(recipient);
             recipient.setId(recipientId);
 
-            //crear la transferencia
+            //create transfer
             transfer.setDepositor(depositor);
             transfer.setRecipient(recipient);
             transfer.setSecretAlphanumeric(secret.getSecretAlphanumeric());
             transfer.setTransferType(transferTypeComponent.getTransferType(Constants.TRANSACTION_TYPE_CREDIT_CARD));
             transferId = transferComponent.createTransfer(transfer);
             transfer.setId(transferId);
-            
-            //send mail to recipiet
-            MailUtil.sendMailRecipientNewTransfer(transfer, locale.getDisplayLanguage());
-            
-            //send mail to depositor
+            transfer.setCardNumber(number);
+
+            //send mail to recipiet (new transfer)
+            MailUtil.sendMailRecipientNewTransfer(transfer, message, locale.getDisplayLanguage());
+
+            //send mail to depositor (new transfer)
             MailUtil.sendMailDepositorNewTransfer(transfer, locale.getDisplayLanguage());
-            
+
             //update bankReponse
             bankResponse.setTransfer(transfer);
             bankResponseComponent.updateBankResponse(bankResponse);

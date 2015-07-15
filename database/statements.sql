@@ -13,7 +13,7 @@ INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('affiliat
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('freelancer');
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('cashier');
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('responsable');
-INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('contact');
+INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('contact company');
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('contact billing');
 INSERT INTO `regaloenclave`.`person_type` (`person_type_name`) VALUES ('partner');
 
@@ -34,164 +34,10 @@ INSERT INTO `regaloenclave`.`administrator` (`administrator_password`, `administ
 
 
 #mail template----------------------------------------------------------------------------------------
-INSERT INTO 
-`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
-VALUES 
-('English', 
-'no-responder@regaloenclave.com', 
-'0', 
-"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>
-            <span style='font-size: 12px; color: #cacaca; text-align: right; border-bottom: 1px solid #ccc;'>regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a></span><br/>    
-            <h1>Bienvenid(@) <strong>:name</strong> a regalo en clave</h1>
-            Para nosotros es muy grato que te unas a los afiliados de regaloenclave.com
-            <br><br><br>
-        </div>", 
-'new affiliate', 
-'bienvenido afiliado a regaloenclave.com');
-INSERT INTO 
-`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
-VALUES 
-('Spanish', 
-'no-responder@regaloenclave.com', 
-'0', 
-"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>
-            <span style='font-size: 12px; color: #cacaca; text-align: right; border-bottom: 1px solid #ccc;'>regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a></span><br/>    
-            <h1>Bienvenid(@) <strong>:name</strong> a regalo en clave</h1>
-            Para nosotros es muy grato que te unas a los afiliados de regaloenclave.com
-            <br><br><br>
-        </div>", 
-'new affiliate', 
-'bienvenido afiliado a regaloenclave.com');
-INSERT INTO 
-`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
-VALUES 
-('English', 
-'no-responder@regaloenclave.com', 
-'0', 
-"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>
-            <span style='font-size: 12px; color: #cacaca; text-align: right; border-bottom: 1px solid #ccc;'>regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a></span><br/>    
-            <h1>Informacion de tu cuenta en regalo en clave ah sido actualizada</h1>
-            <br/>
-            Por favor checa que tu informacion sea la correcta en<br/>
-            <a href=\"http://regaloenclave.com/affiliate\">http://regaloenclave.com/affiliate</a>
-            <br><br><br>
-        </div>", 
-'update information', 
-'tu informacion de regaloenclave.com fue actualizada');
-INSERT INTO 
-`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
-VALUES 
-('Spanish', 
-'no-responder@regaloenclave.com', 
-'0', 
-"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>
-            <span style='font-size: 12px; color: #cacaca; text-align: right; border-bottom: 1px solid #ccc;'>regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a></span><br/>    
-            <h1>Informacion de tu cuenta en regalo en clave ah sido actualizada</h1>
-            <br/>
-            Por favor checa que tu informacion sea la correcta en<br/>
-            <a href=\"http://regaloenclave.com/affiliate\">http://regaloenclave.com/affiliate</a>
-            <br><br><br>
-        </div>", 
-'update information', 
-'tu informacion de regaloenclave.com fue actualizada');
-INSERT INTO 
-`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
-VALUES 
-('English', 
-'no-responder@regaloenclave.com', 
-'0', 
-"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>            
-            <div style='font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc'>
-                regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a>
-            </div>            
-            
-            Bienvenido :name a regaloenclave.com<br/>
-            Proximamente recibiras informacion para poder entrar al sistema de regaloenclave.com para que puedas afiliar negocios<br/>
-            <br/>
-            Esta cuenta de correo sera tu usuario 
-            usuario: <br/>
-            <strong>:email</strong>            
-            <br>
-            <br>
-            <br>
-            Gracias por formar parte de regaloenclave.com
-        </div>", 
-'new freelancer', 
-'bienvenido freelancer a regaloenclave.com');
-INSERT INTO 
-`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
-VALUES 
-('Spanish', 
-'no-responder@regaloenclave.com', 
-'0', 
-"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>            
-            <div style='font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc'>
-                regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a>
-            </div>            
-            
-            Bienvenido :name a regaloenclave.com<br/>
-            Proximamente recibiras informacion para poder entrar al sistema de regaloenclave.com para que puedas afiliar negocios<br/>
-            <br/>
-            Esta cuenta de correo sera tu usuario 
-            usuario: <br/>
-            <strong>:email</strong>            
-            <br>
-            <br>
-            <br>
-            Gracias por formar parte de regaloenclave.com
-        </div>", 
-'new freelancer', 
-'bienvenido freelancer a regaloenclave.com');
-INSERT INTO 
-`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
-VALUES 
-('English', 
-'no-responder@regaloenclave.com', 
-'0', 
-"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>            
-            <div style='font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc'>
-                regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a>
-            </div>            
-            
-            Bienvenido a regaloenclave.com<br/>
-            Ahora puedes ingresar al sistema de regaloenclave.com en la siguiente direccion 
-            <a href='http://regaloenclave.com/affiliate'>http://regaloenclave.com/affiliate</a>
-            <br/>
-            Esta cuenta de correo sera tu usuario <strong>:usuario</strong> y el password es el que usaste en el registro <br/>
-            <br>
-            <br>
-            <br>
-            Gracias por formar parte de regaloenclave.com
-        </div>", 
-'new partner', 
-'bienvenido affiliado a regaloenclave.com');
-INSERT INTO 
-`regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) 
-VALUES 
-('Spanish', 
-'no-responder@regaloenclave.com', 
-'0', 
-"<div style='margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center'>            
-            <div style='font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc'>
-                regala lo que quieras en <a href='http://regaloenclave.com'>regaloenclave.com</a>
-            </div>            
-            
-            Bienvenido a regaloenclave.com<br/>
-            Ahora puedes ingresar al sistema de regaloenclave.com en la siguiente direccion 
-            <a href='http://regaloenclave.com/affiliate'>http://regaloenclave.com/affiliate</a>
-            <br/>
-            Esta cuenta de correo sera tu usuario <strong>:usuario</strong> y el password es el que usaste en el registro <br/>
-            <br>
-            <br>
-            <br>
-            Gracias por formar parte de regaloenclave.com
-        </div>", 
-'new partner', 
-'bienvenido affiliado a regaloenclave.com');
-INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('Spanish', 'no-responder@regaloenclave.com', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \r\n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\r\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\r\n            </div>            \r\n            \r\n            <h2>Tu regalo se realizo con exito</h2><br/>\r\n            tu regalo fue enviado a :recipient por la cantidad :amount\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n        </div>', 'depositor new transfer', 'tu regalo se realizo con exito');
-INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('English', 'no-responder@regaloenclave.com', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \r\n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\r\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\r\n            </div>            \r\n            \r\n            <h2>Tu regalo se realizo con exito</h2><br/>\r\n            tu regalo fue enviado a :recipient por la cantidad :amount\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n        </div>', 'depositor new transfer', 'tu regalo se realizo con exito');
-INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('Spanish', 'no-responder@regaloenclave.com', '0', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>                        \n            \n            hola :name la clave de tu regalo es :secret\n            <br/>\n            por un valor de :value\n            <br/>\n            estos son los sitios donde puedes cambiar tu clave \n            <a href=\"http://regaloenclave.com/affiliateDirectory\">sitios afiliados a regaloenclave.com</a>\n            <br/>\n            <br/>\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\n        </div>', 'recipient new secret', 'tienes una nueva clave en regaloenclave.com');
-INSERT INTO `regaloenclave`.`mail_template` (`mail_template_display_language`, `mail_template_from`, `mail_template_is_soft_deleted`, `mail_template_message`, `mail_template_name`, `mail_template_subject`) VALUES ('English', 'no-responder@regaloenclave.com', '0', '<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>                        \n            \n            hola :name la clave de tu regalo es :secret\n            <br/>\n            por un valor de :value\n            <br/>\n            estos son los sitios donde puedes cambiar tu clave \n            <a href=\"http://regaloenclave.com/affiliateDirectory\">sitios afiliados a regaloenclave.com</a>\n            <br/>\n            <br/>\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\n        </div>', 'recipient new secret', 'tienes una nueva clave en regaloenclave.com');
+INSERT INTO `mail_template` VALUES (1,'English','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>\n            <span style=\'font-size: 12px; color: #cacaca; text-align: right; border-bottom: 1px solid #ccc;\'>regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a></span><br/>    \n            <h1>Bienvenid(@) <strong>:name</strong> a regalo en clave</h1>\n            Para nosotros es muy grato que te unas a los afiliados de regaloenclave.com\n            <br><br><br>\n        </div>','new affiliate','bienvenido afiliado a regaloenclave.com'),(2,'Spanish','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>\n            <span style=\'font-size: 12px; color: #cacaca; text-align: right; border-bottom: 1px solid #ccc;\'>regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a></span><br/>    \n            <h1>Bienvenid(@) <strong>:name</strong> a regalo en clave</h1>\n            Para nosotros es muy grato que te unas a los afiliados de regaloenclave.com\n            <br><br><br>\n        </div>','new affiliate','bienvenido afiliado a regaloenclave.com'),(3,'English','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>\n            <span style=\'font-size: 12px; color: #cacaca; text-align: right; border-bottom: 1px solid #ccc;\'>regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a></span><br/>    \n            <h1>Informacion de tu cuenta en regalo en clave ah sido actualizada</h1>\n            <br/>\n            Por favor checa que tu informacion sea la correcta en<br/>\n            <a href=\"http://regaloenclave.com/affiliate\">http://regaloenclave.com/affiliate</a>\n            <br><br><br>\n        </div>','update information','tu informacion de regaloenclave.com fue actualizada'),(4,'Spanish','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>\n            <span style=\'font-size: 12px; color: #cacaca; text-align: right; border-bottom: 1px solid #ccc;\'>regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a></span><br/>    \n            <h1>Informacion de tu cuenta en regalo en clave ah sido actualizada</h1>\n            <br/>\n            Por favor checa que tu informacion sea la correcta en<br/>\n            <a href=\"http://regaloenclave.com/affiliate\">http://regaloenclave.com/affiliate</a>\n            <br><br><br>\n        </div>','update information','tu informacion de regaloenclave.com fue actualizada'),(5,'English','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>            \n            \n            Bienvenido :name a regaloenclave.com<br/>\n            Proximamente recibiras informacion para poder entrar al sistema de regaloenclave.com para que puedas afiliar negocios<br/>\n            <br/>\n            Esta cuenta de correo sera tu usuario \n            usuario: <br/>\n            <strong>:email</strong>            \n            <br>\n            <br>\n            <br>\n            Gracias por formar parte de regaloenclave.com\n        </div>','new freelancer','bienvenido freelancer a regaloenclave.com'),(6,'Spanish','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>            \n            \n            Bienvenido :name a regaloenclave.com<br/>\n            Proximamente recibiras informacion para poder entrar al sistema de regaloenclave.com para que puedas afiliar negocios<br/>\n            <br/>\n            Esta cuenta de correo sera tu usuario \n            usuario: <br/>\n            <strong>:email</strong>            \n            <br>\n            <br>\n            <br>\n            Gracias por formar parte de regaloenclave.com\n        </div>','new freelancer','bienvenido freelancer a regaloenclave.com'),(7,'English','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>            \n            \n            Bienvenido a regaloenclave.com<br/>\n            Ahora puedes ingresar al sistema de regaloenclave.com en la siguiente direccion \n            <a href=\'http://regaloenclave.com/affiliate\'>http://regaloenclave.com/affiliate</a>\n            <br/>\n            Esta cuenta de correo sera tu usuario <strong>:usuario</strong> y el password es el que usaste en el registro <br/>\n            <br>\n            <br>\n            <br>\n            Gracias por formar parte de regaloenclave.com\n        </div>','new partner','bienvenido affiliado a regaloenclave.com'),(8,'Spanish','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\n            </div>            \n            \n            Bienvenido a regaloenclave.com<br/>\n            Ahora puedes ingresar al sistema de regaloenclave.com en la siguiente direccion \n            <a href=\'http://regaloenclave.com/affiliate\'>http://regaloenclave.com/affiliate</a>\n            <br/>\n            Esta cuenta de correo sera tu usuario <strong>:usuario</strong> y el password es el que usaste en el registro <br/>\n            <br>\n            <br>\n            <br>\n            Gracias por formar parte de regaloenclave.com\n        </div>','new partner','bienvenido affiliado a regaloenclave.com'),(9,'Spanish','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \r\n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\r\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\r\n            </div>            \r\n            \r\n            <h2>Gracias :name por comprar en regalo en clave.com, tu compra es segura</h2><br/>\r\n            \r\n            Hiciste un obsequio por $:amount a :recipient quien te lo agradecera sinceramente.\r\n            <br/>\r\n            tu pago fue realizado con la tarjeta **** **** **** :card<br/>\r\n            con la clave de autorizacion :id y en tu estado de cuenta aparecera con el concepto de \"Regalo en Clave\"            \r\n            <br/>\r\n            <br/>            \r\n            <img src=\"http://static.regaloenclave.com/images/Logo150x150.png\" alt=\"\" />\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n        </div>    ','depositor new transfer','tu regalo se realizo con exito'),(10,'English','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \r\n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\r\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\r\n            </div>            \r\n            \r\n            <h2>Gracias :name por comprar en regalo en clave.com, tu compra es segura</h2><br/>\r\n            \r\n            Hiciste un obsequio por $:amount a :recipient quien te lo agradecera sinceramente.\r\n            <br/>\r\n            tu pago fue realizado con la tarjeta **** **** **** :card<br/>\r\n            con la clave de autorizacion :id y en tu estado de cuenta aparecera con el concepto de \"Regalo en Clave\"            \r\n            <br/>\r\n            <br/>            \r\n            <img src=\"http://static.regaloenclave.com/images/Logo150x150.png\" alt=\"\" />\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n        </div>    ','depositor new transfer','tu regalo se realizo con exito'),(13,'Spanish','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \r\n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\r\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\r\n            </div>                        \r\n            \r\n            hola :name la clave de tu regalo es <span style=\"color:red\"><strong>:secret</strong></span>\r\n            <br/>\r\n            por un valor de <strong>:value</strong>\r\n            <br/>\r\n            estos son los sitios donde puedes cambiar tu clave \r\n            <a href=\"http://regaloenclave.com/affiliateDirectory\">sitios afiliados a regaloenclave.com</a>\r\n            <br/>\r\n            recuerda que tu clave tiene una vigencia de 90 dias apartir de hoy.\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <img src=\"http://static.regaloenclave.com/images/tarjeta_:card.jpg\" style=\"text-align: center\" alt=\"\" />\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n        </div>   ','recipient new secret','tienes una nueva clave en regaloenclave.com'),(14,'English','no-responder@regaloenclave.com',0,'<div style=\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\'>            \r\n            <div style=\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\'>\r\n                regala lo que quieras en <a href=\'http://regaloenclave.com\'>regaloenclave.com</a>\r\n            </div>                        \r\n            \r\n            hola :name la clave de tu regalo es <span style=\"color:red\"><strong>:secret</strong></span>\r\n            <br/>\r\n            por un valor de <strong>:value</strong>\r\n            <br/>\r\n            estos son los sitios donde puedes cambiar tu clave \r\n            <a href=\"http://regaloenclave.com/affiliateDirectory\">sitios afiliados a regaloenclave.com</a>\r\n            <br/>\r\n            recuerda que tu clave tiene una vigencia de 90 dias apartir de hoy.\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <img src=\"http://static.regaloenclave.com/images/tarjeta_:card.jpg\" style=\"text-align: center\" alt=\"\" />\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n        </div>   ','recipient new secret','tienes una nueva clave en regaloenclave.com'),(15,'Spanish','no-responder@regaloenclave.com',0,'<div style=\\\'margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\\\'>            \\n            <div style=\\\'font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\\\'>\\n                regala lo que quieras en <a href=\\\'http://regaloenclave.com\\\'>regaloenclave.com</a>\\n            </div>            \\n            \\n            <img src=\\\"http://static.regaloenclave.c<div style=\"margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\">            \r\n            <div style=\"font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\">\r\n                regala lo que quieras en <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n            </div>            \r\n            \r\n            <img src=\"http://static.regaloenclave.com/images/tarjeta_:card.jpg\" style=\"text-align: center\" />\r\n            <br/>\r\n            <span>\r\n                :message\r\n            </span>\r\n            <br/>\r\n            <img src=\"http://static.regaloenclave.com/images/Logo150x150.png\" />\r\n            <br/>\r\n            Muchas felicidades :name1 (:name1 :lastName1) te ha hecho un regalo en clave por la cantidad de <strong>$:value</strong>\r\n            <br/>\r\n            tu clave es <span style=\"color: red\"><strong>:secret</strong></span>\r\n            <br/>\r\n            Esta clave la puede cambiar total o parcialmente por productos\r\n            y servicios en cualquiera de los negocios afiliados a nuestro sistema, mismos que puedes \r\n            consultar <a href=\"http://regaloenclave.com/affiliateDirectory\">aquí</a> recuerda que tu clave tiene un vigencia de 90 días a partir de hoy, \r\n            si no la utilizas se pierde su importe, consulta el modo de usarla en <a href=\"https://regaloenclave.com\">www.regaloenclave.com</a>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n            <br/>\r\n        </div> ','recipient new transfer','haz recibido un regalo en clave'),(16,'English','no-responder@regaloenclave.com',0,'<div style=\"margin: auto; border: solid 1px #ccc; min-height: 150px; width: 95%; height: 95%; text-align: center\">            \r\n            <div style=\"font-size: 12px; color:#cacaca; text-align: right; border-top: 1 px solid #ccc\">\r\n                regala lo que quieras en <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n            </div>            \r\n            \r\n            <img src=\"http://static.regaloenclave.com/images/tarjeta_:card.jpg\" style=\"text-align: center\" />\r\n            <br/>\r\n            <span>\r\n                :message\r\n            </span>\r\n            <br/>\r\n            <img src=\"http://static.regaloenclave.com/images/Logo150x150.png\" />\r\n            <br/>\r\n            Muchas felicidades :name1 (:name1 :lastName1) te ha hecho un regalo en clave por la cantidad de <strong>$:value</strong>\r\n            <br/>\r\n            tu clave es <span style=\"color: red\"><strong>:secret</strong></span>\r\n            <br/>\r\n            Esta clave la puede cambiar total o parcialmente por productos\r\n            y servicios en cualquiera de los negocios afiliados a nuestro sistema, mismos que puedes \r\n            consultar <a href=\"http://regaloenclave.com/affiliateDirectory\">aquí</a> recuerda que tu clave tiene un vigencia de 90 días a partir de hoy, \r\n            si no la utilizas se pierde su importe, consulta el modo de usarla en <a href=\"https://regaloenclave.com\">www.regaloenclave.com</a>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            <br/>\r\n            Gracias por usar <a href=\"http://regaloenclave.com\">regaloenclave.com</a>\r\n            <br/>\r\n        </div> ','recipient new transfer','haz recibido un regalo en clave');
+
+
+
 
 
 
@@ -298,6 +144,8 @@ INSERT INTO transaction_type (transaction_type_name) VALUES ('active company');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate company');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('active cashier');
 INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate cashier');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('active partner');
+INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate partner');
 
 
 
@@ -305,22 +153,39 @@ INSERT INTO transaction_type (transaction_type_name) VALUES ('deactivate cashier
 
 
 #category----------------------------------------------------------------------------------------------------
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('arte y cultura');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('bares y antros');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('bellaza y cosmetica');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('casinos y lugares de apuestas');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('departamentales');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('deportes y espacimiento');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('electronica y linea blanca');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Informatica y telefonia');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('joyeria y accesorios');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('moda y calzado');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('muebles y decoracion');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('regalos y juguetes');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('restaurantes y cafeterias');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('salud');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('servicios');
-INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('viajes y hoteles');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Accesorios para Vehículos');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Animales y Mascotas');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Arte, Cultura y Antigüedades');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Bares y Antros');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Bebés');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Belleza y Cosmética');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Cámaras y Accesorios');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Casinos y lugares de apuestas');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Celulares y Telefonía');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Coleccionables');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Computación e Informática');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Consolas y Videojuegos');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Departamentales');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Deportes Fitness y Esparcimiento');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Línea blanca');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Electrónica, Audio y Video');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Especialidades Médicas');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Hogar y Electrodomésticos');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Industrias y Oficinas');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Instrumentos Musicales');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Joyería y accesorios');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Juegos y Juguetes');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Libros, Revistas y Comics');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Limpieza y Mantenimiento');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Moda, Calzado y Accesorios');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Muebles y Decoración');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Música, Películas y Series');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Regalos y Juguetes');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Restaurantes y Cafeterías');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Seguridad');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Servicios');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Viajes y Hoteles');
+INSERT INTO `regaloenclave`.`category` (`category_name`) VALUES ('Otras Categorías');
 
 
 

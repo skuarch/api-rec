@@ -21,8 +21,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "freelancer")
 @NamedQueries({
-        @NamedQuery(name = "getFreelancer", query = "from Freelancer f where f.person.email = :email and f.password = :password and active = 1 and f.isSoftDeleted = 0"),
-        @NamedQuery(name = "getFreelancerList", query = "from Freelancer f where f.isSoftDeleted = 0")        
+        @NamedQuery(name = "getFreelancer", query = "from Freelancer f where f.person.email = :email and f.password = :password and active = 1 and f.isSoftDeleted = 0 order by f.id desc"),
+        @NamedQuery(name = "getFreelancerList", query = "from Freelancer f where f.isSoftDeleted = 0 order by f.id desc")        
 })
 public class Freelancer implements Serializable {
 

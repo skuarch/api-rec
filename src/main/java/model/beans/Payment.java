@@ -46,6 +46,25 @@ public class Payment implements Serializable {
     @JoinColumn(name = "recipient_id", nullable = false)
     private Recipient recipient;
     
+    @Column(name = "payment_behalf", nullable = false)
+    private long behalf;
+    
+    @Column(name = "payment_behalf_brand", nullable = false)
+    private String behalfBrand;
+    
+    @Column(name = "payment_discount_percentage", nullable = false)
+    private byte discountPercentage = 12;
+    
+    @Column(name = "payment_profit", columnDefinition = "numeric(5,2)", nullable = false)
+    private BigDecimal profit;
+    
+    @Column(name = "payment_totla_pay", columnDefinition = "numeric(5,2)", nullable = false)
+    private BigDecimal totalPay;
+    
+    @OneToOne
+    @JoinColumn(name = "affiliate_type_id", nullable = false)
+    private AffiliateType affiliateType;
+    
     @OneToOne
     @JoinColumn(name = "payment_status_id", nullable = false)
     private PaymentStatus paymentStatus;
@@ -131,6 +150,57 @@ public class Payment implements Serializable {
     }
 
     public void setAmount(BigDecimal amount) {
+        if(amount.intValue() < 1){
+            throw new IllegalArgumentException("amount is less than 1");
+        }
         this.amount = amount;
+    }
+
+    public long getBehalf() {
+        return behalf;
+    }
+
+    public void setBehalf(long behalf) {
+        this.behalf = behalf;
+    }    
+
+    public AffiliateType getAffiliateType() {
+        return affiliateType;
+    }
+
+    public void setAffiliateType(AffiliateType affiliateType) {
+        this.affiliateType = affiliateType;
+    }    
+
+    public String getBehalfBrand() {
+        return behalfBrand;
+    }
+
+    public void setBehalfBrand(String behalfBrand) {
+        this.behalfBrand = behalfBrand;
+    }
+
+    public byte getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(byte discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public BigDecimal getProfit() {
+        return profit;
+    }
+
+    public void setProfit(BigDecimal profit) {
+        this.profit = profit;
+    }
+
+    public BigDecimal getTotalPay() {
+        return totalPay;
+    }
+
+    public void setTotalPay(BigDecimal totalPay) {
+        this.totalPay = totalPay;
     }
 }

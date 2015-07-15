@@ -2,6 +2,8 @@ package model.beans;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -10,10 +12,14 @@ import java.math.BigInteger;
 public class AffiliateBasic implements Serializable {
 
     private BigInteger id;
-    private String logo;
+    private String logo = "http://static.regaloenclave.com/uploads/images/noLogo.gif";
     private String brand;
     private String description;
-    private String type;    
+    private String type; 
+    private int discountPercentage;
+    private List<Category> category = new ArrayList<>();
+    private String website;
+    private String facebook;
     
     public AffiliateBasic() {
     }
@@ -64,5 +70,37 @@ public class AffiliateBasic implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(int discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public List<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(List<Category> category) {
+        this.category = category;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
     }
 }

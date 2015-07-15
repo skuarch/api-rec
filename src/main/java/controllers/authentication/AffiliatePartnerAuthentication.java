@@ -6,9 +6,11 @@ import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import model.beans.Affiliate;
+import model.beans.Company;
 import model.beans.Login;
 import model.beans.Partner;
 import model.components.AffiliateComponent;
+import model.components.CompanyComponent;
 import model.components.PartnerComponent;
 import model.logic.Constants;
 import model.util.Validator;
@@ -33,14 +35,18 @@ public class AffiliatePartnerAuthentication extends BaseController {
     private PartnerComponent partnerComponent;
     @Autowired
     private AffiliateComponent affiliateComponent;
+    @Autowired
+    private CompanyComponent companyComponent;
 
     //==========================================================================
     @RequestMapping(value = {"v1/authentication/partner/affiliate", "/v1/authentication/partner/affiliate"})
-    public @ResponseBody String authentication(@ModelAttribute Login login, HttpServletResponse response) {
-        
+    public @ResponseBody
+    String authentication(@ModelAttribute Login login, HttpServletResponse response) {
+
         JSONObject jsono = null;
         Partner p;
         Affiliate a;
+        Company c;
 
         try {
 
@@ -63,33 +69,56 @@ public class AffiliatePartnerAuthentication extends BaseController {
                 jsono.put("validate", false);
             }
 
+            //is partner?
             p = partnerComponent.getPartner(login.getEmail(), login.getPassword());
-
             if (p != null && p.getActive() == 1) {
                 jsono = createPartnerJson(p);
                 jsono.put("validate", true);
                 lastLoginPartner(p);
-            } else {
-                //check if is affiliate
-                a = affiliateComponent.getAffiliate(login.getEmail(), login.getPassword());
-                if (a != null && a.getActive() == 1) {
-                    jsono = createAffiliateJson(a);
-                    jsono.put("validate", true);
-                    lastLoginAffiliate(a);
-                } else {
-                    jsono.put("validate", false);
-                }
+                Thread.sleep(1000);
+                return jsono.toString();
+            }
+
+            //is affiliate?
+            a = affiliateComponent.getAffiliate(login.getEmail(), login.getPassword());
+            if (a != null && a.getActive() == 1) {
+                jsono = createAffiliateJson(a);
+                jsono.put("validate", true);
+                lastLoginAffiliate(a);
+            } else if (a != null && a.getActive() == 0) {
+                //the affiliate is not active but he should login and accept 
+                //privacy politics
+                jsono = createAffiliateJson(a);
+                jsono.put("validate", true);
+                lastLoginAffiliate(a);
+                Thread.sleep(1000);
+                return jsono.toString();
             }
             
-            Thread.sleep(1000);
+            //is company
+            c = companyComponent.getCompany(login.getEmail(), login.getPassword());
+            if (c != null && c.getActive() == 1) {
+                jsono = createCompanyJson(c);
+                jsono.put("validate", true);
+                lastLoginCompany(c);
+            } else if (c != null && c.getActive() == 0) {
+                //the company is not active but he should login and accept 
+                //privacy politics
+                jsono = createCompanyJson(c);
+                jsono.put("validate", true);
+                lastLoginCompany(c);
+                Thread.sleep(1000);
+                return jsono.toString();
+            }
+
+            jsono.put("validate", false);
 
         } catch (Exception e) {
             logger.error("AffiliatePartnerAuthentication.authentication", e);
             jsono = new JSONObject("{\"error\":\"" + e.getMessage() + "\",}");
         }
-
+        
         return jsono.toString();
-
     }
 
     //==========================================================================
@@ -98,7 +127,7 @@ public class AffiliatePartnerAuthentication extends BaseController {
         JSONObject jsono = null;
 
         try {
-            
+
             jsono = new JSONObject();
             jsono.put("id", p.getId());
             jsono.put("name", p.getPerson().getName());
@@ -111,7 +140,10 @@ public class AffiliatePartnerAuthentication extends BaseController {
             jsono.put("personId", p.getPerson().getId());
             jsono.put("isPartner", true);
             jsono.put("isAffiliate", false);
+            jsono.put("isCompany", false);
             jsono.put("personType", Constants.PERSON_TYPE_PARTNER);
+            jsono.put("approved", 1);
+            jsono.put("active", p.getActive());
 
         } catch (Exception e) {
             throw e;
@@ -120,14 +152,14 @@ public class AffiliatePartnerAuthentication extends BaseController {
         return jsono;
 
     }
-    
+
     //==========================================================================
     private JSONObject createAffiliateJson(Affiliate a) {
 
         JSONObject jsono = null;
 
         try {
-            
+
             jsono = new JSONObject();
             jsono.put("id", a.getId());
             jsono.put("name", a.getPerson().getName());
@@ -140,7 +172,10 @@ public class AffiliatePartnerAuthentication extends BaseController {
             jsono.put("personId", a.getPerson().getId());
             jsono.put("isPartner", false);
             jsono.put("isAffiliate", true);
+            jsono.put("isCompany", false);
             jsono.put("personType", Constants.PERSON_TYPE_AFFILIATE);
+            jsono.put("approved", a.getApproved());
+            jsono.put("active", a.getActive());
 
         } catch (Exception e) {
             throw e;
@@ -150,6 +185,38 @@ public class AffiliatePartnerAuthentication extends BaseController {
 
     }
     
+    //==========================================================================
+    private JSONObject createCompanyJson(Company c) {
+
+        JSONObject jsono = null;
+
+        try {
+
+            jsono = new JSONObject();
+            jsono.put("id", c.getId());
+            jsono.put("name", c.getPerson().getName());
+            jsono.put("lastName", c.getPerson().getLastName());
+            jsono.put("email", c.getPerson().getEmail());
+            jsono.put("gender", c.getPerson().getGender().getName());
+            jsono.put("type", c.getPerson().getPersonType().getName());
+            jsono.put("phone", c.getPerson().getPhone());
+            jsono.put("registrationDate", c.getPerson().getRegistrationDate());
+            jsono.put("personId", c.getPerson().getId());
+            jsono.put("isPartner", false);
+            jsono.put("isAffiliate", false);
+            jsono.put("isCompany", true);
+            jsono.put("personType", Constants.PERSON_TYPE_CONTACT_COMPANY);
+            jsono.put("approved", c.getApproved());
+            jsono.put("active", c.getActive());
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return jsono;
+
+    }
+
     //==========================================================================
     private void lastLoginPartner(Partner partner) throws Exception {
 
@@ -163,7 +230,7 @@ public class AffiliatePartnerAuthentication extends BaseController {
         }).start();
 
     }
-    
+
     //==========================================================================
     private void lastLoginAffiliate(Affiliate affiliate) throws Exception {
 
@@ -171,6 +238,20 @@ public class AffiliatePartnerAuthentication extends BaseController {
             try {
                 affiliate.setLastLogin(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 affiliateComponent.updateAffiliate(affiliate);
+            } catch (Exception e) {
+                logger.error("AdministratorAuthentication.lastLogin", e);
+            }
+        }).start();
+
+    }
+    
+    //==========================================================================
+    private void lastLoginCompany(Company company) throws Exception {
+
+        new Thread(() -> {
+            try {
+                company.setLastLogin(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                companyComponent.updateCompany(company);
             } catch (Exception e) {
                 logger.error("AdministratorAuthentication.lastLogin", e);
             }

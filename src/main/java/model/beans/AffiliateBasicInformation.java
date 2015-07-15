@@ -16,6 +16,9 @@ public class AffiliateBasicInformation {
     private List<Category> category = new ArrayList<>();        
     private MultipartFile logoFile;    
     private String description;
+    private byte discountPercentage = 12;
+    private String website;
+    private String facebook;
     
     public AffiliateBasicInformation() {
     }
@@ -66,6 +69,30 @@ public class AffiliateBasicInformation {
 
     public void setLogoFile(MultipartFile logoFile) {
         this.logoFile = logoFile;
+    }
+
+    public byte getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(byte discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
     }
     
 }

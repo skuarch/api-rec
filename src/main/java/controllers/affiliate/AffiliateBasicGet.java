@@ -59,12 +59,16 @@ public class AffiliateBasicGet extends BaseController {
                     establishments = (ArrayList<Establishment>) affiliate.getEstablishment();
                 }
                 affiliateCompanyBasic = new AffiliateCompanyBasic((BigInteger.valueOf(affiliate.getId())), affiliate.getUrlLogo(), affiliate.getBrand(), affiliate.getDescription(), "1");
+                affiliateCompanyBasic.setWebsite(affiliate.getWebsite());
+                affiliateCompanyBasic.setFacebook(affiliate.getFacebook());
             } else {
                 company = companyComponent.getCompany(id);
                 if (company.getEstablishment().size() > 0) {
                     establishments = (ArrayList<Establishment>) company.getEstablishment();
                 }                
                 affiliateCompanyBasic = new AffiliateCompanyBasic((BigInteger.valueOf(company.getId())), company.getUrlLogo(), company.getBrand(), company.getDescription(), "2");
+                affiliateCompanyBasic.setWebsite(company.getWebsite());
+                affiliateCompanyBasic.setFacebook(company.getFacebook());
             }
 
             affiliateCompanyBasic.setEstablishment(establishments);

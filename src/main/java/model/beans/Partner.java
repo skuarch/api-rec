@@ -20,8 +20,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "partner")
 @NamedQueries({
-        @NamedQuery(name = "getPartner", query = "from Partner p where p.person.email = :email and p.password = :password and p.isSoftDeleted = 0"),
-        @NamedQuery(name = "getPartnerList", query = "from Partner p where p.isSoftDeleted = 0")        
+        @NamedQuery(name = "getPartner", query = "from Partner p where p.person.email = :email and p.password = :password and p.isSoftDeleted = 0 order by p.id desc"),
+        @NamedQuery(name = "getPartnerList", query = "from Partner p where p.isSoftDeleted = 0 order by p.id desc")        
 })
 public class Partner {
 

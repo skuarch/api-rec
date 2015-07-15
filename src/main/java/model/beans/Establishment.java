@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,6 +28,9 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(name = "establishment")
+@NamedQueries({
+    @NamedQuery(name = "getEstablishmentList", query = "from Establishment e where e.isSoftDeleted = 0 order by e.id desc")    
+})
 public class Establishment implements Serializable {
 
     @Id

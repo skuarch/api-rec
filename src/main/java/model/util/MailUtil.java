@@ -103,13 +103,13 @@ public class MailUtil {
     }
 
     //==========================================================================
-    public static void sendMailRecipientNewTransfer(Transfer transfer, String displayLanguage) {
+    public static void sendMailRecipientNewTransfer(Transfer transfer, String message,String displayLanguage) {
 
         new Thread(() -> {
 
             try {
 
-                MailSender.sendMailRecipientNewTransfer(transfer, displayLanguage);
+                MailSender.sendMailRecipientNewTransfer(transfer, message,displayLanguage);
 
             } catch (Exception e) {
                 logger.error("MailUtil.sendMailRecipientNewTransfer", e);
@@ -120,7 +120,7 @@ public class MailUtil {
     }
 
     //==========================================================================
-    public static void sendMailRecipientNewTransfer(Recipient recipient, BigDecimal amount, String displayLanguage) {
+    /*public static void sendMailRecipientNewTransfer(Recipient recipient, BigDecimal amount, String displayLanguage) {
 
         new Thread(() -> {
 
@@ -134,7 +134,7 @@ public class MailUtil {
 
         }).start();
 
-    }
+    }*/
     
     //==========================================================================
     public static void sendMailRecipientNewSecret(Recipient recipient, BigDecimal amount, Secret secret,String displayLanguage) {

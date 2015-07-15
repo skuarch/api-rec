@@ -30,14 +30,15 @@ public class AffiliateGet extends BaseController{
     public @ResponseBody String getAffiliate(@ModelAttribute Affiliate affiliate, HttpServletResponse response){
         
         JSONObject jsono;
+        Affiliate a;
         
         try {
             
             setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
             
-            affiliate = affiliateComponent.getAffiliate(affiliate.getId());            
-            jsono = new JSONObject(affiliate);
+            a = affiliateComponent.getAffiliate(affiliate.getId());              
+            jsono = new JSONObject(a);
             
         } catch (Exception e) {
             logger.error("AffiliateGet.createAffiliate", e);

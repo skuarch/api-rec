@@ -14,6 +14,8 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.StandardBasicTypes;
 
 /**
  * Generic Data Access Object, please don't create an object only use a
@@ -50,7 +52,7 @@ public class DAO {
             session = HibernateUtil.getSessionFactory().openSession();
 
         } catch (HibernateException he) {
-            HibernateUtil.closeSession(session);            
+            HibernateUtil.closeSession(session);
             throw he;
         }
     } // end startSession
@@ -87,18 +89,18 @@ public class DAO {
     } // end create
 
     //==========================================================================
-    public <T> ArrayList<T> orderCriteria(T type, int maxResults, String propertyName,String order) {
+    public <T> ArrayList<T> orderCriteria(T type, int maxResults, String propertyName, String order) {
 
         ArrayList<T> list = null;
 
         Criteria criteria = session.createCriteria(type.getClass());
-        
-        if(order.equalsIgnoreCase("asc")){
+
+        if (order.equalsIgnoreCase("asc")) {
             criteria.addOrder(Order.asc(propertyName));
-        }else{
+        } else {
             criteria.addOrder(Order.desc(propertyName));
         }
-        
+
         criteria.setMaxResults(maxResults);
         list = new ArrayList(criteria.list());
 
@@ -204,7 +206,7 @@ public class DAO {
     /**
      * return an ArrayList of objects if exists then return a null.
      *
-     * @param <T> type     
+     * @param <T> type
      * @return ArrayList or null
      * @throws HibernateException
      */
@@ -259,6 +261,61 @@ public class DAO {
             session.setCacheMode(CacheMode.IGNORE);
             query = session.createQuery(hql);
             query.setProperties(type);
+            query.setCacheable(false);
+            list = query.list();
+            session.flush();
+            session.clear();
+
+        } catch (HibernateException he) {
+            throw he;
+        } finally {
+            HibernateUtil.closeSession(session);
+            type = null;
+        }
+
+        return list;
+    } // end hql
+
+    //==========================================================================
+    /**
+     * execute a <code>hql</code> sentence.
+     *
+     * @param hsql String
+     * @return List or null
+     * @throws HibernateException
+     */
+    @SuppressWarnings("unchecked")
+    public <T> List<T> sql(String sql, HashMap<String, String> parameters, T type, String columnScalar) throws HibernateException {
+
+        if (sql == null || sql.length() < 1) {
+            throw new IllegalArgumentException("the parameter sql is null");
+        }
+
+        if (type == null) {
+            throw new IllegalArgumentException("the parameter type is null");
+        }
+
+        List<T> list = null;
+        Query query = null;
+
+        try {
+
+            session.setCacheMode(CacheMode.IGNORE);
+
+            if (columnScalar == null) {
+                query = session.createSQLQuery(sql);
+            } else {
+                query = session.createSQLQuery(sql).addScalar(columnScalar, StandardBasicTypes.LONG);
+            }
+            query.setResultTransformer(Transformers.aliasToBean(type.getClass()));
+            query.setProperties(type);
+
+            for (Map.Entry<String, String> entrySet : parameters.entrySet()) {
+                String key = entrySet.getKey();
+                String value = entrySet.getValue();
+                query.setParameter(key, value);
+            }
+
             query.setCacheable(false);
             list = query.list();
             session.flush();
@@ -388,7 +445,7 @@ public class DAO {
 
             query = session.getNamedQuery(queryName);
             query.setProperties(type);
-            list = query.list();            
+            list = query.list();
 
         } catch (HibernateException he) {
             throw he;
@@ -422,8 +479,8 @@ public class DAO {
 
         try {
 
-            query = session.getNamedQuery(queryName);            
-            query.setProperties(type);            
+            query = session.getNamedQuery(queryName);
+            query.setProperties(type);
             arrayList = new ArrayList(query.list());
 
         } catch (HibernateException he) {
@@ -435,7 +492,7 @@ public class DAO {
         return arrayList;
 
     } // end query
-    
+
     //==========================================================================
     /**
      * @param <T> type
@@ -443,7 +500,7 @@ public class DAO {
      * @return List or null
      * @throws HibernateException
      */
-    public <T> ArrayList<T> query(T type, String queryName,boolean ignoreCache) throws HibernateException {
+    public <T> ArrayList<T> query(T type, String queryName, boolean ignoreCache) throws HibernateException {
 
         if (queryName == null || queryName.length() < 1) {
             throw new NullPointerException("queryName is null or empty");
@@ -457,14 +514,14 @@ public class DAO {
         ArrayList<T> arrayList = null;
 
         try {
-            
-            query = session.getNamedQuery(queryName);            
-            
-            if(ignoreCache){
+
+            query = session.getNamedQuery(queryName);
+
+            if (ignoreCache) {
                 query.setCacheMode(CacheMode.IGNORE);
             }
-            
-            query.setProperties(type);            
+
+            query.setProperties(type);
             arrayList = new ArrayList(query.list());
 
         } catch (HibernateException he) {
@@ -514,7 +571,7 @@ public class DAO {
             for (Map.Entry<String, String> entry : parameters.entrySet()) {
                 key = entry.getKey();
                 value = entry.getValue();
-                query.setString(key, value);                
+                query.setString(key, value);
             }
 
             list = query.list();
@@ -560,7 +617,7 @@ public class DAO {
 
         try {
 
-            query = session.getNamedQuery(queryName);            
+            query = session.getNamedQuery(queryName);
             query.setProperties(type);
 
             for (Map.Entry<String, String> entry : parameters.entrySet()) {
@@ -570,13 +627,13 @@ public class DAO {
             }
 
             arrayList = (ArrayList<T>) query.list();
-            
+
         } catch (HibernateException he) {
             throw he;
         } finally {
             HibernateUtil.closeSession(session);
         }
-
+        
         return arrayList;
 
     } // end query
@@ -806,54 +863,81 @@ public class DAO {
     } // end getTotalRows
 
     //==========================================================================
-    public List sqlQuery(String sql)  throws HibernateException {
-    
+    public List sqlQuery(String sql) throws HibernateException {
+
         List list = null;
-        
+
         try {
-            
+
             SQLQuery query = session.createSQLQuery(sql);
-            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);            
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
             list = query.list();
-            
+
         } catch (Exception e) {
             throw e;
         } finally {
             HibernateUtil.closeSession(session);
-        }       
-        
+        }
+
         return list;
-    
+
     }
     
     //==========================================================================
-    /*public <T> List<T> sqlQuery(String sql, T type)  throws HibernateException {
-    
-        if (type == null) {
-            throw new IllegalArgumentException("the parameter type is null");
-        }
+    public List sqlQuery(String sql, HashMap<String, String> parameters) throws HibernateException {
 
-        if (sql == null || sql.length() < 1) {
-            throw new IllegalArgumentException("the parameter sql is null or empty");
-        }
-        
-        List<T> list = null;
+        List list = null;
 
         try {
 
-            SQLQuery query = session.createSQLQuery(sql);            
-            query.setResultTransformer(Transformers.aliasToBean(type.getClass()));
-            list = query.list();
+            SQLQuery query = session.createSQLQuery(sql);
             
-        } catch (HibernateException he) {
-            throw he;
+            parameters.entrySet().stream().forEach((entrySet) -> {
+                String key = entrySet.getKey();
+                String value = entrySet.getValue();
+                query.setParameter(key, value);
+            });
+            
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            list = query.list();
+
+        } catch (Exception e) {
+            throw e;
         } finally {
             HibernateUtil.closeSession(session);
-            type = null;
         }
 
         return list;
-        
-    }*/
+
+    }
+
+    //==========================================================================
+    /*public <T> List<T> sqlQuery(String sql, T type)  throws HibernateException {
     
+     if (type == null) {
+     throw new IllegalArgumentException("the parameter type is null");
+     }
+
+     if (sql == null || sql.length() < 1) {
+     throw new IllegalArgumentException("the parameter sql is null or empty");
+     }
+        
+     List<T> list = null;
+
+     try {
+
+     SQLQuery query = session.createSQLQuery(sql);            
+     query.setResultTransformer(Transformers.aliasToBean(type.getClass()));
+     list = query.list();
+            
+     } catch (HibernateException he) {
+     throw he;
+     } finally {
+     HibernateUtil.closeSession(session);
+     type = null;
+     }
+
+     return list;
+        
+     }*/
 } // end class

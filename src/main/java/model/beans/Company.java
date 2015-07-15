@@ -32,7 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Table(name = "company")
 @NamedQueries({
     @NamedQuery(name = "getCompaniesByCreator", query = "from Company c where c.creatorId = :id and c.isSoftDeleted = 0"),
-    @NamedQuery(name = "getCompanyList", query = "from Company c where c.isSoftDeleted = 0")
+    @NamedQuery(name = "getCompanyList", query = "from Company c where c.isSoftDeleted = 0 order by c.id desc"),
+    @NamedQuery(name = "getCompanyByEmailPassword", query = "from Company c where c.person.email = :email and c.password = :password and c.isSoftDeleted = 0 order by c.id desc")
 })
 public class Company implements Serializable {
 
@@ -46,12 +47,18 @@ public class Company implements Serializable {
 
     @Column(name = "company_brand", nullable = false)
     private String brand;
-    
+
     @Column(name = "company_discount_percentage", columnDefinition = "int default 0", nullable = false)
     private byte discountPercentage = 12;
-    
+
     @Column(name = "company_url_logo")
     private String urlLogo;
+
+    @Column(name = "company_website", nullable = true)
+    private String website;
+
+    @Column(name = "company_facebook", nullable = true)
+    private String facebook;
 
     @Column(name = "company_password", nullable = false, columnDefinition = "varchar(32)")
     private String password;
@@ -125,6 +132,12 @@ public class Company implements Serializable {
 
     @Column(name = "company_active", columnDefinition = "int default 0")
     private byte active = 0;
+
+    @Column(name = "affiliate_approved", columnDefinition = "int default 0")
+    private byte approved = 0;
+    
+    @Column(name = "company_last_login")
+    private String lastLogin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
     public long getId() {
         return id;
@@ -321,6 +334,38 @@ public class Company implements Serializable {
 
     public void setDiscountPercentage(byte discountPercentage) {
         this.discountPercentage = discountPercentage;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public byte getApproved() {
+        return approved;
+    }
+
+    public void setApproved(byte approved) {
+        this.approved = approved;
+    }
+
+    public String getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
 }

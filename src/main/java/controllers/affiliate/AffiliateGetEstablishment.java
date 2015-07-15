@@ -41,6 +41,7 @@ public class AffiliateGetEstablishment extends BaseController {
 
             setHeaderNoChache(response);
             setContentType(response, MediaType.APPLICATION_JSON);
+            
             affiliate = affiliateComponent.getAffiliate(affiliate.getId());
             establishments = affiliate.getEstablishment();
             jsona = new JSONArray(establishments);

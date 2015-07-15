@@ -24,6 +24,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.web.multipart.MultipartFile;
 
+//@NamedQuery(name = "getAffiliate", query = "select a from Affiliate a, IN(a.establishment) as e where a.id = :affiliateId  and a.isSoftDeleted = 0 and e.isSoftDeleted = 0"),
 /**
  *
  * @author skuarch
@@ -32,8 +33,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Table(name = "affiliate")
 @NamedQueries({
     @NamedQuery(name = "getAffiliateByCreator", query = "select new Affiliate(a.id, a.brand, a.person, a.description, a.address, a.bank, a.clabe, a.ownerAccountBank, a.emailNotifications, a.contact, a.taxCompanyName, a.taxId) from Affiliate a where a.creatorId = :id and a.isSoftDeleted = 0"),
-    @NamedQuery(name = "getAffiliate", query = "from Affiliate a where a.person.email = :email and a.password = :password and a.isSoftDeleted = 0"),
-    @NamedQuery(name = "getAffiliatesList", query = "from Affiliate a where a.isSoftDeleted = 0")
+    @NamedQuery(name = "getAffiliateByEmailPassword", query = "from Affiliate a where a.person.email = :email and a.password = :password and a.isSoftDeleted = 0 order by a.id desc"),
+    @NamedQuery(name = "getAffiliatesList", query = "from Affiliate a where a.isSoftDeleted = 0 order by a.id desc")
 })
 public class Affiliate implements Serializable {
 
@@ -45,9 +46,12 @@ public class Affiliate implements Serializable {
     @Column(name = "affiliate_active", columnDefinition = "int default 0")
     private byte active = 0;
     
+    @Column(name = "affiliate_approved", columnDefinition = "int default 0")
+    private byte approved = 0;
+
     @Column(name = "affiliate_discount_percentage", columnDefinition = "int default 0", nullable = false)
     private byte discountPercentage = 12;
-    
+
     @Column(name = "affiliate_password", nullable = false, columnDefinition = "varchar(32)")
     private String password;
 
@@ -85,10 +89,16 @@ public class Affiliate implements Serializable {
     @Column(name = "affiliate_logo_path_name", unique = false)
     private String logoPathName;
 
+    @Column(name = "affiliate_website", nullable = true)
+    private String website;
+
+    @Column(name = "affiliate_facebook", nullable = true)
+    private String facebook;
+
     @OneToOne
     @JoinColumn(name = "contact_id", nullable = false)
     private Contact contact;
-    
+
     @Column(name = "affiliate_url_logo")
     private String urlLogo;
 
@@ -123,9 +133,9 @@ public class Affiliate implements Serializable {
 
     @Column(name = "affiliate_registration_date", nullable = false, length = 19)
     private String registrationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-    
+
     @Column(name = "affiliate_last_login")
-    private String lastLogin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());        
+    private String lastLogin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
     //==========================================================================
     public Affiliate() {
@@ -144,6 +154,9 @@ public class Affiliate implements Serializable {
         this.person = person;
         this.contact = contact;
         this.address = address;
+    }
+
+    public Affiliate(Affiliate affiliate) {
     }
 
     public long getId() {
@@ -224,7 +237,12 @@ public class Affiliate implements Serializable {
     }
 
     public List<Category> getCategory() {
-        return category;
+        if (!category.isEmpty()) {
+            List<Category> c = category.stream().distinct().collect(Collectors.toList());
+            return c;
+        } else {
+            return category;
+        }
     }
 
     public void setCategory(List<Category> category) {
@@ -341,6 +359,34 @@ public class Affiliate implements Serializable {
 
     public void setDiscountPercentage(byte discountPercentage) {
         this.discountPercentage = discountPercentage;
+    }
+
+    public void setAffiliate(Affiliate affiliate) {
+
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public byte getApproved() {
+        return approved;
+    }
+
+    public void setApproved(byte approved) {
+        this.approved = approved;
     }
 
 }

@@ -23,7 +23,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "transfer")
 @NamedQueries({
-        @NamedQuery(name = "getTransferList", query = "from Transfer t where t.isSoftDeleted = 0"),
+        @NamedQuery(name = "getTransferList", query = "from Transfer t where t.isSoftDeleted = 0 order by t.id desc"),
         @NamedQuery(name = "getTransferListByDepositorEmail", query = "from Transfer t where t.depositor.email = :email and t.isSoftDeleted = 0 order by t.date desc"),
         @NamedQuery(name = "getTransferListByRecipientEmail", query = "from Transfer t where t.recipient.email = :email and t.isSoftDeleted = 0 order by t.date desc")        
 })
@@ -59,7 +59,10 @@ public class Transfer implements Serializable {
     private String secretAlphanumeric;    
     
     @Transient
-    private byte card;
+    private byte card; //giftCard
+    
+    @Transient
+    private String cardNumber; //credit card
 
     public Transfer() {
     }
@@ -134,6 +137,14 @@ public class Transfer implements Serializable {
 
     public void setCard(byte card) {
         this.card = card;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
 }

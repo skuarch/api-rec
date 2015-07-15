@@ -57,7 +57,7 @@ public class CompanyUpdateBasicInformation extends BaseController {
             companyBasicInformation
                     .getPerson()
                     .setPersonType(
-                            personTypeComponent.getPersonType(Constants.CONTACT)
+                            personTypeComponent.getPersonType(Constants.CONTACT_COMPANY)
                     );
             company = companyComponent.getCompany(companyBasicInformation.getCompanyId());            
             companyBasicInformation.setCompanyId(company.getId());
@@ -70,13 +70,17 @@ public class CompanyUpdateBasicInformation extends BaseController {
             company.setBrand(companyBasicInformation.getBrand());
             company.setCategory(companyBasicInformation.getCategory());            
             company.setLogoFile(companyBasicInformation.getLogoFile());
-            company.setDescription(companyBasicInformation.getDescription());            
+            company.setDescription(companyBasicInformation.getDescription());               
+            company.setDiscountPercentage(companyBasicInformation.getDiscountPercentage());
             
             if (company.getLogoFile() != null) {
                 //update logo
                 deleteFile(company);
                 saveFiles(company);
             }
+            
+            company.setWebsite(companyBasicInformation.getWebsite());
+            company.setFacebook(companyBasicInformation.getFacebook());
             
             companyComponent.updateCompany(company);
 

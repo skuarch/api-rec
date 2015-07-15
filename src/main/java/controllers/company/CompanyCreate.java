@@ -82,7 +82,7 @@ public class CompanyCreate extends BaseController {
             }
 
             //get person type
-            company.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT));
+            company.getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT_COMPANY));
             company.getContact().getPerson().setPersonType(personTypeComponent.getPersonType(Constants.CONTACT_BILLING));
             idPersonCompany = personComponent.savePerson(company.getPerson());
             idContactTax = personComponent.savePerson(company.getContact().getPerson());

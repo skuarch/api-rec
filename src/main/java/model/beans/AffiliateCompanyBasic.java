@@ -16,6 +16,8 @@ public class AffiliateCompanyBasic implements Serializable {
     private String description;
     private String type;
     private List<Establishment> establishment;
+    private String website;
+    private String facebook;
     
     public AffiliateCompanyBasic() {
     }
@@ -74,5 +76,21 @@ public class AffiliateCompanyBasic implements Serializable {
 
     public void setEstablishment(List<Establishment> establishment) {
         this.establishment = establishment;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
     }
 }

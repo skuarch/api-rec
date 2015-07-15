@@ -1,5 +1,6 @@
 package model.beans;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "affiliate_type")
-public class AffiliateType {    
+public class AffiliateType implements Serializable {    
+    
+    public static final byte AFFILIATE_TYPE_PERSON = 1;
+    public static final byte AFFILIATE_TYPE_COMPANY = 2;
     
     @Id
     @Column(name = "affiliate_type_id")
@@ -39,6 +43,5 @@ public class AffiliateType {
 
     public void setName(String name) {
         this.name = name;
-    }
-    
+    }    
 }

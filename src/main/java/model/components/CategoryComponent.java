@@ -1,9 +1,9 @@
 package model.components;
 
 import java.util.ArrayList;
+import model.beans.Category;
 import model.database.DAO;
 import org.springframework.stereotype.Component;
-import model.beans.Category;
 
 /**
  *
@@ -32,6 +32,7 @@ public class CategoryComponent {
         return categories;
     }   
     
+    //==========================================================================
     public Category getCategory(long id) throws Exception{
         
         if(id < 1){

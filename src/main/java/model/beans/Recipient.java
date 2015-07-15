@@ -13,6 +13,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -43,6 +44,9 @@ public class Recipient {
 
     @Column(name = "recipient_email", nullable = false)
     private String email;
+    
+    @Transient
+    private String message;
     
     @OneToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
@@ -115,5 +119,13 @@ public class Recipient {
     public void setIsSoftDeleted(byte isSoftDeleted) {
         this.isSoftDeleted = isSoftDeleted;
     }    
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
 }

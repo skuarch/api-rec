@@ -89,12 +89,17 @@ public class AffiliateUpdateBasicInformation extends BaseController {
             affiliate.setCategory(affiliateBasicInformation.getCategory());
             affiliate.setDescription(affiliateBasicInformation.getDescription());
             affiliate.setLogoFile(affiliateBasicInformation.getLogoFile());
+            affiliate.setDiscountPercentage(affiliateBasicInformation.getDiscountPercentage());
 
             if (affiliate.getLogoFile() != null) {
                 //update logo
                 deleteFile(affiliate);
                 saveFiles(affiliate);
             }
+            
+            //some other stuffs
+            affiliate.setWebsite(affiliateBasicInformation.getWebsite());
+            affiliate.setFacebook(affiliateBasicInformation.getFacebook());
 
             affiliateComponent.updateAffiliate(affiliate);
 

@@ -1,8 +1,11 @@
 package model.components;
 
 import java.util.ArrayList;
+import java.util.List;
+import model.beans.Cashier;
 import model.beans.Establishment;
 import model.database.DAO;
+import model.logic.SoftDeletedCashier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -78,10 +81,14 @@ public class EstablishmentComponent {
         }
         
         Establishment establishment = null;
+        List<Cashier> cashiers;
         
         try {
             
             establishment = new DAO().get(id, new Establishment());
+            cashiers = establishment.getCashier();
+            cashiers.removeIf(new SoftDeletedCashier());
+            establishment.setCashier(cashiers);
             
         } catch (Exception e) {
             throw e;
@@ -89,13 +96,6 @@ public class EstablishmentComponent {
         
         return establishment;
         
-    }
-
-    //==========================================================================
-    public Establishment getEstablishmentByCashier(long cashierId){
-    
-        return null;
-    
-    }
+    }    
     
 }

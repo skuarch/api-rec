@@ -179,8 +179,11 @@ public class MailSender {
         try {
             
             mailTemplate = new MailTemplateComponent().getTemplate("depositor new transfer", displayLanguage);
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":name", transfer.getDepositor().getName()));
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":recipient", transfer.getRecipient().getEmail()));
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":amount", transfer.getAmount() + ""));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":card", String.valueOf(transfer.getCardNumber()).substring(12, 16)));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":id", "00" + transfer.getId()));
             
             configurationMail = new ConfigurationMailComponent().getConfigurationMail();
             mail = new Mail(
@@ -199,11 +202,15 @@ public class MailSender {
     }
     
     //==========================================================================
-    public static void sendMailRecipientNewTransfer(Transfer transfer, String displayLanguage) throws Exception {
+    public static void sendMailRecipientNewTransfer(Transfer transfer, String message, String displayLanguage) throws Exception {
         
         if(displayLanguage == null || displayLanguage.length() < 1){
             throw new IllegalArgumentException("displayLanguage is null or empty");
         } 
+        
+        if(message.length() < 1){
+            message = "";
+        }
         
         Mail mail = null;
         ConfigurationMail configurationMail = null;        
@@ -214,9 +221,12 @@ public class MailSender {
             mailTemplate = new MailTemplateComponent().getTemplate("recipient new transfer", displayLanguage);
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":card", transfer.getCard() + ""));
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":name1", transfer.getDepositor().getName()));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":lastName1", transfer.getDepositor().getLastName()));            
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":name2", transfer.getRecipient().getName()));
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":secret", transfer.getSecretAlphanumeric()));
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":value", transfer.getAmount() + ""));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":message", message));
+            
             
             configurationMail = new ConfigurationMailComponent().getConfigurationMail();
             mail = new Mail(
@@ -282,8 +292,8 @@ public class MailSender {
             
             mailTemplate = new MailTemplateComponent().getTemplate("recipient new secret", displayLanguage);
             mailTemplate.setMessage(mailTemplate.getMessage().replace(":name", recipient.getName()));
-            mailTemplate.setMessage(mailTemplate.getMessage().replace(":value", amount + ""));
-            mailTemplate.setMessage(mailTemplate.getMessage().replace(":secret", secret.getSecretAlphanumeric()));
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":secret", secret.getSecretAlphanumeric()));            
+            mailTemplate.setMessage(mailTemplate.getMessage().replace(":value", amount + ""));            
             
             configurationMail = new ConfigurationMailComponent().getConfigurationMail();
             mail = new Mail(
