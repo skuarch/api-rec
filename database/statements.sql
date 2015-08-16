@@ -100,7 +100,7 @@ INSERT INTO `regaloenclave`.`configuration_mail_authentication` (`configuration_
 
 
 #general configuration-------------------------------------------------------------------------------
-INSERT INTO general_configuration (general_configuration_upload_path, general_configuration_url_static_images) VALUES ('/opt/glassfish4/glassfish/domains/domain1/docroot/uploads/images/', 'http://regaloenclave.com/uploads/images/');
+INSERT INTO general_configuration (general_configuration_upload_path, general_configuration_url_static_images) VALUES ('/opt/glassfish4/glassfish/domains/domain1/docroot/uploads/images/', 'http://static.regaloenclave.com/uploads/images/');
 
 
 

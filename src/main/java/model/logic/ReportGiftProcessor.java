@@ -33,34 +33,35 @@ public class ReportGiftProcessor {
 "            </div> ");
             bodyEmail.append("<br> Estos son los regalos que haz recibido");
             bodyEmail.append("<br> numero de regalos ").append(transferlistRecipient.size());
-            bodyEmail.append("<br>");                    
+            bodyEmail.append("<br><br>");                    
             
             if(transferlistRecipient.size() > 0){
                 
                 transferlistRecipient.stream().map((transfer) -> {                    
                     return transfer;
                 }).forEach((transfer) -> {
-                    bodyEmail.append("<br> fecha: ").append(transfer.getDate());
-                    bodyEmail.append("<br> clave: ").append(transfer.getSecretAlphanumeric());
-                    bodyEmail.append("<br> monto: ").append(transfer.getAmount());
+                    bodyEmail.append("<br> fecha: <strong>").append(transfer.getDate()).append("</strong>");
+                    bodyEmail.append(", clave: <strong>").append(transfer.getSecretAlphanumeric()).append("</strong>");
+                    bodyEmail.append(",  monto: <strong>").append(transfer.getAmount()).append("</strong>");
                 });                
                 
             }
             
+            bodyEmail.append("<br><br>---------------------------------------------------------------------------------------------------------------------------------<br/>");                    
+            
             bodyEmail.append("<br> Estos son los regalos que haz hecho");
             bodyEmail.append("<br> numero de regalos ").append(transferlistDepositor.size());
-            bodyEmail.append("<br>");                    
+            bodyEmail.append("<br><br>");                    
             
             if(transferlistDepositor.size() > 0){
                 
                 transferlistDepositor.stream().map((transfer) -> {                    
                     return transfer;
-                }).forEach((transfer) -> {
-                    bodyEmail.append("<br>-------------------------------------------<br/>");                    
-                    bodyEmail.append("<br> fecha: ").append(transfer.getDate());                    
-                    bodyEmail.append("<br> monto: ").append(transfer.getAmount());
-                    bodyEmail.append("<br> beneficiario email: ").append(transfer.getRecipient().getEmail());
-                    bodyEmail.append("<br> beneficiario nombre: ").append(transfer.getRecipient().getName()).append(" ").append(transfer.getRecipient().getLastName());
+                }).forEach((transfer) -> {                    
+                    bodyEmail.append("<br> fecha: <strong>").append(transfer.getDate()).append("</strong>");                    
+                    bodyEmail.append(", monto: <strong>").append(transfer.getAmount()).append("</strong>");
+                    bodyEmail.append(", beneficiario email: <strong>").append(transfer.getRecipient().getEmail()).append("</strong>");
+                    bodyEmail.append(", beneficiario nombre: <strong>").append(transfer.getRecipient().getName()).append(" ").append(transfer.getRecipient().getLastName()).append("</strong>");
                 });                
                 
             }
